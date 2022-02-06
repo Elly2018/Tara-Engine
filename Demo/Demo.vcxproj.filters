@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{71a8a4aa-2c6b-4455-873c-6aa5f377f88a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultPostProcess.frag">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="Resources\DefaultPostProcess.vert">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="Resources\PureColor.frag">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="Resources\PureColor.vert">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="Resources\TextureSurface.frag">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="Resources\TextureSurface.vert">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="Resources\Gradient.vert">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="Resources\Gradient.frag">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Grid.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Default.png">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

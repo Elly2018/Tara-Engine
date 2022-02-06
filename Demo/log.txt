@@ -1,0 +1,334 @@
+[System] 
+[System] GLFW version: 4.5
+[System] GLSL version: #version 450
+[System] 	GLFW_RESIZABLE: GLFW_TRUE
+[System] 	GLFW_VISIBLE: GLFW_TRUE
+[System] 	GLFW_DECORATED: GLFW_TRUE
+[System] 	GLFW_FOCUSED: GLFW_TRUE
+[System] 	GLFW_AUTO_ICONIFY: GLFW_TRUE
+[System] 	GLFW_FLOATING: GLFW_FALSE
+[System] 	GLFW_MAXIMIZED: GLFW_FALSE
+[System] 	GLFW_CENTER_CURSOR: GLFW_TRUE
+[System] 	GLFW_TRANSPARENT_FRAMEBUFFER: GLFW_FALSE
+[System] 	GLFW_FOCUS_ON_SHOW: GLFW_TRUE
+[System] 	GLFW_SCALE_TO_MONITOR: GLFW_FALSE
+[System] 	glfwSetWindowPos: 100x100
+[System] 	have_limit: True
+[System] 		minimum_size: 800x600, have: TRUE
+[System] 		maximum_size: 0x0, have: FALSE
+[System] 	have_aspect_ratio: False
+[System] 		aspect_ratio: 0x0
+[System] Window created
+[System] Glad initialized
+[System] Demo window start!
+[Warning] Test Warning Message
+[Error] Test Error Message
+[System] Imgui gui version: 1.87 WIP
+[System] Register events...
+[System] Register events finished
+[System] Shader created!
+[System] 	Shader pool add!
+[System] 
+[System] Compile Shader... Default Postprocess VERTEX
+[System] #########################################################
+[System] #			VERTEX start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+layout(location = 0) in vec3 aPos;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in vec2 aTex;
+out vec2 Tex;
+
+void main()
+{
+	gl_Position = vec4(aPos, 1.0);
+	Tex = aTex;
+}
+
+[System] 
+[System] #########################################################
+[System] #			VERTEX end			#
+[System] #########################################################
+[System] 
+[System] Compile Shader... Default Postprocess FRAGMENT
+[System] #########################################################
+[System] #			FRAGMENT start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+#extension GL_ARB_explicit_uniform_location : require
+in vec2 Tex;
+out vec4 FragColor;
+
+layout(location = 0) uniform sampler2D screenTexture;
+uniform vec2 screenSize;
+
+void main()
+{
+	//FragColor = texture(screenTexture, Tex);
+	float uv_x = Tex.x * (screenSize.x / screenSize.y);
+	float uv_y = Tex.y;
+	FragColor = texture(screenTexture, Tex);
+}
+
+[System] 
+[System] #########################################################
+[System] #			FRAGMENT end			#
+[System] #########################################################
+[System] Trying import mesh from: .\Resources\Quad.obj
+[System] Mesh created!
+[System] 	Mesh pool add!
+[System] 	Set mesh name Quad.obj
+[System] 	Quad.obj Vertex register size: 4
+[System] 	Quad.obj Normal register size: 4
+[System] 	Quad.obj Textures register size: 4
+[System] 	Quad.obj Indices register size: 6
+[System] Mesh update start: Quad.obj
+[System] Mesh update end: Quad.obj
+[System] Tara initialization start
+[System] Debug level: 1
+[System] Debug filename: log.txt
+[System] Buildin resources shader create: Color
+[System] Shader created!
+[System] 	Shader pool add!
+[System] 
+[System] Compile Shader... Color Shader VERTEX
+[System] #########################################################
+[System] #			VERTEX start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+layout(location = 0) in vec3 aPos;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in vec2 aTex;
+out vec2 Tex;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(aPos, 1.0);
+	Tex = aTex;
+}
+
+[System] 
+[System] #########################################################
+[System] #			VERTEX end			#
+[System] #########################################################
+[System] 
+[System] Compile Shader... Color Shader FRAGMENT
+[System] #########################################################
+[System] #			FRAGMENT start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+in vec2 Tex;
+out vec4 FragColor;
+
+uniform vec3 color;
+void main()
+{
+	FragColor = vec4(color, 1.0);
+}
+
+[System] 
+[System] #########################################################
+[System] #			FRAGMENT end			#
+[System] #########################################################
+[System] Buildin resources shader create: Gradient
+[System] Shader created!
+[System] 	Shader pool add!
+[System] 
+[System] Compile Shader... Gradient Shader VERTEX
+[System] #########################################################
+[System] #			VERTEX start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+layout(location = 0) in vec3 aPos;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in vec2 aTex;
+out vec2 Tex;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(aPos, 1.0);
+	Tex = aTex;
+}
+
+[System] 
+[System] #########################################################
+[System] #			VERTEX end			#
+[System] #########################################################
+[System] 
+[System] Compile Shader... Gradient Shader FRAGMENT
+[System] #########################################################
+[System] #			FRAGMENT start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+in vec2 Tex;
+out vec4 FragColor;
+
+uniform vec3 color;
+void main()
+{
+	FragColor = vec4(color, 1.0);
+}
+
+[System] 
+[System] #########################################################
+[System] #			FRAGMENT end			#
+[System] #########################################################
+[System] Buildin resources shader create: Texture
+[System] Shader created!
+[System] 	Shader pool add!
+[System] 
+[System] Compile Shader... Texture Shader VERTEX
+[System] #########################################################
+[System] #			VERTEX start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+layout(location = 0) in vec3 aPos;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in vec2 aTex;
+out vec2 Tex;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(aPos, 1.0);
+	Tex = aTex;
+}
+
+[System] 
+[System] #########################################################
+[System] #			VERTEX end			#
+[System] #########################################################
+[System] 
+[System] Compile Shader... Texture Shader FRAGMENT
+[System] #########################################################
+[System] #			FRAGMENT start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+in vec2 Tex;
+out vec4 FragColor;
+
+uniform vec3 color;
+uniform sampler2D surface;
+void main()
+{
+	FragColor = texture(surface, Tex) * vec4(color, 1.0);
+}
+
+[System] 
+[System] #########################################################
+[System] #			FRAGMENT end			#
+[System] #########################################################
+[System] Buildin resources shader create: Postprocess
+[System] Buildin resources texture create: White
+[System] Texture created!
+[System] 	Generate texture successfully: "White texture"  "White Texture"
+[System] Apply ! White Texture
+[System] Buildin resources texture create: Grid
+[System] Texture created!
+[System] 	Import texture successfully: ".\Resources\Grid.png"  "Grid Texture"
+[System] Apply ! Grid Texture
+[System] Buildin resources texture create: Default
+[System] Texture created!
+[System] 	Import texture successfully: ".\Resources\Default.png"  "Default Texture"
+[System] Apply ! Default Texture
+[System] Buildin resources mesh create: Cube
+[System] Trying import mesh from: .\Resources\Cube.obj
+[System] Mesh created!
+[System] 	Mesh pool add!
+[System] 	Set mesh name Cube.obj
+[System] 	Cube.obj Vertex register size: 24
+[System] 	Cube.obj Normal register size: 24
+[System] 	Cube.obj Textures register size: 24
+[System] 	Cube.obj Indices register size: 36
+[System] Mesh update start: Cube.obj
+[System] Mesh update end: Cube.obj
+[System] Buildin resources mesh create: Sphere
+[System] Trying import mesh from: .\Resources\Sphere.obj
+[System] Mesh created!
+[System] 	Mesh pool add!
+[System] 	Set mesh name Sphere.obj
+[System] 	Sphere.obj Vertex register size: 1984
+[System] 	Sphere.obj Normal register size: 1984
+[System] 	Sphere.obj Textures register size: 1984
+[System] 	Sphere.obj Indices register size: 2880
+[System] Mesh update start: Sphere.obj
+[System] Mesh update end: Sphere.obj
+[System] Buildin resources mesh create: Plane
+[System] Trying import mesh from: .\Resources\Plane.obj
+[System] Mesh created!
+[System] 	Mesh pool add!
+[System] 	Set mesh name Plane.obj
+[System] 	Plane.obj Vertex register size: 4
+[System] 	Plane.obj Normal register size: 4
+[System] 	Plane.obj Textures register size: 4
+[System] 	Plane.obj Indices register size: 6
+[System] Mesh update start: Plane.obj
+[System] Mesh update end: Plane.obj
+[System] Buildin resources mesh create: Cone
+[System] Trying import mesh from: .\Resources\Cone.obj
+[System] Mesh created!
+[System] 	Mesh pool add!
+[System] 	Set mesh name Cone.obj
+[System] 	Cone.obj Vertex register size: 128
+[System] 	Cone.obj Normal register size: 128
+[System] 	Cone.obj Textures register size: 128
+[System] 	Cone.obj Indices register size: 186
+[System] Mesh update start: Cone.obj
+[System] Mesh update end: Cone.obj
+[System] Buildin resources mesh create: Triangle
+[System] Mesh created!
+[System] 	Mesh pool add!
+[System] 	Triangle Vertex register size: 3
+[System] 	Triangle Indices register size: 3
+[System] Mesh update start: Triangle
+[System] Mesh update end: Triangle
+[System] Buildin resources mesh create: Quad
+[System] Trying import mesh from: .\Resources\Quad.obj
+[System] Mesh created!
+[System] 	Mesh pool add!
+[System] 	Set mesh name Quad.obj
+[System] 	Quad.obj Vertex register size: 4
+[System] 	Quad.obj Normal register size: 4
+[System] 	Quad.obj Textures register size: 4
+[System] 	Quad.obj Indices register size: 6
+[System] Mesh update start: Quad.obj
+[System] Mesh update end: Quad.obj
+[System] Tara initialization end
+[System] Trying import mesh from: .\Resources\Cube.obj
+[System] Mesh created!
+[System] 	Mesh pool add!
+[System] 	Set mesh name Cube.obj
+[System] 	Cube.obj Vertex register size: 24
+[System] 	Cube.obj Normal register size: 24
+[System] 	Cube.obj Textures register size: 24
+[System] 	Cube.obj Indices register size: 36
+[System] Mesh update start: Cube.obj
+[System] Mesh update end: Cube.obj
+[System] Trying import mesh from: .\Resources\Sphere.obj
+[System] Mesh created!
+[System] 	Mesh pool add!
+[System] 	Set mesh name Sphere.obj
+[System] 	Sphere.obj Vertex register size: 1984
+[System] 	Sphere.obj Normal register size: 1984
+[System] 	Sphere.obj Textures register size: 1984
+[System] 	Sphere.obj Indices register size: 2880
+[System] Mesh update start: Sphere.obj
+[System] Mesh update end: Sphere.obj
+[System] YO
+[System] YO
