@@ -304,12 +304,12 @@ namespace Tara {
 			Summary:
 				Get total time pass.
 		*/
-		static double Time();
+		static double_t Time();
 		/*
 			Summary:
 				Get current frame update delta time.
 		*/
-		static double Delta();
+		static double_t Delta();
 	private:
 		/*
 			Summary:
@@ -326,8 +326,8 @@ namespace Tara {
 		*/
 		static void UpdateKey();
 
-		static double m_time;
-		static double m_delta;
+		static double_t m_time;
+		static double_t m_delta;
 		static glm::dvec2 mouse_position;
 		static glm::dvec2 mouse_delta;
 		static glm::dvec2 scroll;
@@ -338,4 +338,3 @@ namespace Tara {
 		static std::map<int, std::pair<int, int>> keyboard_last;
 	};
 }
-

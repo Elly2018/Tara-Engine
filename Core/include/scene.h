@@ -2,7 +2,9 @@
 #include <vector>
 #include <config.h>
 #include <asset.h>
+#include <shader.h>
 #include <eobject.h>
+#include <components/camera.h>
 
 namespace Tara {
 	/*
@@ -67,11 +69,14 @@ namespace Tara {
 				Use depth first search to collects all objects with matches tag.
 		*/
 		std::vector<EObject*> FindObjectsByTag(const char* tag);
+
+		size_t TopLayerCount();
 		/*
 			Summary:
 				Check how many instances of EObject in scene.
 		*/
-		size_t ObjectCount();
+		size_t Count();
+		EObject* GetChild(int32_t index);
 
 	protected:
 		/*
@@ -91,6 +96,7 @@ namespace Tara {
 				Normally user shouldn't call this method, user should set the active scene and create object instead.
 		*/
 		void AddObject(EObject* target);
+		void RemoveObject(EObject* target);
 		// Primary camera for rendering.
 		Tara::CCamera* m_MainCamera = nullptr;
 		// Scene objects top leaf.

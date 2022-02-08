@@ -19,5 +19,7 @@
 #include <renderer.h>
 #include <glm/glm.hpp>
 #include <utility>
+#include <scene.h>
+#include <components/allcomponents.h>
 
 using namespace glm;

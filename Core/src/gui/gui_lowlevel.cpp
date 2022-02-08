@@ -1,325 +1,113 @@
-#include <gui.h>
-#include <string>
-#include <stdarg.h>
+#include "gui/gui_lowlevel.h"
 #ifndef TARA_NO_IMGUI
-//#define GLFW_INCLUDE_NONE
+#include <gui/gui_style.h>
 #include <imgui.h>
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
+#include <Windows.h>
+#include <Shellapi.h>
 #include <cstdarg>
+#include <sstream>
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
 #endif
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
-#include <einput.h>
-#undef GLFW_INCLUDE_NONE
-
+#include <ewindow.h>
+#include <imgui_markdown.h>
 // [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
 // To link with VS2010-era libraries, VS2015+ requires linking with legacy_stdio_definitions.lib, which we do using this pragma.
 // Your own project should not be affected, as you are likely to link with a newer binary of GLFW that is adequate for your version of Visual Studio.
 #if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
 #pragma comment(lib, "legacy_stdio_definitions")
 #endif
+#endif
 
 namespace Tara {
+#ifndef TARA_NO_IMGUI
 	ImGui_ChangeViewport m_ImGui_ChangeViewport;
-	namespace UI {
-	
-		#pragma region Struct implementation
-		int32_t ImGui_FlagBase::GetFlags()
+
+	bool markdownInit = false;
+	ImGui::MarkdownConfig mdConfig = ImGui::MarkdownConfig();
+	ImFont* H1 = NULL;
+	ImFont* H2 = NULL;
+	ImFont* H3 = NULL;
+
+	void LinkCallback(ImGui::MarkdownLinkCallbackData data_) {
+		std::string url(data_.link, data_.linkLength);
+		if (!data_.isImage)
 		{
-			return int32_t();
+			ShellExecuteA(NULL, "open", url.c_str(), NULL, NULL, SW_SHOWNORMAL);
 		}
-		int32_t ImGui_WindiwFlags::GetFlags()
+	}
+	ImGui::MarkdownImageData ImageCallback(ImGui::MarkdownLinkCallbackData data_)
+	{
+		// In your application you would load an image based on data_ input. Here we just use the imgui font texture.
+		ImTextureID image = ImGui::GetIO().Fonts->TexID;
+		// > C++14 can use ImGui::MarkdownImageData imageData{ true, false, image, ImVec2( 40.0f, 20.0f ) };
+		ImGui::MarkdownImageData imageData;
+		imageData.isValid = true;
+		imageData.useLinkCallback = false;
+		imageData.user_texture_id = image;
+		imageData.size = ImVec2(40.0f, 20.0f);
+
+		// For image resize when available size.x > image width, add
+		ImVec2 const contentSize = ImGui::GetContentRegionAvail();
+		if (imageData.size.x > contentSize.x)
 		{
-			int32_t buffer = 0;
-			if (NoTitleBar) buffer |= ImGuiWindowFlags_NoTitleBar;
-			if (NoResize) buffer |= ImGuiWindowFlags_NoResize;
-			if (NoMove) buffer |= ImGuiWindowFlags_NoMove;
-			if (NoScrollbar) buffer |= ImGuiWindowFlags_NoScrollbar;
-			if (NoScrollWithMouse) buffer |= ImGuiWindowFlags_NoScrollWithMouse;
-			if (NoCollapse) buffer |= ImGuiWindowFlags_NoCollapse;
-			if (AlwaysAutoResize) buffer |= ImGuiWindowFlags_NoCollapse;
-			if (NoBackground) buffer |= ImGuiWindowFlags_NoBackground;
-			if (UnSave) buffer |= ImGuiWindowFlags_UnsavedDocument;
-			if (NoMouseInput) buffer |= ImGuiWindowFlags_NoMouseInputs;
-			if (MenuBar) buffer |= ImGuiWindowFlags_MenuBar;
-			if (HorizontalScrollbar) buffer |= ImGuiWindowFlags_HorizontalScrollbar;
-			if (NoFocusOnAppearing) buffer |= ImGuiWindowFlags_NoFocusOnAppearing;
-			if (NoBringToFrontOnFocus) buffer |= ImGuiWindowFlags_NoBringToFrontOnFocus;
-			if (AlwaysVerticalScrollbar) buffer |= ImGuiWindowFlags_AlwaysVerticalScrollbar;
-			if (AlwaysHorizontalScrollbar) buffer |= ImGuiWindowFlags_AlwaysHorizontalScrollbar;
-			if (AlwaysUseWindowPadding) buffer |= ImGuiWindowFlags_AlwaysUseWindowPadding;
-			if (NoNavInputs) buffer |= ImGuiWindowFlags_NoNavInputs;
-			if (NoNavFocus) buffer |= ImGuiWindowFlags_NoNavFocus;
-			if (UnsaveDocumentDot) buffer |= ImGuiWindowFlags_UnsavedDocument;
-
-			if (NoDocking) buffer |= ImGuiWindowFlags_NoDocking;
-
-			if (NoNav) buffer |= ImGuiWindowFlags_NoNav;
-			if (NoDecoration) buffer |= ImGuiWindowFlags_NoDecoration;
-			if (NoInputs) buffer |= ImGuiWindowFlags_NoInputs;
-			return buffer;
+			float const ratio = imageData.size.y / imageData.size.x;
+			imageData.size.x = contentSize.x;
+			imageData.size.y = contentSize.x * ratio;
 		}
-		int32_t ImGui_ConditionFlags::GetFlags()
+
+		return imageData;
+	}
+	void ExampleMarkdownFormatCallback(const ImGui::MarkdownFormatInfo& markdownFormatInfo_, bool start_)
+	{
+		// Call the default first so any settings can be overwritten by our implementation.
+		// Alternatively could be called or not called in a switch statement on a case by case basis.
+		// See defaultMarkdownFormatCallback definition for furhter examples of how to use it.
+		ImGui::defaultMarkdownFormatCallback(markdownFormatInfo_, start_);
+
+		switch (markdownFormatInfo_.type)
 		{
-			int32_t buffer = 0;
-			if (Always) buffer |= ImGuiCond_Always;
-			if (Once) buffer |= ImGuiCond_Once;
-			if (FirstUseEver) buffer |= ImGuiCond_FirstUseEver;
-			if (Appearing) buffer |= ImGuiCond_Appearing;
-			return buffer;
-		}
-		int32_t ImGui_TableFlags::GetFlags()
+			// example: change the colour of heading level 2
+		case ImGui::MarkdownFormatType::HEADING:
 		{
-			int32_t buffer = 0;
-			if (ReSizeble) buffer |= ImGuiTableFlags_Resizable;
-			if (ReOrderable) buffer |= ImGuiTableFlags_Reorderable;
-			if (Hideable) buffer |= ImGuiTableFlags_Hideable;
-			if (Sortable) buffer |= ImGuiTableFlags_Sortable;
-			if (NoSave) buffer |= ImGuiTableFlags_NoSavedSettings;
-			if (ContextMenuInBody) buffer |= ImGuiTableFlags_ContextMenuInBody;
-
-			if (RowBG) buffer |= ImGuiTableFlags_RowBg;
-			if (BordersInnerH) buffer |= ImGuiTableFlags_BordersInnerH;
-			if (BordersOuterH) buffer |= ImGuiTableFlags_BordersOuterH;
-			if (BordersInnerV) buffer |= ImGuiTableFlags_BordersInnerV;
-			if (BordersOuterV) buffer |= ImGuiTableFlags_BordersOuterV;
-			if (NoBordersInBody) buffer |= ImGuiTableFlags_NoBordersInBody;
-			if (NoBordersInBodyUntilResize) buffer |= ImGuiTableFlags_NoBordersInBodyUntilResize;
-
-			if (SizingFixedFit) buffer |= ImGuiTableFlags_SizingFixedFit;
-			if (SizingFixedSame) buffer |= ImGuiTableFlags_SizingFixedSame;
-			if (SizingStretchProp) buffer |= ImGuiTableFlags_SizingStretchProp;
-			if (SizingStretchSame) buffer |= ImGuiTableFlags_SizingStretchSame;
-
-			if (NoHostExtendX) buffer |= ImGuiTableFlags_NoHostExtendX;
-			if (NoHostExtendY) buffer |= ImGuiTableFlags_NoHostExtendY;
-			if (NoKeepColumnVisible) buffer |= ImGuiTableFlags_NoKeepColumnsVisible;
-			if (PreciseWidths) buffer |= ImGuiTableFlags_PreciseWidths;
-
-			if (NoClip) buffer |= ImGuiTableFlags_NoClip;
-
-			if (PadOuterX) buffer |= ImGuiTableFlags_PadOuterX;
-			if (NoPadOuterX) buffer |= ImGuiTableFlags_NoPadOuterX;
-			if (NoPadInnerX) buffer |= ImGuiTableFlags_NoPadInnerX;
-
-			if (ScrollX) buffer |= ImGuiTableFlags_ScrollX;
-			if (ScrollY) buffer |= ImGuiTableFlags_ScrollY;
-
-			if (SortMulti) buffer |= ImGuiTableFlags_SortMulti;
-			if (SortTristate) buffer |= ImGuiTableFlags_SortTristate;
-			return buffer;
-		}
-		int32_t ImGui_TabFlagsFitting::GetFlags()
-		{
-			int32_t buffer = 0;
-			if (Resizedown) buffer |= ImGuiTabBarFlags_FittingPolicyResizeDown;
-			if (Scroll) buffer |= ImGuiTabBarFlags_FittingPolicyScroll;
-			return buffer;
-		}
-		int32_t ImGui_ComboFlags::GetFlags()
-		{
-			int32_t buffer = 0;
-			if (PopupAlignLeft) buffer |= ImGuiComboFlags_PopupAlignLeft;
-			if (HeightSmall) buffer |= ImGuiComboFlags_HeightSmall;
-			if (HeightHeightRegular) buffer |= ImGuiComboFlags_HeightRegular;
-			if (HeightHeightLarge) buffer |= ImGuiComboFlags_HeightLarge;
-			if (HeightHeightLargest) buffer |= ImGuiComboFlags_HeightLargest;
-			if (NoArrowButton) buffer |= ImGuiComboFlags_NoArrowButton;
-			if (NoPreview) buffer |= ImGuiComboFlags_NoPreview;
-			return buffer;
-		}
-		int32_t ImGui_TabFlags::GetFlags()
-		{
-			int32_t buffer = 0;
-			if (ReOrderable) buffer |= ImGuiTabBarFlags_Reorderable;
-			if (AutoSelectTab) buffer |= ImGuiTabBarFlags_AutoSelectNewTabs;
-			if (TabListPopupButton) buffer |= ImGuiTabBarFlags_TabListPopupButton;
-			if (NoCloseMiddleMouse) buffer |= ImGuiTabBarFlags_NoCloseWithMiddleMouseButton;
-			if (NoTabListScrolling) buffer |= ImGuiTabBarFlags_NoTabListScrollingButtons;
-			if (NoTooltop) buffer |= ImGuiTabBarFlags_NoTooltip;
-			buffer |= fittingpolicy.GetFlags();
-			return buffer;
-		}
-		int32_t ImGui_TabitemsFlags::GetFlags()
-		{
-			int32_t buffer = 0;
-			if (UnSave) buffer != ImGuiTabItemFlags_UnsavedDocument;
-			if (SetSelect) buffer != ImGuiTabItemFlags_SetSelected;
-			if (NoCloseMiddleMouse) buffer != ImGuiTabItemFlags_NoCloseWithMiddleMouseButton;
-			if (NoPushID) buffer != ImGuiTabItemFlags_NoPushId;
-			if (NoTooltip) buffer != ImGuiTabItemFlags_NoTooltip;
-			if (NoReOrder) buffer != ImGuiTabItemFlags_NoReorder;
-			if (Leading) buffer != ImGuiTabItemFlags_Leading;
-			if (Trailing) buffer != ImGuiTabItemFlags_Trailing;
-			return buffer;
-		}
-		int32_t ImGui_PopupFlags::GetFlags()
-		{
-			return int32_t();
-		}
-		#pragma endregion
-
-		#pragma region Style
-		void ImGui_SetLightTheme() {
-			ImGui::StyleColorsLight();
-		}
-		void ImGui_SetDarkTheme() {
-			ImGui::StyleColorsDark();
-		}
-		void ImGui_SetClassicTheme() {
-			ImGui::StyleColorsClassic();
-		}
-		void ImGui_SetTaraTheme()
-		{
-			ImGuiStyle& style = ImGui::GetStyle();
-
-			// light style from Pacôme Danhiez (user itamago) https://github.com/ocornut/imgui/pull/511#issuecomment-175719267
-			style.Alpha = 1.0f;
-			style.FrameRounding = 3.0f;
-			style.Colors[ImGuiCol_Text] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
-			style.Colors[ImGuiCol_TextDisabled] = ImVec4(0.60f, 0.60f, 0.60f, 1.00f);
-			style.Colors[ImGuiCol_WindowBg] = ImVec4(0.94f, 0.94f, 0.94f, 0.94f);
-			style.Colors[ImGuiCol_ChildBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-			style.Colors[ImGuiCol_PopupBg] = ImVec4(1.00f, 1.00f, 1.00f, 0.94f);
-			style.Colors[ImGuiCol_Border] = ImVec4(0.00f, 0.00f, 0.00f, 0.39f);
-			style.Colors[ImGuiCol_BorderShadow] = ImVec4(1.00f, 1.00f, 1.00f, 0.10f);
-			style.Colors[ImGuiCol_FrameBg] = ImVec4(1.00f, 1.00f, 1.00f, 0.94f);
-			style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
-			style.Colors[ImGuiCol_FrameBgActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
-			style.Colors[ImGuiCol_TitleBg] = ImVec4(0.96f, 0.96f, 0.96f, 1.00f);
-			style.Colors[ImGuiCol_TitleBgCollapsed] = ImVec4(1.00f, 1.00f, 1.00f, 0.51f);
-			style.Colors[ImGuiCol_TitleBgActive] = ImVec4(0.82f, 0.82f, 0.82f, 1.00f);
-			style.Colors[ImGuiCol_MenuBarBg] = ImVec4(0.86f, 0.86f, 0.86f, 1.00f);
-			style.Colors[ImGuiCol_ScrollbarBg] = ImVec4(0.98f, 0.98f, 0.98f, 0.53f);
-			style.Colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.69f, 0.69f, 0.69f, 1.00f);
-			style.Colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.59f, 0.59f, 0.59f, 1.00f);
-			style.Colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.49f, 0.49f, 0.49f, 1.00f);
-			//style.Colors[ImGuiCol_ComboBg] = ImVec4(0.86f, 0.86f, 0.86f, 0.99f);
-			style.Colors[ImGuiCol_CheckMark] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-			style.Colors[ImGuiCol_SliderGrab] = ImVec4(0.24f, 0.52f, 0.88f, 1.00f);
-			style.Colors[ImGuiCol_SliderGrabActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-			style.Colors[ImGuiCol_Button] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
-			style.Colors[ImGuiCol_ButtonHovered] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-			style.Colors[ImGuiCol_ButtonActive] = ImVec4(0.06f, 0.53f, 0.98f, 1.00f);
-			style.Colors[ImGuiCol_Header] = ImVec4(0.26f, 0.59f, 0.98f, 0.31f);
-			style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.80f);
-			style.Colors[ImGuiCol_HeaderActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-			//style.Colors[ImGuiCol_Column] = ImVec4(0.39f, 0.39f, 0.39f, 1.00f);
-			//style.Colors[ImGuiCol_ColumnHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.78f);
-			//style.Colors[ImGuiCol_ColumnActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-			style.Colors[ImGuiCol_ResizeGrip] = ImVec4(1.00f, 1.00f, 1.00f, 0.50f);
-			style.Colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
-			style.Colors[ImGuiCol_ResizeGripActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
-			//style.Colors[ImGuiCol_CloseButton] = ImVec4(0.59f, 0.59f, 0.59f, 0.50f);
-			//style.Colors[ImGuiCol_CloseButtonHovered] = ImVec4(0.98f, 0.39f, 0.36f, 1.00f);
-			//style.Colors[ImGuiCol_CloseButtonActive] = ImVec4(0.98f, 0.39f, 0.36f, 1.00f);
-			style.Colors[ImGuiCol_PlotLines] = ImVec4(0.39f, 0.39f, 0.39f, 1.00f);
-			style.Colors[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
-			style.Colors[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
-			style.Colors[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
-			style.Colors[ImGuiCol_TextSelectedBg] = ImVec4(0.26f, 0.59f, 0.98f, 0.35f);
-			//style.Colors[ImGuiCol_ModalWindowDarkening] = ImVec4(0.20f, 0.20f, 0.20f, 0.35f);
-
-			for (int i = 0; i <= ImGuiCol_COUNT; i++)
+			if (markdownFormatInfo_.level == 2)
 			{
-				ImVec4& col = style.Colors[i];
-				float H, S, V;
-				ImGui::ColorConvertRGBtoHSV(col.x, col.y, col.z, H, S, V);
-
-				if (S < 0.1f)
+				if (start_)
 				{
-					V = 1.0f - V;
+					ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_TextDisabled]);
 				}
-				ImGui::ColorConvertHSVtoRGB(H, S, V, col.x, col.y, col.z);
-				if (col.w < 1.00f)
+				else
 				{
-					col.w *= 0.9f;
+					ImGui::PopStyleColor();
 				}
 			}
+			break;
 		}
-		void ImGui_TextColor(float r, float g, float b, float a) {
-			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(r, g, b, a));
+		default:
+		{
+			break;
 		}
-		void ImGui_TextColor(glm::vec4 v) {
-			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(v.r, v.g, v.b, v.a));
 		}
-		void ImGui_TextColor(glm::vec3 v) {
-			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(v.r, v.g, v.b, 1));
-		}
-		void ImGui_TextDisabledColor(float r, float g, float b, float a) {
-			ImGui::PushStyleColor(ImGuiCol_TextDisabled, ImVec4(r, g, b, a));
-		}
-		void ImGui_TextDisabledColor(glm::vec4 v) {
-			ImGui::PushStyleColor(ImGuiCol_TextDisabled, ImVec4(v.r, v.g, v.b, v.a));
-		}
-		void ImGui_TextDisabledColor(glm::vec3 v) {
-			ImGui::PushStyleColor(ImGuiCol_TextDisabled, ImVec4(v.r, v.g, v.b, 1));
-		}
+	}
+	void MarkdownInitialization()
+	{
+		mdConfig.linkCallback = LinkCallback;
+		mdConfig.tooltipCallback = NULL;
+		mdConfig.imageCallback = ImageCallback;
+		//mdConfig.linkIcon = ICON_FA_LINK;
+		mdConfig.headingFormats[0] = { H1, true };
+		mdConfig.headingFormats[1] = { H2, true };
+		mdConfig.headingFormats[2] = { H3, false };
+		mdConfig.userData = NULL;
+		mdConfig.formatCallback = ExampleMarkdownFormatCallback;
 
-		void ImGui_WindowBgColor(float r, float g, float b, float a) {
-			ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(r, g, b, a));
-		}
-		void ImGui_ChildBgColor(float r, float g, float b, float a) {
-			ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(r, g, b, a));
-		}
-		void ImGui_PopupBgColor(float r, float g, float b, float a) {
-			ImGui::PushStyleColor(ImGuiCol_PopupBg, ImVec4(r, g, b, a));
-		}
-		void ImGui_BorderColor(float r, float g, float b, float a) {
-			ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(r, g, b, a));
-		}
-		void ImGui_BorderShadowColor(float r, float g, float b, float a) {
-			ImGui::PushStyleColor(ImGuiCol_BorderShadow, ImVec4(r, g, b, a));
-		}
-		void ImGui_FrameBgColor(float r, float g, float b, float a) {
-			ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(r, g, b, a));
-		}
-		void ImGui_FrameBgHoveredColor(float r, float g, float b, float a) {
-			ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(r, g, b, a));
-		}
-		void ImGui_FrameBgActiveColor(float r, float g, float b, float a) {
-			ImGui::PushStyleColor(ImGuiCol_FrameBgActive, ImVec4(r, g, b, a));
-		}
-		void ImGui_TitleBgColor(float r, float g, float b, float a) {
-			ImGui::GetStyle().Colors[ImGuiCol_TitleBg] = ImVec4(r, g, b, a);
-		}
-		void ImGui_TitleBgActiveColor(float r, float g, float b, float a) {
-			ImGui::GetStyle().Colors[ImGuiCol_TitleBgActive] = ImVec4(r, g, b, a);
-		}
-		void ImGui_TitleBgCollapsedColor(float r, float g, float b, float a) {
-			ImGui::GetStyle().Colors[ImGuiCol_TitleBgCollapsed] = ImVec4(r, g, b, a);
-		}
-		void ImGui_MenuBarBgColor(float r, float g, float b, float a) {
-			ImGui::GetStyle().Colors[ImGuiCol_MenuBarBg] = ImVec4(r, g, b, a);
-		}
-		void ImGui_HeaderColor(float r, float g, float b, float a) {
-			ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(r, g, b, a));
-		}
-		void ImGui_HeaderHoveredColor(float r, float g, float b, float a)
-		{
-			ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(r, g, b, a));
-		}
-		void ImGui_HeaderActiveColor(float r, float g, float b, float a)
-		{
-			ImGui::PushStyleColor(ImGuiCol_HeaderActive, ImVec4(r, g, b, a));
-		}
-		void ImGui_NavHighlightColor(float r, float g, float b, float a)
-		{
-			ImGui::PushStyleColor(ImGuiCol_NavHighlight, ImVec4(r, g, b, a));
-		}
-		void ImGui_PopVar(int32_t c)
-		{
-			ImGui::PopStyleVar(c);
-		}
-		void ImGui_PopColor(int32_t c)
-		{
-			ImGui::PopStyleColor(c);
-		}
-		#pragma endregion
+		markdownInit = true;
+	}
 
-		#pragma region Gui Func
+	namespace UI {
 		void ImGui_Initialization(const char* version, void* window)
 		{
 			GLFWwindow* w = (GLFWwindow*)window;
@@ -360,8 +148,11 @@ namespace Tara {
 			// - The fonts will be rasterized at a given size (w/ oversampling) and stored into a texture when calling ImFontAtlas::Build()/GetTexDataAsXXXX(), which ImGui_ImplXXXX_NewFrame below will call.
 			// - Read 'docs/FONTS.md' for more instructions and details.
 			// - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double backslash \\ !
-			io.Fonts->AddFontDefault();
-			//io.Fonts->AddFontFromFileTTF("../../misc/fonts/Roboto-Medium.ttf", 16.0f);
+			//io.Fonts->AddFontDefault();
+			io.Fonts->AddFontFromFileTTF(".\\Resources\\fonts\\OpenSans-Medium.ttf", 16.0f);
+			H1 = io.Fonts->AddFontFromFileTTF(".\\Resources\\fonts\\OpenSans-Bold.ttf", 36.0f);
+			H2 = io.Fonts->AddFontFromFileTTF(".\\Resources\\fonts\\OpenSans-Bold.ttf", 32.0f);
+			H3 = io.Fonts->AddFontFromFileTTF(".\\Resources\\fonts\\OpenSans-SemiBold.ttf", 26.0f);
 			//io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
 			//io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
 			//io.Fonts->AddFontFromFileTTF("../../misc/fonts/ProggyTiny.ttf", 10.0f);
@@ -454,52 +245,42 @@ namespace Tara {
 		{
 			return ImGui::BeginTabItem(title, open, flags.GetFlags());
 		}
-
 		bool ImGui_BeginTable(const char* title, int column, ImGui_TableFlags flags, glm::vec2 outterSize, float innerWidth)
 		{
 			return ImGui::BeginTable(title, column, flags.GetFlags(), ImVec2(outterSize.x, outterSize.y), innerWidth);
 		}
-
 		bool ImGui_BeginListbox()
 		{
 			return false;
 		}
-
 		void ImGui_BeginTooltip()
 		{
 			ImGui::BeginTooltip();
 		}
-
 		bool ImGui_BeginPopup(const char* title, ImGui_WindiwFlags flags)
 		{
 			return ImGui::BeginPopup(title, flags.GetFlags());
 		}
-
 		bool ImGui_BeginPopupContextItem()
 		{
 			return false;
 		}
-
 		bool ImGui_BeginPopupContextVoid()
 		{
 			return false;
 		}
-
 		bool ImGui_BeginPopupContextWindow()
 		{
 			return false;
 		}
-
 		bool ImGui_BeginPopupModal(const char* title, bool* open, ImGui_WindiwFlags flags)
 		{
 			return ImGui::BeginPopupModal(title, open, flags.GetFlags());
 		}
-
 		bool ImGui_BeginDrag()
 		{
 			return false;
 		}
-
 		bool ImGui_BeginDrop()
 		{
 			return false;
@@ -817,7 +598,7 @@ namespace Tara {
 		{
 			return ImGui::Button(title);
 		}
-		bool ImGui_ButtonArrow(const char* title, arrowdirection dir)
+		bool ImGui_ButtonArrow(const char* title, ArrowDirection dir)
 		{
 			return ImGui::ArrowButton(title, (int)dir);
 		}
@@ -908,6 +689,34 @@ namespace Tara {
 		bool ImGui_InputVec4(const char* title, glm::vec4* value)
 		{
 			return ImGui::InputFloat4(title, &value->x);
+		}
+		bool ImGui_DragFloat(const char* title, float_t* value, float_t speed, float_t min, float_t max)
+		{
+			return ImGui::DragFloat(title, value, speed, min, max);
+		}
+		bool ImGui_DragVec2(const char* title, float_t value[2], float_t speed, float_t min, float_t max)
+		{
+			return ImGui::DragFloat2(title, &value[0], speed, min, max);
+		}
+		bool ImGui_DragVec2(const char* title, glm::vec2* value, float_t speed, float_t min, float_t max)
+		{
+			return ImGui::DragFloat2(title, &value->x, speed, min, max);
+		}
+		bool ImGui_DragVec3(const char* title, float_t value[3], float_t speed, float_t min, float_t max)
+		{
+			return ImGui::DragFloat3(title, &value[0], speed, min, max);
+		}
+		bool ImGui_DragVec3(const char* title, glm::vec3* value, float_t speed, float_t min, float_t max)
+		{
+			return ImGui::DragFloat3(title, &value->x, speed, min, max);
+		}
+		bool ImGui_DragVec4(const char* title, float_t value[4], float_t speed, float_t min, float_t max)
+		{
+			return ImGui::DragFloat4(title, &value[0], speed, min, max);
+		}
+		bool ImGui_DragVec4(const char* title, glm::vec4* value, float_t speed, float_t min, float_t max)
+		{
+			return ImGui::DragFloat4(title, &value->x, speed, min, max);
 		}
 		bool ImGui_SliderAngle(const char* title, float_t* value, float_t min, float_t max)
 		{
@@ -1033,20 +842,32 @@ namespace Tara {
 		{
 			return ImGui::Selectable(title, selected);
 		}
-		void ImGui_Tree(const char* title)
+		bool ImGui_Selectable(const char* title, bool selected)
 		{
-			ImGui::TreeNode(title);
+			return ImGui::Selectable(title, selected);
 		}
-		void ImGui_Tree(const char* id, const char* title, ...)
+		bool ImGui_Tree(const char* title)
+		{
+			return ImGui::TreeNode(title);
+		}
+		bool ImGui_Tree(const char* id, const char* title, ...)
 		{
 			va_list vl;
 			va_start(vl, title);
-			ImGui::TreeNodeV(id, title, vl);
+			bool v = ImGui::TreeNodeV(id, title, vl);
 			va_end(vl);
+			return v;
 		}
-		void ImGui_Tree()
+		bool ImGui_Tree(const void* id, const char* title, ...)
 		{
-
+			va_list vl;
+			va_start(vl, title);
+			bool v = ImGui::TreeNodeV(id, title, vl);
+			va_end(vl);
+			return v;
+		}
+		void ImGui_TreePop() {
+			ImGui::TreePop();
 		}
 		void ImGui_Disabled(const char* title, ...)
 		{
@@ -1151,23 +972,45 @@ namespace Tara {
 
 		void ImGui_PieMenu()
 		{
+
 		}
-		void ImGui_TextureField(Texture* target)
+		void ImGui_Markdown(std::string& text) {
+			if (!markdownInit) MarkdownInitialization();
+			ImGui::Markdown(text.c_str(), text.length(), mdConfig);
+		}
+		void ImGui_MeshField(const char* title, Mesh* target)
 		{
 			std::string s = "";
-			ImGui_Text(target->Name());
 			glm::vec2 wsize = ImGui_GetWindowSize();
-			ImGui_Sameline(wsize.x / 2.f, 2);
+			ImGui_Column(2, false);
+			ImGui_Text(title);
+			ImGui_SetColumnWidth(0, std::fmax(wsize.x / 7.0f, 80));
+			ImGui_NextColumn();
 			if (target == nullptr) {
 				ImGui_Disabled("NULL");
 			}
 			else {
-				glm::ivec2 size = target->Size();
-				s.append(std::to_string(size.x));
-				s.append("x");
-				s.append(std::to_string(size.y));
+				s.append(target->Name());
 				ImGui_Disabled(s.c_str());
 			}
+			ImGui_NextColumn();
+		}
+		void ImGui_TextureField(const char* title, Texture* target)
+		{
+			std::string s = "";
+			glm::vec2 wsize = ImGui_GetWindowSize();
+			ImGui_Column(2, false);
+			ImGui_Text(title);
+			ImGui_SetColumnWidth(0, std::fmax(wsize.x / 7.0f, 80));
+			ImGui_NextColumn();
+			if (target == nullptr) {
+				ImGui_Disabled("NULL");
+			}
+			else {
+				s.append(target->Name());
+				ImGui_Disabled(s.c_str());
+			}
+			ImGui_NextColumn();
 		}
 		void ImGui_TextureImageField(Texture* target, int32_t size, ImGui_EventPack<Texture> events)
 		{
@@ -1212,10 +1055,10 @@ namespace Tara {
 			glm::ivec2 windowSize = ImGui_GetWindowSize();
 			int32_t columnCount = -1;
 			if (column == 0) {
-				columnCount = std::max(windowSize.x / size, 1);
+				columnCount = std::fmax(windowSize.x / size, 1);
 			}
 			else {
-				columnCount = std::max(std::min(column, windowSize.x / size), 1);
+				columnCount = std::fmax(std::fmin(column, windowSize.x / size), 1);
 			}
 			// Override tooltip.
 			if (events.Tooltop == nullptr) {
@@ -1232,7 +1075,8 @@ namespace Tara {
 			ImGui_TextColor(0, 1, 1);
 			ImGui_Text("Textures: %s", title);
 			ImGui::PopStyleColor();
-			ImGui_BeginChild("Grid Image Field", columnCount * size, height, true, wf);
+			ImGui_BeginChild("Grid Image Field Frame", 0, 0, false, wf);
+			ImGui_BeginChild("Grid Image Field", columnCount * size, height, false, wf);
 			ImGui_Column(columnCount, false);
 			for (int32_t i = 0; i < target.size(); i++) {
 				Texture* tex = target.at(i);
@@ -1241,195 +1085,97 @@ namespace Tara {
 			}
 			ImGui_Column(1);
 			ImGui_EndChild();
+			ImGui_EndChild();
 		}
-		#pragma endregion
-
-		#pragma region Gui Base Objects
-		ImGui_ElementBase::ImGui_ElementBase(const char* _label)
+		void ImGui_MaterialField(const char* title, Material* target)
 		{
-			label = label;
-		}
-		ImGui_ElementBase::~ImGui_ElementBase()
-		{
-		}
-		ImGui_WindowBase::ImGui_WindowBase()
-		{
-		}
-		ImGui_WindowBase::ImGui_WindowBase(const char* _title)
-		{
-			title = _title;
-		}
-		ImGui_WindowBase::~ImGui_WindowBase()
-		{
-			for (auto i = elementlist.begin(); i != elementlist.end(); i++) {
-				delete *i;
+			std::string s = "";
+			glm::vec2 wsize = ImGui_GetWindowSize();
+			ImGui_Column(2, false);
+			ImGui_Text(title);
+			ImGui_SetColumnWidth(0, std::fmax(wsize.x / 7.0f, 80));
+			ImGui_NextColumn();
+			if (target == nullptr) {
+				ImGui_Disabled("NULL");
 			}
-		}
-		void ImGui_WindowBase::Render()
-		{
-			if (show) {
-				ImGui::Begin(title.c_str(), &show);
-				Content();
-				ImGui::End();
-			}
-		}
-		void ImGui_WindowBase::Content()
-		{
-			DefaultContent();
-		}
-		void ImGui_WindowBase::DefaultContent()
-		{
-			for (auto i = elementlist.begin(); i != elementlist.end(); i++) {
-				ImGui_ElementBase* buffer = *i;
-				buffer->Render();
-			}
-		}
-
-		ImGui_ElementBase* ImGui_WindowBase::AddChild(ImGui_ElementBase* element)
-		{
-			if (element)
-				elementlist.push_back(element);
-			return element;
-		}
-		std::vector<ImGui_ElementBase*> ImGui_WindowBase::AddChildren(std::vector<ImGui_ElementBase*> elements)
-		{
-			for (auto i = elements.begin(); i != elements.end(); i++) {
-				ImGui_ElementBase* buffer = (*i);
-				if (buffer)
-					elementlist.push_back(buffer);
-			}
-			return elements;
-		}
-		bool ImGui_WindowBase::RemoveChild(ImGui_ElementBase* element)
-		{
-			for (auto i = elementlist.begin(); i != elementlist.end(); i++) {
-				ImGui_ElementBase* buffer = (*i);
-				if (buffer == element) {
-					elementlist.erase(i);
-					return true;
+			else {
+				s.append(target->Name());
+				ImGui_Disabled(s.c_str());
+				if (UI::ImGui_BeginDrop()) {
+					UI::ImGui_EndDrop();
 				}
 			}
-			return false;
+			ImGui_NextColumn();
 		}
-		bool ImGui_WindowBase::RemoveChildren(std::vector<ImGui_ElementBase*> elements)
+		void ImGui_MaterialImageField(Material* target, CommomMesh preview)
 		{
-			for (auto i = elements.begin(); i != elements.end(); i++) {
-				ImGui_ElementBase* buffer = (*i);
-				RemoveChild(buffer);
+		}
+		void ImGui_MaterialVerticalImageField(Material* target, CommomMesh preview)
+		{
+		}
+		void ImGui_MaterialGridImageField(Material* target, CommomMesh preview)
+		{
+		}
+		void ImGui_ShaderField(Shader* target)
+		{
+		}
+		EObject* ImGui_EObjectHierarchy(EObject* target, EObject* _focus) {
+			size_t c = target->Count();
+			EObject* focus = _focus;
+			if (target == focus) {
+				ImGui_TextColor(glm::vec3(1, 1, 0));
 			}
-			return true;
-		}
-		bool ImGui_WindowBase::RemoveAll()
-		{
-			elementlist.clear();
-			return true;
-		}
-
-		void ImGui_WindowBase::Swap(int32_t index1, int32_t index2)
-		{
-			ImGui_ElementBase* buffer = elementlist.at(index1);
-			elementlist[index1] = elementlist[index2];
-			elementlist[index2] = buffer;
-		}
-		ImGui_ElementBase* ImGui_WindowBase::GetChild(int32_t index)
-		{
-			return elementlist[index];
-		}
-		std::vector<ImGui_ElementBase*> ImGui_WindowBase::GetChildren(int32_t index, int32_t count)
-		{
-			std::vector<ImGui_ElementBase*> result = std::vector<ImGui_ElementBase*>();
-			for (int i = index; i < index + count; i++) {
-				if (i > elementlist.size()) break;
-				ImGui_ElementBase* buffer = elementlist[i];
-				result.push_back(buffer);
+			else {
+				ImGui_TextColor(glm::vec3(1, 1, 1));
 			}
-			return result;
-		}
-		size_t ImGui_WindowBase::Count()
-		{
-			return elementlist.size();
-		}
-		void ImGui_WindowBase::SetVisible(bool v) {
-			show = v;
-		}
-		bool ImGui_WindowBase::Visible() {
-			return show;
-		}
-		#pragma endregion
 
-		#pragma region Gui Window Subclasses
-		ImGui_DebugWindow::ImGui_DebugWindow() : ImGui_WindowBase("Tara Debug Info")
-		{
-		}
-		ImGui_DebugWindow::~ImGui_DebugWindow()
-		{
-		}
-		void ImGui_DebugWindow::Content()
-		{
-			DebugInfo();
-		}
-		void ImGui_DebugWindow::DebugInfo()
-		{
-			std::string t = "";
-			if (ImGui_BeginTabBar("Debug Info")) {
-				if (ImGui_BeginTabitems("Application", 0)) {
-					t = "Tara version: 1.0";
-					ImGui_Text(t.c_str());
-					ImGui_EndTabitems();
+			if (ImGui_Tree((void*)target, target->Name())) {
+				if (ImGui_IsItemFocued()) {
+					focus = target;
 				}
-				if (ImGui_BeginTabitems("Input", 0)) {
-					t = "time: ";
-					t.append(std::to_string(EInput::Time()));
-					ImGui_Text(t.c_str());
-
-					t = "time delta: ";
-					t.append(std::to_string(EInput::Delta()));
-					ImGui_Text(t.c_str());
-
-					glm::ivec2 m = EInput::GetMousePosition();
-					t = "mouse: ";
-					t.append(std::to_string((int)m.x));
-					t.append(", " + std::to_string((int)m.y));
-					ImGui_Text(t.c_str());
-
-					m = EInput::GetMouseDelta();
-					t = "mouse delta: ";
-					t.append(std::to_string((int)m.x));
-					t.append(", " + std::to_string((int)m.y));
-					ImGui_Text(t.c_str());
-
-					char c = EInput::GetLastChar();
-					t = "last char: ";
-					t += c;
-					ImGui_Text(t.c_str());
-
-					t = "log level: ";
-					t.append(std::to_string(DEBUG_LEVEL));
-					ImGui_Text(t.c_str());
-
-					t = "log filename: ";
-					t.append(DEBUG_FILENAME);
-					ImGui_Text(t.c_str());
-					ImGui_EndTabitems();
+				ImGui_TableNextColumn();
+				if (c > 0) {
+					ImGui_Indent();
+					for (int32_t i = 0; i < c; i++) {
+						focus = ImGui_EObjectHierarchy(target->GetChild(i), focus);
+					}
+					ImGui_UnIndent();
 				}
-				ImGui_EndTabBar();
+				ImGui_TreePop();
 			}
+			ImGui_PopColor();
+			return focus;
 		}
-		#pragma endregion
-
-		#pragma region Gui Element Subclasses
-		ImGui_TextureView::ImGui_TextureView(Texture* tex)
+		void ImGui_EObjectField(const char* title, EObject* target)
 		{
-			target = tex;
+			std::string s = "";
+			glm::vec2 wsize = ImGui_GetWindowSize();
+			ImGui_Column(2, false);
+			ImGui_Text(title);
+			ImGui_SetColumnWidth(0, std::fmax(wsize.x / 7.0f, 80));
+			ImGui_NextColumn();
+			if (target == nullptr) {
+				ImGui_Disabled("NULL");
+			}
+			else {
+				s.append(target->Name());
+				ImGui_Disabled(s.c_str());
+			}
+			ImGui_NextColumn();
 		}
-		ImGui_TextureView::~ImGui_TextureView()
+		void ImGui_EObjectImageField(EObject* target)
 		{
 		}
-		void ImGui_TextureView::Render()
+		void ImGui_EObjectVerticalImageField(EObject* target)
 		{
-			ImGui_Image((void*)target->ID(), glm::vec2(512, 512), glm::vec2(0));
 		}
-		#pragma endregion
-};
-};
+		void ImGui_EObjectGridImageField(EObject* target)
+		{
+		}
+		void ImGui_EComponentField(EObject* target)
+		{
+			
+		}
+	}
 #endif
+}

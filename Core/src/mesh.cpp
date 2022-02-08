@@ -1,4 +1,5 @@
 #include "mesh.h"
+#include <fstream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <array>
@@ -6,18 +7,55 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <glm/gtx/string_cast.hpp>
+#include <buildin/buildin.h>
 
 namespace Tara {
-	const char* Cube_Obj = ".\\Resources\\Cube.obj";
-	const char* Quad_Obj = ".\\Resources\\Quad.obj";
-	const char* Sphere_Obj = ".\\Resources\\Sphere.obj";
-	const char* Plane_Obj = ".\\Resources\\Plane.obj";
-	const char* Cone_Obj = ".\\Resources\\Cone.obj";
-	const char* Triangle_Obj = ".\\Resources\\Triangle.obj";
 	AssetPool<Mesh>* Mesh::m_meshPool = new AssetPool<Mesh>();
+
+	static Mesh* ImportFromScene(const aiScene* scene) {
+		if (scene->HasMeshes()) {
+			aiMesh* bmesh = scene->mMeshes[0];
+			Mesh* result = new Mesh();
+			TARA_DEBUG_LEVEL("\tSet mesh name %s", 1, scene->mRootNode->mName.C_Str());
+			result->SetName(scene->mRootNode->mName.C_Str());
+			std::vector<glm::vec3> ver = std::vector<glm::vec3>();
+			std::vector<glm::vec3> nor = std::vector<glm::vec3>();
+			std::vector<glm::vec2> tex = std::vector<glm::vec2>();
+			std::vector<uint32_t> ind = std::vector<uint32_t>();
+			for (unsigned int i = 0; i < bmesh->mNumVertices; i++) {
+				aiVector3D aver = bmesh->mVertices[i];
+				ver.push_back(glm::vec3(aver.x, aver.y, aver.z));
+				if (bmesh->HasNormals()) {
+					aiVector3D anor = bmesh->mNormals[i];
+					nor.push_back(glm::vec3(anor.x, anor.y, anor.z));
+				}
+				if (bmesh->mTextureCoords[0]) {
+					aiVector3D atex = bmesh->mTextureCoords[0][i];
+					tex.push_back(glm::vec2(atex.x, atex.y));
+				}
+				else {
+					tex.push_back(glm::vec2(0, 0));
+				}
+			}
+			for (unsigned int i = 0; i < bmesh->mNumFaces; i++) {
+				aiFace face = bmesh->mFaces[i];
+				for (unsigned int j = 0; j < face.mNumIndices; j++) {
+					ind.push_back(face.mIndices[j]);
+				}
+			}
+			result->SetVertices(ver);
+			result->SetNormal(nor);
+			result->SetTextures(tex);
+			result->SetIndices(ind);
+			result->Update();
+			return result;
+		}
+		return nullptr;
+	}
 
 	void CreateDefaultMeshes()
 	{
+#ifndef TARA_NO_BUILDIN
 		TARA_DEBUG_LEVEL("Buildin resources mesh create: Cube", 1);
 		Mesh::GetCommon(CommomMesh::Cube);
 		TARA_DEBUG_LEVEL("Buildin resources mesh create: Sphere", 1);
@@ -30,6 +68,9 @@ namespace Tara {
 		Mesh::GetCommon(CommomMesh::Triangle);
 		TARA_DEBUG_LEVEL("Buildin resources mesh create: Quad", 1);
 		Mesh::GetCommon(CommomMesh::Quad);
+#else
+		TARA_DEBUG_LEVEL("Buildin feature has been disabled at this build mode: Mesh initialization", 1);
+#endif
 	}
 
 	Mesh::Mesh()
@@ -60,79 +101,41 @@ namespace Tara {
 		case CommomMesh::Cube:
 		{
 			Mesh* s = m_meshPool->Find("Cube.obj", true);
-			if (s == nullptr) return GetCube(glm::vec3(1));
+			if (s == nullptr) return GetCube();
 			else return s;
 		}
 		case CommomMesh::Quad:
 		{
-			Mesh* s = m_meshPool->Find("Quad.obj", true);
-			if (s == nullptr) return GetQuad(glm::vec3(1));
+			Mesh* s = m_meshPool->Find("Quad", true);
+			if (s == nullptr) return GetQuad();
 			else return s;
 		}
 		case CommomMesh::Sphere:
 		{
-			Mesh* s = m_meshPool->Find("Sphere.obj", true);
-			if (s == nullptr) return GetSphere(glm::vec3(1));
+			Mesh* s = m_meshPool->Find("Sphere", true);
+			if (s == nullptr) return GetSphere();
 			else return s;
 		}
 		case CommomMesh::Plane:
 		{
-			Mesh* s = m_meshPool->Find("Plane.obj", true);
-			if (s == nullptr) return GetPlane(glm::vec3(1));
+			Mesh* s = m_meshPool->Find("Plane", true);
+			if (s == nullptr) return GetPlane();
 			else return s;
 		}
 		case CommomMesh::Cone:
 		{
-			Mesh* s = m_meshPool->Find("Cone.obj", true);
-			if (s == nullptr) return GetCone(glm::vec3(1));
+			Mesh* s = m_meshPool->Find("Cone", true);
+			if (s == nullptr) return GetCone();
 			else return s;
 		}
 		case CommomMesh::Triangle:
 		{
-			Mesh* s = m_meshPool->Find("Triangle.obj", true);
-			if (s == nullptr) return GetTriangle(glm::vec3(1));
+			Mesh* s = m_meshPool->Find("Triangle", true);
+			if (s == nullptr) return GetTriangle();
 			else return s;
 		}
 		}
 		return nullptr;
-	}
-	Mesh* Mesh::GetCube(glm::vec3 size, glm::ivec3 subdive)
-	{
-		return ImportFromFile(Cube_Obj);
-	}
-	Mesh* Mesh::GetQuad(glm::vec3 size, glm::ivec3 subdive)
-	{
-		return ImportFromFile(Quad_Obj);
-	}
-	Mesh* Mesh::GetSphere(glm::vec3 size, glm::ivec2 linecut)
-	{
-		return ImportFromFile(Sphere_Obj);
-	}
-	Mesh* Mesh::GetPlane(glm::vec2 size)
-	{
-		return ImportFromFile(Plane_Obj);
-	}
-	Mesh* Mesh::GetCone(glm::vec3 size, int32_t dotcount)
-	{
-		return ImportFromFile(Cone_Obj);
-	}
-	Mesh* Mesh::GetTriangle(glm::vec3 size)
-	{
-		Mesh* buffer = new Mesh();
-		buffer->m_name = "Triangle";
-		buffer->m_buildIn = true;
-		std::vector<glm::vec3> ver = std::vector<glm::vec3>({
-			glm::vec3(-0.9f, -0.5f, 0.0f), // left 
-			glm::vec3(0.9f, -0.5f, 0.0f), // right
-			glm::vec3(0.0f, 0.5f, 0.0f), // top
-		});
-		std::vector<uint32_t> ind = std::vector<uint32_t>({
-			0, 1, 2
-		});
-		buffer->SetVertices(ver);
-		buffer->SetIndices(ind);
-		buffer->Update();
-		return buffer;
 	}
 	Mesh* Mesh::ImportFromFile(const char* filename)
 	{
@@ -140,47 +143,19 @@ namespace Tara {
 		Assimp::Importer importer;
 		const aiScene* scene = importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 		if (scene) {
-			if (scene->HasMeshes()) {
-				aiMesh* bmesh = scene->mMeshes[0];
-				Mesh* result = new Mesh();
-				TARA_DEBUG_LEVEL("\tSet mesh name %s", 1, scene->mRootNode->mName.C_Str());
-				result->SetName(scene->mRootNode->mName.C_Str());
-				result->m_buildIn = false;
-				std::vector<glm::vec3> ver = std::vector<glm::vec3>();
-				std::vector<glm::vec3> nor = std::vector<glm::vec3>();
-				std::vector<glm::vec2> tex = std::vector<glm::vec2>();
-				std::vector<uint32_t> ind = std::vector<uint32_t>();
-				for (unsigned int i = 0; i < bmesh->mNumVertices; i++) {
-					aiVector3D aver = bmesh->mVertices[i];
-					ver.push_back(glm::vec3(aver.x, aver.y, aver.z));
-					if (bmesh->HasNormals()) {
-						aiVector3D anor = bmesh->mNormals[i];
-						nor.push_back(glm::vec3(anor.x, anor.y, anor.z));
-					}
-					if (bmesh->mTextureCoords[0]) {
-						aiVector3D atex = bmesh->mTextureCoords[0][i];
-						tex.push_back(glm::vec2(atex.x, atex.y));
-					}
-					else {
-						tex.push_back(glm::vec2(0, 0));
-					}
-				}
-				for (unsigned int i = 0; i < bmesh->mNumFaces; i++) {
-					aiFace face = bmesh->mFaces[i];
-					for (unsigned int j = 0; j < face.mNumIndices; j++) {
-						ind.push_back(face.mIndices[j]);
-					}
-				}
-				result->SetVertices(ver);
-				result->SetNormal(nor);
-				result->SetTextures(tex);
-				result->SetIndices(ind);
-				result->Update();
-				return result;
-			}
+			return ImportFromScene(scene);
 		}
 		TARA_DEBUG_LEVEL("ASSIMP::ERROR::%s", 4, importer.GetErrorString());
 		return nullptr;
+	}
+	Mesh* Mesh::ImportFromMemory(std::string memoey) {
+		TARA_DEBUG_LEVEL("Trying import mesh from memory", 1);
+		Assimp::Importer importer;
+		remove(MESH_IMPORT_TEMP);
+		std::ofstream output(MESH_IMPORT_TEMP);
+		output << memoey;
+		output.close();
+		return ImportFromFile(MESH_IMPORT_TEMP);
 	}
 	AssetPool<Mesh>* Mesh::GetAssetPool()
 	{
@@ -243,6 +218,14 @@ namespace Tara {
 		glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
 		Unbind();
 	}
+	size_t Mesh::VerticesCount()
+	{
+		return m_pack.size();
+	}
+	size_t Mesh::TriangleCount()
+	{
+		return m_indices.size() / 3;
+	}
 	void Mesh::CleanStore()
 	{
 		m_vertices.clear();
@@ -279,5 +262,48 @@ namespace Tara {
 	{
 		m_pack = ver;
 		TARA_DEBUG_LEVEL("\t%s Pack register size: %i", 1, Name(), m_pack.size());
+	}
+
+	Mesh* Mesh::GetCube()
+	{
+		Mesh* buffer = ImportFromMemory(BuildInMesh::Cube().c_str());
+		buffer->SetName("Cube");
+		buffer->m_buildIn = true;
+		return buffer;
+	}
+	Mesh* Mesh::GetQuad()
+	{
+		Mesh* buffer = ImportFromMemory(BuildInMesh::Quad().c_str());
+		buffer->SetName("Quad");
+		buffer->m_buildIn = true;
+		return buffer;
+	}
+	Mesh* Mesh::GetSphere()
+	{
+		Mesh* buffer = ImportFromMemory(BuildInMesh::Sphere().c_str());
+		buffer->SetName("Sphere");
+		buffer->m_buildIn = true;
+		return buffer;
+	}
+	Mesh* Mesh::GetPlane()
+	{
+		Mesh* buffer = ImportFromMemory(BuildInMesh::Plane().c_str());
+		buffer->SetName("Plane");
+		buffer->m_buildIn = true;
+		return buffer;
+	}
+	Mesh* Mesh::GetCone()
+	{
+		Mesh* buffer = ImportFromMemory(BuildInMesh::Cone().c_str());
+		buffer->SetName("Cone");
+		buffer->m_buildIn = true;
+		return buffer;
+	}
+	Mesh* Mesh::GetTriangle()
+	{
+		Mesh* buffer = ImportFromMemory(BuildInMesh::Triangle().c_str());
+		buffer->SetName("Triangle");
+		buffer->m_buildIn = true;
+		return buffer;
 	}
 }

@@ -14,7 +14,7 @@ namespace Tara {
 	class FrameBuffer : public AssetBase
 	{
 	public:
-		FrameBuffer(int32_t width = 1024, int32_t height = 1024);
+		FrameBuffer(int32_t width = 1920, int32_t height = 1080);
 		~FrameBuffer();
 		/*
 			Summary:

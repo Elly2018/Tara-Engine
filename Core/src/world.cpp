@@ -1,22 +1,24 @@
 #include "world.h"
 
-Tara::world* current = nullptr;
+namespace Tara {
+    World* current = nullptr;
 
-Tara::world::world()
-{
-    if (current == nullptr) current = this;
-}
+    World::World()
+    {
+        if (current == nullptr) current = this;
+    }
 
-Tara::world::~world()
-{
-}
+    World::~World()
+    {
+    }
 
-Tara::world* Tara::current_world()
-{
-    return current;
-}
+    World* current_world()
+    {
+        return current;
+    }
 
-void Tara::set_activeworld(world* target)
-{
-    current = target;
+    void set_activeworld(World* target)
+    {
+        current = target;
+    }
 }

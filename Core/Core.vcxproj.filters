@@ -9,17 +9,29 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files\lib">
-      <UniqueIdentifier>{7808d4c3-91e0-401e-9c47-69b4fd74ab09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\lib\Imgui">
-      <UniqueIdentifier>{8a945fcb-bf79-4acf-89c3-f48965c16a82}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\components">
       <UniqueIdentifier>{e5831bfe-2a13-41c9-b362-088d82a891c8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\components">
       <UniqueIdentifier>{5551f999-04dc-408a-b656-7f5a3a5db58d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lib">
+      <UniqueIdentifier>{403790b3-e03b-4cb5-af12-e8eab61f7c6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lib\imgui">
+      <UniqueIdentifier>{4058e088-5d46-42b2-9a3e-d18dd4218e3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\buildin">
+      <UniqueIdentifier>{f2e4d162-66fe-4866-8dc2-cc14e114a071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui">
+      <UniqueIdentifier>{e72c3dd4-048d-499a-8c0c-930b8d10bd39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\buildin">
+      <UniqueIdentifier>{81fee6ce-cfc1-4281-b1f1-de6e6a2d7e22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui">
+      <UniqueIdentifier>{962e5669-0a4e-4e78-bd85-9ed0879b55ea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,9 +59,6 @@
     <ClCompile Include="src\eobject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ecomponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -59,41 +68,83 @@
     <ClCompile Include="src\renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\glad\src\glad.c">
-      <Filter>Source Files\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\imgui_1.87\backends\imgui_impl_glfw.cpp">
-      <Filter>Source Files\lib\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\imgui_1.87\backends\imgui_impl_opengl3.cpp">
-      <Filter>Source Files\lib\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\imgui_1.87\imgui.cpp">
-      <Filter>Source Files\lib\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\imgui_1.87\imgui_draw.cpp">
-      <Filter>Source Files\lib\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\imgui_1.87\imgui_tables.cpp">
-      <Filter>Source Files\lib\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\imgui_1.87\imgui_widgets.cpp">
-      <Filter>Source Files\lib\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\asset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\backward\backward.cpp">
-      <Filter>Source Files\lib</Filter>
-    </ClCompile>
     <ClCompile Include="src\logger.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\glad.c">
+      <Filter>Source Files\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\backward.cpp">
+      <Filter>Source Files\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\imgui\imgui.cpp">
+      <Filter>Source Files\lib\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\imgui\imgui_draw.cpp">
+      <Filter>Source Files\lib\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\imgui\imgui_impl_glfw.cpp">
+      <Filter>Source Files\lib\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\imgui\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\lib\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\imgui\imgui_tables.cpp">
+      <Filter>Source Files\lib\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\lib\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\component.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\camera.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\transformation.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\mesh_renderer.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\free_camera.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\collision.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\character_control.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\buildin\buildin_mesh.cpp">
+      <Filter>Source Files\buildin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\buildin\buildin_texture.cpp">
+      <Filter>Source Files\buildin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\buildin\buildin_shader.cpp">
+      <Filter>Source Files\buildin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\base64.cpp">
+      <Filter>Source Files\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\gui_container.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\gui_style.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\gui_lowlevel.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\gui_flags.cpp">
+      <Filter>Source Files\gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,9 +181,6 @@
     <ClInclude Include="include\eobject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ecomponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -153,6 +201,54 @@
     </ClInclude>
     <ClInclude Include="include\logger.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\buildin\buildin.h">
+      <Filter>Header Files\buildin</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\component.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\camera.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\character_control.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\collision.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\free_camera.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\mesh_renderer.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\transformation.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\Physics.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\light.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\allcomponents.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gui\gui_flags.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gui\gui_lowlevel.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gui\gui_container.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gui\gui_base.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gui\gui_style.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -43,13 +43,8 @@ namespace Tara {
 		~Mesh();
 
 		static Mesh* GetCommon(CommomMesh type);
-		static Mesh* GetCube(glm::vec3 size = glm::vec3(1), glm::ivec3 subdive = glm::ivec3(1));
-		static Mesh* GetQuad(glm::vec3 size = glm::vec3(1), glm::ivec3 subdive = glm::ivec3(1));
-		static Mesh* GetSphere(glm::vec3 size = glm::vec3(1), glm::ivec2 linecut = glm::ivec2(6));
-		static Mesh* GetPlane(glm::vec2 size = glm::vec3(1));
-		static Mesh* GetCone(glm::vec3 size = glm::vec3(1), int32_t dotcount = 12);
-		static Mesh* GetTriangle(glm::vec3 size = glm::vec3(1));
 		static Mesh* ImportFromFile(const char* filename);
+		static Mesh* ImportFromMemory(std::string memory);
 		/*
 			Summary:
 				Get asset pool
@@ -61,6 +56,8 @@ namespace Tara {
 		void Unbind();
 		void Update();
 		void Draw();
+		size_t VerticesCount();
+		size_t TriangleCount();
 
 		void CleanStore();
 		void CleanPack();
@@ -80,7 +77,13 @@ namespace Tara {
 		std::vector<glm::vec2> m_textures = std::vector<glm::vec2>();
 		std::vector<uint32_t> m_indices = std::vector<uint32_t>();
 		std::vector<Vertex> m_pack = std::vector<Vertex>();
-
 		static AssetPool<Mesh>* m_meshPool;
+
+		static Mesh* GetCube();
+		static Mesh* GetQuad();
+		static Mesh* GetSphere();
+		static Mesh* GetPlane();
+		static Mesh* GetCone();
+		static Mesh* GetTriangle();
 	};
 }

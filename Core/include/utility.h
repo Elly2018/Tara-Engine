@@ -26,5 +26,10 @@ namespace Tara {
 			static void PrintTrace();
 			static const char* CurrentTimeString();
 		};
+
+		class DllExport String {
+		public:
+			static void RemoveString(std::string& main, std::string find);
+		};
 	};
 }

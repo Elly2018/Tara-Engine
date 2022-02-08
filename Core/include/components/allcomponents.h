@@ -1,0 +1,9 @@
+#pragma once
+#include <components/camera.h>
+#include <components/character_control.h>
+#include <components/collision.h>
+#include <components/free_camera.h>
+#include <components/light.h>
+#include <components/mesh_renderer.h>
+#include <components/Physics.h>
+#include <components/transformation.h>

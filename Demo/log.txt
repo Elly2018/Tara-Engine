@@ -76,16 +76,17 @@ void main()
 [System] #########################################################
 [System] #			FRAGMENT end			#
 [System] #########################################################
-[System] Trying import mesh from: .\Resources\Quad.obj
+[System] Trying import mesh from memory
+[System] Trying import mesh from: .\temp\mesh_import_temp
 [System] Mesh created!
 [System] 	Mesh pool add!
-[System] 	Set mesh name Quad.obj
-[System] 	Quad.obj Vertex register size: 4
-[System] 	Quad.obj Normal register size: 4
-[System] 	Quad.obj Textures register size: 4
-[System] 	Quad.obj Indices register size: 6
-[System] Mesh update start: Quad.obj
-[System] Mesh update end: Quad.obj
+[System] 	Set mesh name mesh_import_temp
+[System] 	mesh_import_temp Vertex register size: 4
+[System] 	mesh_import_temp Normal register size: 4
+[System] 	mesh_import_temp Textures register size: 4
+[System] 	mesh_import_temp Indices register size: 6
+[System] Mesh update start: mesh_import_temp
+[System] Mesh update end: mesh_import_temp
 [System] Tara initialization start
 [System] Debug level: 1
 [System] Debug filename: log.txt
@@ -248,87 +249,76 @@ void main()
 [System] 	Import texture successfully: ".\Resources\Default.png"  "Default Texture"
 [System] Apply ! Default Texture
 [System] Buildin resources mesh create: Cube
-[System] Trying import mesh from: .\Resources\Cube.obj
+[System] Trying import mesh from memory
+[System] Trying import mesh from: .\temp\mesh_import_temp
 [System] Mesh created!
 [System] 	Mesh pool add!
-[System] 	Set mesh name Cube.obj
-[System] 	Cube.obj Vertex register size: 24
-[System] 	Cube.obj Normal register size: 24
-[System] 	Cube.obj Textures register size: 24
-[System] 	Cube.obj Indices register size: 36
-[System] Mesh update start: Cube.obj
-[System] Mesh update end: Cube.obj
+[System] 	Set mesh name mesh_import_temp
+[System] 	mesh_import_temp Vertex register size: 20
+[System] 	mesh_import_temp Normal register size: 20
+[System] 	mesh_import_temp Textures register size: 20
+[System] 	mesh_import_temp Indices register size: 30
+[System] Mesh update start: mesh_import_temp
+[System] Mesh update end: mesh_import_temp
 [System] Buildin resources mesh create: Sphere
-[System] Trying import mesh from: .\Resources\Sphere.obj
+[System] Trying import mesh from memory
+[System] Trying import mesh from: .\temp\mesh_import_temp
 [System] Mesh created!
 [System] 	Mesh pool add!
-[System] 	Set mesh name Sphere.obj
-[System] 	Sphere.obj Vertex register size: 1984
-[System] 	Sphere.obj Normal register size: 1984
-[System] 	Sphere.obj Textures register size: 1984
-[System] 	Sphere.obj Indices register size: 2880
-[System] Mesh update start: Sphere.obj
-[System] Mesh update end: Sphere.obj
+[System] 	Set mesh name mesh_import_temp
+[System] 	mesh_import_temp Vertex register size: 1980
+[System] 	mesh_import_temp Normal register size: 1980
+[System] 	mesh_import_temp Textures register size: 1980
+[System] 	mesh_import_temp Indices register size: 2874
+[System] Mesh update start: mesh_import_temp
+[System] Mesh update end: mesh_import_temp
 [System] Buildin resources mesh create: Plane
-[System] Trying import mesh from: .\Resources\Plane.obj
+[System] Trying import mesh from memory
+[System] Trying import mesh from: .\temp\mesh_import_temp
 [System] Mesh created!
 [System] 	Mesh pool add!
-[System] 	Set mesh name Plane.obj
-[System] 	Plane.obj Vertex register size: 4
-[System] 	Plane.obj Normal register size: 4
-[System] 	Plane.obj Textures register size: 4
-[System] 	Plane.obj Indices register size: 6
-[System] Mesh update start: Plane.obj
-[System] Mesh update end: Plane.obj
+[System] 	Set mesh name mesh_import_temp
+[System] 	mesh_import_temp Vertex register size: 4
+[System] 	mesh_import_temp Normal register size: 4
+[System] 	mesh_import_temp Textures register size: 4
+[System] 	mesh_import_temp Indices register size: 6
+[System] Mesh update start: mesh_import_temp
+[System] Mesh update end: mesh_import_temp
 [System] Buildin resources mesh create: Cone
-[System] Trying import mesh from: .\Resources\Cone.obj
+[System] Trying import mesh from memory
+[System] Trying import mesh from: .\temp\mesh_import_temp
 [System] Mesh created!
 [System] 	Mesh pool add!
-[System] 	Set mesh name Cone.obj
-[System] 	Cone.obj Vertex register size: 128
-[System] 	Cone.obj Normal register size: 128
-[System] 	Cone.obj Textures register size: 128
-[System] 	Cone.obj Indices register size: 186
-[System] Mesh update start: Cone.obj
-[System] Mesh update end: Cone.obj
+[System] 	Set mesh name mesh_import_temp
+[System] 	mesh_import_temp Vertex register size: 93
+[System] 	mesh_import_temp Normal register size: 93
+[System] 	mesh_import_temp Textures register size: 93
+[System] 	mesh_import_temp Indices register size: 93
+[System] Mesh update start: mesh_import_temp
+[System] Mesh update end: mesh_import_temp
 [System] Buildin resources mesh create: Triangle
+[System] Trying import mesh from memory
+[System] Trying import mesh from: .\temp\mesh_import_temp
 [System] Mesh created!
 [System] 	Mesh pool add!
-[System] 	Triangle Vertex register size: 3
-[System] 	Triangle Indices register size: 3
-[System] Mesh update start: Triangle
-[System] Mesh update end: Triangle
+[System] 	Set mesh name mesh_import_temp
+[System] 	mesh_import_temp Vertex register size: 3
+[System] 	mesh_import_temp Normal register size: 3
+[System] 	mesh_import_temp Textures register size: 3
+[System] 	mesh_import_temp Indices register size: 3
+[System] Mesh update start: mesh_import_temp
+[System] Mesh update end: mesh_import_temp
 [System] Buildin resources mesh create: Quad
-[System] Trying import mesh from: .\Resources\Quad.obj
-[System] Mesh created!
-[System] 	Mesh pool add!
-[System] 	Set mesh name Quad.obj
-[System] 	Quad.obj Vertex register size: 4
-[System] 	Quad.obj Normal register size: 4
-[System] 	Quad.obj Textures register size: 4
-[System] 	Quad.obj Indices register size: 6
-[System] Mesh update start: Quad.obj
-[System] Mesh update end: Quad.obj
 [System] Tara initialization end
-[System] Trying import mesh from: .\Resources\Cube.obj
+[System] Create scene
+[System] Trying import mesh from memory
+[System] Trying import mesh from: .\temp\mesh_import_temp
 [System] Mesh created!
 [System] 	Mesh pool add!
-[System] 	Set mesh name Cube.obj
-[System] 	Cube.obj Vertex register size: 24
-[System] 	Cube.obj Normal register size: 24
-[System] 	Cube.obj Textures register size: 24
-[System] 	Cube.obj Indices register size: 36
-[System] Mesh update start: Cube.obj
-[System] Mesh update end: Cube.obj
-[System] Trying import mesh from: .\Resources\Sphere.obj
-[System] Mesh created!
-[System] 	Mesh pool add!
-[System] 	Set mesh name Sphere.obj
-[System] 	Sphere.obj Vertex register size: 1984
-[System] 	Sphere.obj Normal register size: 1984
-[System] 	Sphere.obj Textures register size: 1984
-[System] 	Sphere.obj Indices register size: 2880
-[System] Mesh update start: Sphere.obj
-[System] Mesh update end: Sphere.obj
-[System] YO
-[System] YO
+[System] 	Set mesh name mesh_import_temp
+[System] 	mesh_import_temp Vertex register size: 20
+[System] 	mesh_import_temp Normal register size: 20
+[System] 	mesh_import_temp Textures register size: 20
+[System] 	mesh_import_temp Indices register size: 30
+[System] Mesh update start: mesh_import_temp
+[System] Mesh update end: mesh_import_temp

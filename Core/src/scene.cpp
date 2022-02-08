@@ -15,10 +15,12 @@ namespace Tara {
 
 	Scene::Scene()
 	{
+		TARA_DEBUG_LEVEL("Create scene", 2);
 		if (current == nullptr) current = this;
 	}
 	Scene::~Scene()
 	{
+		TARA_DEBUG_LEVEL("Scene destroy! %s", 2, Name());
 		Clean();
 	}
 
@@ -27,7 +29,6 @@ namespace Tara {
 		for (EObject* i : Objects) {
 			delete i;
 		}
-		Objects.clear();
 	}
 	EObject* Scene::FindObjectByName(const char* name)
 	{
@@ -46,7 +47,14 @@ namespace Tara {
 		return std::vector<EObject*>();
 	}
 
-	size_t Scene::ObjectCount()
+	size_t Scene::TopLayerCount() {
+		size_t count = 0;
+		for (EObject* i : Objects) {
+			count++;
+		}
+		return count;
+	}
+	size_t Scene::Count()
 	{
 		size_t count = 0;
 		for (EObject* i : Objects) {
@@ -55,7 +63,10 @@ namespace Tara {
 				count += ObjectsCountHelper(i);
 			}
 		}
-		return size_t();
+		return count;
+	}
+	EObject* Scene::GetChild(int32_t index) {
+		return Objects.at(index);
 	}
 	void Scene::Update()
 	{
@@ -74,6 +85,10 @@ namespace Tara {
 	void Scene::AddObject(EObject* target)
 	{
 		Objects.push_back(target);
+	}
+	void Scene::RemoveObject(EObject* target)
+	{
+		Objects.erase(std::remove(Objects.begin(), Objects.end(), target), Objects.end());
 	}
 	size_t Scene::ObjectsCountHelper(EObject* t)
 	{

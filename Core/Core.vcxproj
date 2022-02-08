@@ -19,21 +19,34 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\lib\backward\backward.cpp" />
-    <ClCompile Include="..\lib\glad\src\glad.c" />
-    <ClCompile Include="..\lib\imgui\imgui_1.87\backends\imgui_impl_glfw.cpp" />
-    <ClCompile Include="..\lib\imgui\imgui_1.87\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="..\lib\imgui\imgui_1.87\imgui.cpp" />
-    <ClCompile Include="..\lib\imgui\imgui_1.87\imgui_draw.cpp" />
-    <ClCompile Include="..\lib\imgui\imgui_1.87\imgui_tables.cpp" />
-    <ClCompile Include="..\lib\imgui\imgui_1.87\imgui_widgets.cpp" />
     <ClCompile Include="src\asset.cpp" />
-    <ClCompile Include="src\ecomponent.cpp" />
+    <ClCompile Include="src\buildin\buildin_mesh.cpp" />
+    <ClCompile Include="src\buildin\buildin_shader.cpp" />
+    <ClCompile Include="src\buildin\buildin_texture.cpp" />
+    <ClCompile Include="src\components\camera.cpp" />
+    <ClCompile Include="src\components\character_control.cpp" />
+    <ClCompile Include="src\components\collision.cpp" />
+    <ClCompile Include="src\components\component.cpp" />
+    <ClCompile Include="src\components\free_camera.cpp" />
+    <ClCompile Include="src\components\mesh_renderer.cpp" />
+    <ClCompile Include="src\components\transformation.cpp" />
     <ClCompile Include="src\einput.cpp" />
     <ClCompile Include="src\eobject.cpp" />
     <ClCompile Include="src\ewindow.cpp" />
     <ClCompile Include="src\framebuffer.cpp" />
-    <ClCompile Include="src\gui.cpp" />
+    <ClCompile Include="src\gui\gui_container.cpp" />
+    <ClCompile Include="src\gui\gui_flags.cpp" />
+    <ClCompile Include="src\gui\gui_lowlevel.cpp" />
+    <ClCompile Include="src\gui\gui_style.cpp" />
+    <ClCompile Include="src\lib\backward.cpp" />
+    <ClCompile Include="src\lib\base64.cpp" />
+    <ClCompile Include="src\lib\glad.c" />
+    <ClCompile Include="src\lib\imgui\imgui.cpp" />
+    <ClCompile Include="src\lib\imgui\imgui_draw.cpp" />
+    <ClCompile Include="src\lib\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="src\lib\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\lib\imgui\imgui_tables.cpp" />
+    <ClCompile Include="src\lib\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\logger.cpp" />
     <ClCompile Include="src\material.cpp" />
     <ClCompile Include="src\mesh.cpp" />
@@ -46,14 +59,29 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\asset.h" />
+    <ClInclude Include="include\buildin\buildin.h" />
+    <ClInclude Include="include\components\allcomponents.h" />
+    <ClInclude Include="include\components\camera.h" />
+    <ClInclude Include="include\components\character_control.h" />
+    <ClInclude Include="include\components\collision.h" />
+    <ClInclude Include="include\components\component.h" />
+    <ClInclude Include="include\components\free_camera.h" />
+    <ClInclude Include="include\components\light.h" />
+    <ClInclude Include="include\components\mesh_renderer.h" />
+    <ClInclude Include="include\components\Physics.h" />
+    <ClInclude Include="include\components\transformation.h" />
     <ClInclude Include="include\config.h" />
-    <ClInclude Include="include\ecomponent.h" />
     <ClInclude Include="include\einput.h" />
     <ClInclude Include="include\engine.h" />
     <ClInclude Include="include\eobject.h" />
     <ClInclude Include="include\ewindow.h" />
     <ClInclude Include="include\framebuffer.h" />
     <ClInclude Include="include\gui.h" />
+    <ClInclude Include="include\gui\gui_base.h" />
+    <ClInclude Include="include\gui\gui_container.h" />
+    <ClInclude Include="include\gui\gui_flags.h" />
+    <ClInclude Include="include\gui\gui_lowlevel.h" />
+    <ClInclude Include="include\gui\gui_style.h" />
     <ClInclude Include="include\logger.h" />
     <ClInclude Include="include\material.h" />
     <ClInclude Include="include\mesh.h" />
@@ -175,7 +203,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\lib\glfw\include;..\lib\glad\include;..\lib\imgui\imgui_1.87;..\lib\glm\include;include;..\lib\devil\include;..\lib\stb;..\lib\utility;..\lib\backward;..\lib\assimp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\lib\glfw\include;..\lib\glad\include;..\lib\imgui\imgui_1.87;..\lib\glm\include;include;..\lib\devil\include;..\lib\stb;..\lib\utility;..\lib\backward;..\lib\assimp\include;..\lib\base64;..\lib\imgui\imgui_markdown</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PreprocessToFile>false</PreprocessToFile>
@@ -211,7 +239,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\lib\glfw\include;..\lib\glad\include;..\lib\imgui\imgui_1.87;..\lib\glm\include;include;..\lib\devil\include;..\lib\stb;..\lib\utility;..\lib\backward;..\lib\assimp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\lib\glfw\include;..\lib\glad\include;..\lib\imgui\imgui_1.87;..\lib\glm\include;include;..\lib\devil\include;..\lib\stb;..\lib\utility;..\lib\backward;..\lib\assimp\include;..\lib\base64;..\lib\imgui\imgui_markdown</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <DebugInformationFormat>None</DebugInformationFormat>

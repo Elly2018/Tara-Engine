@@ -190,18 +190,38 @@ xcopy $(ProjectDir)Resources $(SolutionDir)$(Platform)\$(Configuration)\$(Projec
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DefaultPostProcess.frag" />
-    <None Include="Resources\DefaultPostProcess.vert" />
-    <None Include="Resources\Gradient.frag" />
-    <None Include="Resources\Gradient.vert" />
-    <None Include="Resources\PureColor.frag" />
-    <None Include="Resources\PureColor.vert" />
-    <None Include="Resources\TextureSurface.frag" />
-    <None Include="Resources\TextureSurface.vert" />
+    <None Include="Resources\DefaultPostProcess.frag">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="Resources\DefaultPostProcess.vert">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="Resources\Gradient.frag">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="Resources\Gradient.vert">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="Resources\PureColor.frag">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="Resources\PureColor.vert">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="Resources\TextureSurface.frag">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="Resources\TextureSurface.vert">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\Default.png" />
-    <Image Include="Resources\Grid.png" />
+    <Image Include="Resources\Default.png">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Resources\Grid.png">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -53,4 +53,14 @@ namespace Tara {
 
 		return str.c_str();
 	}
+	void Utility::String::RemoveString(std::string& main, std::string find)
+	{
+		size_t pos = std::string::npos;
+		// Search for the substring in string in a loop untill nothing is found
+		while ((pos = main.find(find)) != std::string::npos)
+		{
+			// If found then erase it from string
+			main.erase(pos, find.length());
+		}
+	}
 }

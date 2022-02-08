@@ -11,6 +11,56 @@
 #include <logger.h>
 
 /*
+	Define the current build mode
+	It will depend on build mode to import features
+*/
+#pragma region Build Mode
+#ifdef TARA_CORE
+	#define TARA_NO_IMGUI
+	#define TARA_NO_BUILDIN
+	#define TARA_NO_EXTENSION2D
+	#define TARA_NO_EXTENSION3D
+	#define TARA_NO_POSTPROCESSING
+#endif
+
+#ifdef TARA_3D_ENGINE
+#endif
+
+#ifdef TARA_2D_ENGINE
+	#define TARA_NO_EXTENSION3D
+#endif
+
+#ifdef TARA_3D_ENGINE_LIGHTWEIGHT
+	#define TARA_NO_BUILDIN
+#endif
+
+#ifdef TARA_2D_ENGINE_LIGHTWEIGHT
+	#define TARA_NO_BUILDIN
+#endif
+
+#ifdef TARA_3D_GAME
+	#define TARA_NO_IMGUI
+#endif
+
+#ifdef TARA_2D_GAME
+	#define TARA_NO_IMGUI
+	#define TARA_NO_EXTENSION3D
+#endif
+
+#ifdef TARA_3D_GAME_LIGHTWEIGHT
+	#define TARA_NO_IMGUI
+	#define TARA_NO_BUILDIN
+#endif
+
+#ifdef TARA_2D_GAME_LIGHTWEIGHT
+	#define TARA_NO_IMGUI
+	#define TARA_NO_BUILDIN
+	#define TARA_NO_EXTENSION3D
+#endif
+#pragma endregion
+
+#define MESH_IMPORT_TEMP ".\\temp\\mesh_import_temp"
+/*
 	Summary:
 		printf color normal
 */
@@ -50,6 +100,10 @@
 		printf color white
 */
 #define KWHT  "\x1B[37m"
+
+#define LOGCOLOR_NORMAL glm::vec3(1, 1, 1)
+#define LOGCOLOR_WARNING glm::vec3(1, 1, 0)
+#define LOGCOLOR_ERROR glm::vec3(1, 0, 0)
 
 /*
 	Summary:

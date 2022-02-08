@@ -2,6 +2,7 @@
 #include "EWindow.h"
 #include <list>
 #include <map>
+#include <filesystem>
 
 // Include third party library
 #include <glad/glad.h>
@@ -12,6 +13,19 @@
 #include <shader.h>
 #include <texture.h>
 #include <einput.h>
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+#include <Windows.h>
+#define TARA_WINDOW
+#endif
+#if __linux__
+#include "stdlib.h"
+#include "stdio.h"
+#include "string.h"
+#include "sys/times.h"
+#include "sys/vtimes.h"
+#define TARA_LINUX
+#endif
 
 namespace Tara {
 	#pragma region Global variables
@@ -47,14 +61,109 @@ namespace Tara {
 	EWindow* current;
 	#pragma endregion
 
+	#pragma region Local Functionality
+	#ifdef TARA_WINDOW
+	static ULARGE_INTEGER lastCPU, lastSysCPU, lastUserCPU;
+	static int numProcessors;
+	static HANDLE self;
+	void ProfilerInit() {
+		SYSTEM_INFO sysInfo;
+		FILETIME ftime, fsys, fuser;
+
+		GetSystemInfo(&sysInfo);
+		numProcessors = sysInfo.dwNumberOfProcessors;
+
+		GetSystemTimeAsFileTime(&ftime);
+		memcpy(&lastCPU, &ftime, sizeof(FILETIME));
+
+		self = GetCurrentProcess();
+		GetProcessTimes(self, &ftime, &ftime, &fsys, &fuser);
+		memcpy(&lastSysCPU, &fsys, sizeof(FILETIME));
+		memcpy(&lastUserCPU, &fuser, sizeof(FILETIME));
+	}
+
+	double GetCurrentValue() {
+		FILETIME ftime, fsys, fuser;
+		ULARGE_INTEGER now, sys, user;
+		double percent;
+
+		GetSystemTimeAsFileTime(&ftime);
+		memcpy(&now, &ftime, sizeof(FILETIME));
+
+		GetProcessTimes(self, &ftime, &ftime, &fsys, &fuser);
+		memcpy(&sys, &fsys, sizeof(FILETIME));
+		memcpy(&user, &fuser, sizeof(FILETIME));
+		percent = (sys.QuadPart - lastSysCPU.QuadPart) +
+			(user.QuadPart - lastUserCPU.QuadPart);
+		percent /= (now.QuadPart - lastCPU.QuadPart);
+		percent /= numProcessors;
+		lastCPU = now;
+		lastUserCPU = user;
+		lastSysCPU = sys;
+
+		return percent * 100.0;
+	}
+	#endif
+	#if TARA_LINUX
+	clock_t lastCPU, lastSysCPU, lastUserCPU;
+	int numProcessors;
+	void ProfilerInit() {
+		FILE* file;
+		struct tms timeSample;
+		char line[128];
+
+		lastCPU = times(&timeSample);
+		lastSysCPU = timeSample.tms_stime;
+		lastUserCPU = timeSample.tms_utime;
+
+		file = fopen("/proc/cpuinfo", "r");
+		numProcessors = 0;
+		while (fgets(line, 128, file) != NULL) {
+			if (strncmp(line, "processor", 9) == 0) numProcessors++;
+		}
+		fclose(file);
+	}
+
+	double GetCurrentValue() {
+		struct tms timeSample;
+		clock_t now;
+		double percent;
+
+		now = times(&timeSample);
+		if (now <= lastCPU || timeSample.tms_stime < lastSysCPU ||
+			timeSample.tms_utime < lastUserCPU) {
+			//Overflow detection. Just skip this value.
+			percent = -1.0;
+		}
+		else {
+			percent = (timeSample.tms_stime - lastSysCPU) +
+				(timeSample.tms_utime - lastUserCPU);
+			percent /= (now - lastCPU);
+			percent /= numProcessors;
+			percent *= 100;
+		}
+		lastCPU = now;
+		lastSysCPU = timeSample.tms_stime;
+		lastUserCPU = timeSample.tms_utime;
+
+		return percent;
+	}
+	#endif // TARA_WINDOW
+	#pragma endregion
+
 	void Tara_Initialization()
 	{
 		TARA_DEBUG_LEVEL("Tara initialization start", 2);
 		TARA_DEBUG("Debug level: %i", DEBUG_LEVEL);
 		TARA_DEBUG("Debug filename: %s", DEBUG_FILENAME);
+#ifdef TARA_WINDOW || TARA_LINUX
+		ProfilerInit();
+#endif
 		CreateDefaultShaders();
 		CreateDefaultTextures();
 		CreateDefaultMeshes();
+		renderer::pureColor = new Material(Shader::GetCommon(CommonShader::Color));
+		renderer::pureColor->SetVec3("color", glm::vec3(1));
 		TARA_DEBUG_LEVEL("Tara initialization end", 2);
 	}
 
@@ -114,6 +223,8 @@ namespace Tara {
 	#pragma region EWindow
 	EWindow::EWindow(int32_t width, int32_t height, const char* name, OpenGLVersion version, EWindowConfig config) {
 		Logger::LogToFile();
+		std::filesystem::create_directory("temp");
+
 		if (glfwInit() != GLFW_TRUE) {
 			TARA_RUNTIME_ERROR("GLFW failed to initialize");
 		}
@@ -166,7 +277,9 @@ namespace Tara {
 		Mesh::GetAssetPool()->DeleteAll();
 		Mesh::GetAssetPool()->CleanNull();
 		Logger::Flush();
-		ImGuiDestroy();
+#ifndef TARA_NO_IMGUI
+		UI::ImGui_Destroy();
+#endif
 		Logger::Flush();
 		TARA_DEBUG("Delete glfw window");
 		glfwDestroyWindow(window);
@@ -179,7 +292,9 @@ namespace Tara {
 	}
 
 	void EWindow::Start() {
-		ImGuiStart(GLSLVersionMap.at(std::pair<int, int>(m_major, m_major)), (void*)window);
+#ifndef TARA_NO_IMGUI
+		UI::ImGui_Initialization(GLSLVersionMap.at(std::pair<int, int>(m_major, m_major)), (void*)window);
+#endif
 		RegisterEvents();
 		m_postprocessShader = new Material(Shader::GetCommon(CommonShader::DefaultPostprocess));
 		m_screenQuad = Mesh::GetCommon(CommomMesh::Quad);
@@ -201,17 +316,20 @@ namespace Tara {
 		glfwSetCharCallback(window, f5);
 		glfwSetFramebufferSizeCallback(window, f6);
 		glfwSetWindowSizeCallback(window, f6);
-		ImGuiViewport(f7);
+#ifndef TARA_NO_IMGUI
+		UI::ImGui_ViewportCallback(f7);
+#endif
 		TARA_DEBUG("Register events finished");
 	}
 	void EWindow::Mainloop()
 	{
 		while (!glfwWindowShouldClose(window))
 		{
+			float_t m_cpu = renderer::m_RenderState.CPU_Usage;
+			renderer::m_RenderState = RenderState();
+			renderer::m_RenderState.CPU_Usage = m_cpu;
 			// Update glfw events, receive callback functions
 			glfwPollEvents();
-			// Event updating
-			Update();
 			// Render 2D/3D scene
 			Render();
 			// Post processing
@@ -220,6 +338,8 @@ namespace Tara {
 			GUI();
 			// Gui drawing
 			PostGUI();
+			// Event updating
+			Update();
 			// Frame swap
 			Swap();
 			// Update input state
@@ -260,11 +380,23 @@ namespace Tara {
 			CleanBuffer();
 
 			glEnable(GL_DEPTH_TEST);
+			glLineWidth(5);
 			// Apply camera view, projection matrix
 			renderer::view = i->ViewMatrix();
 			renderer::projection = i->ProjectionMatrix();
-			for (Scene* s : m_scenes) {
-				s->Render();
+			if (shaded) {
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+				renderer::wireframeMode = false;
+				for (Scene* s : m_scenes) {
+					s->Render();
+				}
+			}
+			if (wireframe) {
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+				renderer::wireframeMode = true;
+				for (Scene* s : m_scenes) {
+					s->Render();
+				}
 			}
 			glDisable(GL_DEPTH_TEST);
 			i->Unuse();
@@ -272,20 +404,36 @@ namespace Tara {
 	}
 	void EWindow::GUI()
 	{
-		ImGuiGUI();
+#ifndef TARA_NO_IMGUI
+		UI::ImGui_NewFrame();
+#endif
 	}
 	void EWindow::PostGUI()
 	{
-		ImGuiPostGUI(window);
+#ifndef TARA_NO_IMGUI
+		for (auto it = m_guiWindows.begin(); it != m_guiWindows.end(); it++) {
+			(*it)->Start();
+			(*it)->Render();
+		}
+		UI::ImGui_Render(window);
+#endif
 	}
 	void EWindow::Update() {
-		if (!updateScenes) return;
+		if (m_scenes.size() == 0 || !updateScenes) return;
 		for (Scene* i : m_scenes) {
 			i->Update();
 		}
+		m_frameCount++;
+		renderer::m_RenderState.FPS = 1.0 / EInput::Delta();
+#ifdef TARA_WINDOW || TARA_LINUX
+		double m_cpu = GetCurrentValue();
+		renderer::m_RenderState.CPU_Usage = m_cpu == 0.0 ? renderer::m_RenderState.CPU_Usage : m_cpu;
+#endif // TARA_WINDOW
+
 	}
 	void EWindow::PostRender()
 	{
+		if (m_scenes.size() == 0 || !updateScenes || !m_camera || !m_screenQuad || !m_postprocessShader) return;
 		CleanBuffer();
 		m_postprocessShader->Use();
 		m_postprocessShader->UniformVec2("screenSize", GetEWindowSize());
@@ -413,6 +561,10 @@ namespace Tara {
 		int w, h;
 		glfwGetWindowSize(window, &w, &h);
 		return glm::ivec2(w, h);
+	}
+	RenderState& EWindow::GetRenderState()
+	{
+		return renderer::m_RenderState;
 	}
 	#pragma endregion
 };

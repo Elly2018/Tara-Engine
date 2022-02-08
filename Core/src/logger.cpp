@@ -75,9 +75,9 @@ namespace Tara {
 		{
 			currentPos++;
 			if (currentPos <= lastPosition) continue;
-			if (ReadLogger(systemtag, glm::vec3(1, 1, 1), &result, &first, line, &current)) continue;
-			else if (ReadLogger(warningtag, glm::vec3(1, 1, 0), &result, &first, line, &current)) continue;
-			else if (ReadLogger(errortag, glm::vec3(1, 0, 0), &result, &first, line, &current)) continue;
+			if (ReadLogger(systemtag, LOGCOLOR_NORMAL, &result, &first, line, &current)) continue;
+			else if (ReadLogger(warningtag, LOGCOLOR_WARNING, &result, &first, line, &current)) continue;
+			else if (ReadLogger(errortag, LOGCOLOR_ERROR, &result, &first, line, &current)) continue;
 			else current.message += line;
 		}
 		if (!first) {

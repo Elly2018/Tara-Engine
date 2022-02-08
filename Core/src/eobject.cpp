@@ -1,5 +1,6 @@
 #include "eobject.h"
 #include <Scene.h>
+#include <components/allcomponents.h>
 
 namespace Tara {
 	EObject::EObject()
@@ -12,10 +13,12 @@ namespace Tara {
 	}
 	EObject::~EObject()
 	{
-		Destroy();
-		for (EComponent* i : m_components) {
-			delete i;
+		TARA_DEBUG_LEVEL("EObject destroy! %s", 2, Name());
+		size_t c = Count();
+		for (int32_t i = 0; i < c; i++) {
+			delete GetChild(i);
 		}
+		Destroy();
 	}
 
 	bool EObject::SetParent(EObject* target)
@@ -25,12 +28,17 @@ namespace Tara {
 			return false;
 		}
 		if (target == m_parent) return true;
-		if (target == nullptr) {
+		if (!target) {
 			if (m_parent != nullptr) m_parent->RemoveChild(this);
 			m_hostScene->AddObject(target);
 		}
 		else {
-			m_parent->RemoveChild(this);
+			if (m_parent) {
+				m_parent->RemoveChild(this);
+			}
+			else {
+				m_hostScene->RemoveObject(this);
+			}
 			m_parent = target;
 			target->AddChild(this);
 		}
@@ -46,7 +54,7 @@ namespace Tara {
 			TARA_ERROR("%s: 'remove_child' index out of range", m_name);
 			return nullptr;
 		}
-		return m_children[index];
+		return m_children.at(index);
 	}
 	bool EObject::AddChild(EObject* target)
 	{
@@ -55,7 +63,7 @@ namespace Tara {
 	}
 	bool EObject::RemoveChild(EObject* target)
 	{
-		std::remove(m_children.begin(), m_children.end(), target);
+		m_children.erase(std::remove(m_children.begin(), m_children.end(), target), m_children.end());
 		return true;
 	}
 	bool EObject::RemoveChild(int32_t index)
@@ -87,6 +95,9 @@ namespace Tara {
 
 	void EObject::Render()
 	{
+		for (EObject* i : m_children) {
+			i->Render();
+		}
 		for (EComponent* i : m_components) {
 			if (i->GetEnable()) {
 				if (i->m_init) {
@@ -101,6 +112,9 @@ namespace Tara {
 	}
 	void EObject::Update()
 	{
+		for (EObject* i : m_children) {
+			i->Update();
+		}
 		if (m_init) {
 			for (EComponent* i : m_components) {
 				if (i->GetEnable()) {
@@ -135,7 +149,7 @@ namespace Tara {
 	void EObject::Destroy()
 	{
 		for (EComponent* i : m_components) {
-			i->Destroy();
+			delete i;
 		}
 	}
 	void EObject::Enable()

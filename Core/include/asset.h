@@ -22,7 +22,7 @@ namespace Tara {
 		void SetDescription(const char* n);
 
 	protected:
-		std::string m_name = "Default Shader";
+		std::string m_name = "Default Asset";
 		std::string m_description = "";
 	};
 

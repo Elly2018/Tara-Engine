@@ -8,6 +8,7 @@
 
 // Include tara library
 #include "config.h"
+#include <material.h>
 #include <scene.h>
 #include <gui.h>
 
@@ -18,6 +19,7 @@ namespace Tara {
 
 	*/
 	struct DllExport EWindowConfig;
+	struct DllExport RenderState;
 	class DllExport EWindow;
 
 	/*
@@ -213,6 +215,7 @@ namespace Tara {
 	public:
 		glm::ivec2 GetEWindowPos();
 		glm::ivec2 GetEWindowSize();
+		RenderState& GetRenderState();
 
 	protected:
 		std::vector<Scene*> m_scenes = std::vector<Scene*>();
@@ -220,46 +223,13 @@ namespace Tara {
 		CCamera* m_camera;
 		bool updateScenes = true;
 		bool renderScenes = true;
+		bool wireframe = false;
+		bool shaded = true;
 
-	#pragma region UI::ImGui include condition
-	#ifndef TARA_NO_ImGui
+	#ifndef TARA_NO_IMGUI
 		std::vector<UI::ImGui_WindowBase*> m_guiWindows = std::vector<UI::ImGui_WindowBase*>();
 	#endif
 	private:
-
-		void ImGuiStart(const char* version, void* window) {
-	#ifndef TARA_NO_ImGui
-			UI::ImGui_Initialization(version, window);
-	#endif
-		}
-		void ImGuiViewport(ImGui_ChangeViewport callback) {
-	#ifndef TARA_NO_ImGui
-			UI::ImGui_ViewportCallback(callback);
-	#endif
-		}
-		void ImGuiDestroy() {
-	#ifndef TARA_NO_ImGui
-			UI::ImGui_Destroy();
-	#endif
-		}
-		void ImGuiGUI()
-		{
-#ifndef TARA_NO_ImGui
-			UI::ImGui_NewFrame();
-#endif
-		}
-		void ImGuiPostGUI(void* window)
-		{
-	#ifndef TARA_NO_ImGui
-			for (auto it = m_guiWindows.begin(); it != m_guiWindows.end(); it++) {
-				(*it)->Start();
-				(*it)->Render();
-			}
-			UI::ImGui_Render(window);
-	#endif
-		}
-	#pragma endregion
-
 		// Screen render shader
 		Material* m_postprocessShader;
 		// Screen render quad
@@ -268,5 +238,6 @@ namespace Tara {
 		int32_t m_major;
 		// Opengl version minor
 		int32_t m_minor;
+		int32_t m_frameCount;
 	};
 }

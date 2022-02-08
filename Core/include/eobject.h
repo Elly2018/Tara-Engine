@@ -3,17 +3,11 @@
 #include <string.h>
 #include <config.h>
 #include <asset.h>
-#include <EComponent.h>
+#include <mesh.h>
+#include <components/component.h>
 
 namespace Tara {
-	/*
-
-		Structs, classes declaration
-
-	*/
 	class DllExport Scene;
-	class DllExport EObject;
-
 	/*
 		Summary:
 			An entity in scene, object contains name, tag, components.

@@ -1,7 +1,7 @@
 #include "einput.h"
 
 namespace Tara {
-#pragma region Static Member Declaration
+	#pragma region Static Member Declaration
 	double EInput::m_time = 0;
 	double EInput::m_delta = 0;
 	glm::dvec2 EInput::mouse_position = glm::dvec2(0);
@@ -12,12 +12,13 @@ namespace Tara {
 	std::map<int, std::pair<int, int>> EInput::mousebutton_last = std::map<int, std::pair<int, int>>();
 	std::map<int, std::pair<int, int>> EInput::keyboard = std::map<int, std::pair<int, int>>();
 	std::map<int, std::pair<int, int>> EInput::keyboard_last = std::map<int, std::pair<int, int>>();
-#pragma endregion
+	#pragma endregion
 
-#pragma region Application Register Callback
+	#pragma region Application Register Callback
 	void EInput::KeyInput(int key, int scancode, int action, int mods)
 	{
 		UpdateKey();
+		TARA_DEBUG("%i %i %i %i", key, scancode, action, mods);
 		keyboard[key] = std::pair<int, int>(action, mods);
 	}
 	void EInput::ScrollInput(double xoffset, double yoffset)
@@ -54,9 +55,9 @@ namespace Tara {
 		m_time = 0;
 		m_delta = 0;
 	}
-#pragma endregion
+	#pragma endregion
 
-#pragma region Functions
+	#pragma region Functions
 	bool EInput::IsMouseButton(button_action button, int modifier)
 	{
 		if (mousebutton.find((int)button) == mousebutton.end()) return false;
@@ -83,7 +84,7 @@ namespace Tara {
 	{
 		if (keyboard.find((int)key) == keyboard.end()) return false;
 		std::pair<int, int> buffer = keyboard[(int)key];
-		return buffer.first == 1 && ~((~modifier) | buffer.second) == 0;
+		return buffer.first >= 1 && ~((~modifier) | buffer.second) == 0;
 	}
 	bool EInput::IsKeyDown(keycode key, int modifier)
 	{
@@ -91,7 +92,7 @@ namespace Tara {
 		if (keyboard.find((int)key) == keyboard.end()) return false;
 		std::pair<int, int> buffer_last = keyboard_last[(int)key];
 		std::pair<int, int> buffer = keyboard[(int)key];
-		return buffer.first == 1 && buffer_last.first == 0 && ~((~modifier) | buffer.second) == 0;
+		return buffer.first >= 1 && buffer_last.first >= 0 && ~((~modifier) | buffer.second) == 0;
 	}
 	bool EInput::IsKeyUp(keycode key, int modifier)
 	{
@@ -133,5 +134,5 @@ namespace Tara {
 	{
 		keyboard_last = std::map<int, std::pair<int, int>>(keyboard);
 	}
-#pragma endregion
+	#pragma endregion
 };
