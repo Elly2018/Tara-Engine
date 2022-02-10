@@ -48,6 +48,10 @@ namespace Tara {
 	{
 		return m_parent;
 	}
+	Scene* EObject::HostScene()
+	{
+		return m_hostScene;
+	}
 	EObject* EObject::GetChild(int32_t index)
 	{
 		if (index < 0 || index > m_children.size() - 1) {
@@ -108,6 +112,12 @@ namespace Tara {
 					i->m_init = true;
 				}
 			}
+		}
+	}
+	void EObject::Gizmo()
+	{
+		for (EComponent* i : m_components) {
+			i->Gizmo();
 		}
 	}
 	void EObject::Update()
@@ -184,65 +194,65 @@ namespace Tara {
 		buffer->AddComponent<CMeshRenderer>();
 		return buffer;
 	}
-	EObject* ObjectFactory::OFViewer::CreateFreeCamera()
+	EObject* ObjectFactoryViewer::CreateFreeCamera()
 	{
 		EObject* buffer = new EObject();
 		buffer->AddComponent<CTransformation>();
 		buffer->AddComponent<CFreeCamera>();
 		return buffer;
 	}
-	EObject* ObjectFactory::OFViewer::CreateCamera()
+	EObject* ObjectFactoryViewer::CreateCamera()
 	{
 		EObject* buffer = new EObject();
 		buffer->AddComponent<CTransformation>();
 		buffer->AddComponent<CCamera>();
 		return buffer;
 	}
-	EObject* ObjectFactory::OF3D::CreateMesh(CommomMesh mesh)
+	EObject* ObjectFactory3D::CreateMesh(CommomMesh mesh)
 	{
 		EObject* buffer = new EObject();
 		buffer->AddComponent<CTransformation>();
 		CMeshRenderer* m = buffer->AddComponent<CMeshRenderer>();
 		m->SetMesh(Mesh::GetCommon(mesh));
-		m->SetMaterial(new Material(Shader::GetCommon(CommonShader::Color)));
+		m->SetMaterial(new Material(*Shader::GetCommon(CommonShader::Color)));
 		return buffer;
 	}
-	EObject* ObjectFactory::OF3D::CreateMeshWithPhysics(CommomMesh mesh)
+	EObject* ObjectFactory3D::CreateMeshWithPhysics(CommomMesh mesh)
 	{
 		EObject* buffer = new EObject();
 		buffer->AddComponent<CTransformation>();
 		buffer->AddComponent<CPhysics>();
 		CMeshRenderer* m = buffer->AddComponent<CMeshRenderer>();
 		m->SetMesh(Mesh::GetCommon(mesh));
-		m->SetMaterial(new Material(Shader::GetCommon(CommonShader::Color)));
+		m->SetMaterial(new Material(*Shader::GetCommon(CommonShader::Color)));
 		return buffer;
 	}
-	EObject* ObjectFactory::OF2D::CreateSprite()
+	EObject* ObjectFactory2D::CreateSprite()
 	{
 		EObject* buffer = new EObject();
 		return buffer;
 	}
-	EObject* ObjectFactory::OF2D::CreateSpriteWithPhysics()
+	EObject* ObjectFactory2D::CreateSpriteWithPhysics()
 	{
 		EObject* buffer = new EObject();
 		return buffer;
 	}
-	EObject* ObjectFactory::OFSystem::CreatePostProcessSystem()
+	EObject* ObjectFactorySystem::CreatePostProcessSystem()
 	{
 		EObject* buffer = new EObject();
 		return buffer;
 	}
-	EObject* ObjectFactory::OFSystem::CreateVoxelSystem()
+	EObject* ObjectFactorySystem::CreateVoxelSystem()
 	{
 		EObject* buffer = new EObject();
 		return buffer;
 	}
-	EObject* ObjectFactory::OFParticle::CreateDefaultParticleSystem()
+	EObject* ObjectFactoryParticle::CreateDefaultParticleSystem()
 	{
 		EObject* buffer = new EObject();
 		return buffer;
 	}
-	EObject* ObjectFactory::OFParticle::CreateGPUParticleSystem()
+	EObject* ObjectFactoryParticle::CreateGPUParticleSystem()
 	{
 		EObject* buffer = new EObject();
 		return buffer;

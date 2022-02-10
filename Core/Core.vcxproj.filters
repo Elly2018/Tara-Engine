@@ -125,9 +125,6 @@
     <ClCompile Include="src\buildin\buildin_mesh.cpp">
       <Filter>Source Files\buildin</Filter>
     </ClCompile>
-    <ClCompile Include="src\buildin\buildin_texture.cpp">
-      <Filter>Source Files\buildin</Filter>
-    </ClCompile>
     <ClCompile Include="src\buildin\buildin_shader.cpp">
       <Filter>Source Files\buildin</Filter>
     </ClCompile>
@@ -145,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="src\gui\gui_flags.cpp">
       <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\emath.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +249,9 @@
     </ClInclude>
     <ClInclude Include="include\gui\gui_style.h">
       <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\emath.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

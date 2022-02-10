@@ -12,36 +12,37 @@ namespace Tara {
 	{
 	}
 
-	const char* ObjectBase::Name()
+	std::string& ObjectBase::Name()
 	{
-		return m_name.c_str();
+		return m_name;
 	}
-	void ObjectBase::SetName(const char* n)
+	std::string& ObjectBase::Description()
 	{
-		m_name = n;
-	}
-	const char* ObjectBase::Description()
-	{
-		return m_description.c_str();
-	}
-	void ObjectBase::SetDescription(const char* n)
-	{
-		m_description = n;
+		return m_description;
 	}
 
-	AssetBase::AssetBase()
-	{
-	}
 	AssetBase::AssetBase(const char* name)
 	{
 		m_name = name;
+	}
+	AssetBase::AssetBase(const char* name, const char* path) : AssetBase(name)
+	{
+		m_path = path;
 	}
 	AssetBase::~AssetBase()
 	{
 
 	}
-	bool AssetBase::IsBuildIn()
+	bool& AssetBase::BuildIn()
 	{
 		return m_buildIn;
+	}
+	std::string& AssetBase::Path()
+	{
+		return m_path;
+	}
+	std::string& AssetBase::Meta()
+	{
+		return m_meta;
 	}
 }

@@ -13,15 +13,13 @@ namespace Tara {
 		UI::ImGui_DragVec3("Position", &m_position, 0.1f);
 		UI::ImGui_DragVec3("Eular Angle", &m_eularAngle, 0.1f);
 		UI::ImGui_DragVec3("Scale", &m_scale, 0.1f);
-		if (EComponent::m_debugMenu) {
+		if (DebugMenu()) {
 			glm::vec3 gp = GlobalPosition();
 			glm::vec3 ge = GlobalEualrAngle();
 			glm::vec3 gs = GlobalScale();
 			UI::ImGui_LabelText("World Position", "%f, %f, %f", gp.x, gp.y, gp.z);
 			UI::ImGui_LabelText("World EularAngle", "%f, %f, %f", ge.x, ge.y, ge.z);
 			UI::ImGui_LabelText("World Scale", "%f, %f, %f", gs.x, gs.y, gs.z);
-			UI::ImGui_Separator();
-			UI::ImGui_LabelText("Hmmm", "");
 		}
 		#endif
 	}
@@ -61,45 +59,50 @@ namespace Tara {
 	}
 	void CTransformation::Rotate(float_t x, float_t y, float_t z, Space _s)
 	{
-		Rotate(glm::vec3(x, y, z), _s);
-	}
-	void CTransformation::Rotate(glm::vec3 v, Space _s)
-	{
 		switch (_s)
 		{
 		case Tara::Space::World:
+			const glm::vec3 v = glm::vec3(x, y, z);
 			m_eularAngle += GlobalToLocalVector(v);
 			break;
 		case Tara::Space::Local:
-			m_eularAngle += v;
+			m_eularAngle += glm::vec3(x, y, z);
 			break;
 		}
 	}
-	glm::vec3 CTransformation::Forward()
+	void CTransformation::Rotate(float_t x, float_t y, Space _s)
 	{
-		return GlobalToLocalDirection(glm::vec3(0, 0, -1));
+		Rotate(x, y, 0, _s);
 	}
-	glm::vec3 CTransformation::Backward()
+	void CTransformation::Rotate(glm::vec3 v, Space _s)
 	{
-		return GlobalToLocalDirection(glm::vec3(0, 0, 1));
+		Rotate(v.x, v.y, v.z, _s);
 	}
-	glm::vec3 CTransformation::Left()
+	glm::vec3& CTransformation::Forward()
 	{
-		return GlobalToLocalDirection(glm::vec3(-1, 0, 0));
+		glm::vec3 v = GlobalToLocalDirection(glm::vec3(0, 0, -1)); return v;
 	}
-	glm::vec3 CTransformation::Right()
+	glm::vec3& CTransformation::Backward()
 	{
-		return GlobalToLocalDirection(glm::vec3(1, 0, 0));
+		glm::vec3 v = GlobalToLocalDirection(glm::vec3(0, 0, 1)); return v;
 	}
-	glm::vec3 CTransformation::Up()
+	glm::vec3& CTransformation::Left()
 	{
-		return GlobalToLocalDirection(glm::vec3(0, 1, 0));
+		glm::vec3 v = GlobalToLocalDirection(glm::vec3(-1, 0, 0)); return v;
 	}
-	glm::vec3 CTransformation::Down()
+	glm::vec3& CTransformation::Right()
 	{
-		return GlobalToLocalDirection(glm::vec3(0, -1, 0));
+		glm::vec3 v = GlobalToLocalDirection(glm::vec3(1, 0, 0)); return v;
 	}
-	glm::mat4 CTransformation::LocalMatrix()
+	glm::vec3& CTransformation::Up()
+	{
+		glm::vec3 v = GlobalToLocalDirection(glm::vec3(0, 1, 0)); return v;
+	}
+	glm::vec3& CTransformation::Down()
+	{
+		glm::vec3 v = GlobalToLocalDirection(glm::vec3(0, -1, 0)); return v;
+	}
+	const glm::mat4 CTransformation::LocalMatrix()
 	{
 		glm::mat4 r = glm::mat4(1);
 		r = glm::translate(r, -m_position);
@@ -109,7 +112,7 @@ namespace Tara {
 		r = glm::scale(r, m_scale);
 		return r;
 	}
-	glm::mat4 CTransformation::LocalToGlobal()
+	const glm::mat4 CTransformation::LocalToGlobal()
 	{
 		EObject* parent = m_host->Parent();
 		glm::mat4 r = LocalMatrix();
@@ -121,7 +124,7 @@ namespace Tara {
 		}
 		return r;
 	}
-	glm::mat4 CTransformation::GlobalToLocal()
+	const glm::mat4 CTransformation::GlobalToLocal()
 	{
 		EObject* parent = m_host->Parent();
 		glm::mat4 r = LocalMatrix();
@@ -133,28 +136,28 @@ namespace Tara {
 		}
 		return r;
 	}
-	glm::vec3 CTransformation::LocalToGlobalPoint(glm::vec3 v)
+	glm::vec3 CTransformation::LocalToGlobalPoint(const glm::vec3& v)
 	{
 		return LocalToGlobal() * glm::vec4(v.x, v.y, v.z, 1);
 	}
-	glm::vec3 CTransformation::LocalToGlobalVector(glm::vec3 v)
+	glm::vec3 CTransformation::LocalToGlobalVector(const glm::vec3& v)
 	{
 		return LocalToGlobal() * glm::vec4(v.x, v.y, v.z, 0);
 	}
-	glm::vec3 CTransformation::LocalToGlobalDirection(glm::vec3 v)
+	glm::vec3 CTransformation::LocalToGlobalDirection(const glm::vec3& v)
 	{
 		// Mark, this might wrong ?
 		return glm::normalize(GlobalRotation() * v);
 	}
-	glm::vec3 CTransformation::GlobalToLocalPoint(glm::vec3 v)
+	glm::vec3 CTransformation::GlobalToLocalPoint(const glm::vec3& v)
 	{
 		return GlobalToLocal() * glm::vec4(v.x, v.y, v.z, 1);
 	}
-	glm::vec3 CTransformation::GlobalToLocalVector(glm::vec3 v)
+	glm::vec3 CTransformation::GlobalToLocalVector(const glm::vec3& v)
 	{
 		return GlobalToLocal() * glm::vec4(v.x, v.y, v.z, 0);
 	}
-	glm::vec3 CTransformation::GlobalToLocalDirection(glm::vec3 v)
+	glm::vec3 CTransformation::GlobalToLocalDirection(const glm::vec3& v)
 	{
 		// Mark, this might wrong ?
 		return glm::normalize(LocalRotation() * v);

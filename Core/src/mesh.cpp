@@ -1,8 +1,9 @@
 #include "mesh.h"
+#include <map>
+#include <functional>
 #include <fstream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <array>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -10,14 +11,73 @@
 #include <buildin/buildin.h>
 
 namespace Tara {
-	AssetPool<Mesh>* Mesh::m_meshPool = new AssetPool<Mesh>();
+#pragma region BuildIn Getter
+	#ifndef TARA_NO_BUILDIN_3D
+	Mesh* GetCube()
+	{
+		Mesh* buffer = Mesh::ImportFromMemory(BuildInMesh::Cube().c_str());
+		buffer->Name() = "Cube";
+		buffer->BuildIn() = true;
+		return buffer;
+	}
+	Mesh* GetSphere()
+	{
+		Mesh* buffer = Mesh::ImportFromMemory(BuildInMesh::Sphere().c_str());
+		return buffer;
+	}
+	Mesh* GetPlane()
+	{
+		Mesh* buffer = Mesh::ImportFromMemory(BuildInMesh::Plane().c_str());
+		return buffer;
+	}
+	Mesh* GetCone()
+	{
+		Mesh* buffer = Mesh::ImportFromMemory(BuildInMesh::Cone().c_str());
+		return buffer;
+	}
+	Mesh* GetTriangle()
+	{
+		Mesh* buffer = Mesh::ImportFromMemory(BuildInMesh::Triangle().c_str());
+		return buffer;
+	}
+	Mesh* GetQuad()
+	{
+		Mesh* buffer = Mesh::ImportFromMemory(BuildInMesh::Quad().c_str());
+		return buffer;
+	}
+	#else
+	#ifndef TARA_NO_BUILDIN_2D
+	Mesh* GetQuad()
+	{
+		Mesh* buffer = Mesh::ImportFromMemory(BuildInMesh::Quad().c_str());
+		return buffer;
+	}
+	#endif
+	#endif
+#pragma endregion
 
-	static Mesh* ImportFromScene(const aiScene* scene) {
+	AssetPool<Mesh>* Mesh::m_meshPool = new AssetPool<Mesh>();
+	const std::map<CommomMesh, std::pair<std::string, std::function<Mesh* ()>>> mesh_commonMap = {
+		#ifndef TARA_NO_BUILDIN_3D
+		{CommomMesh::Cube, {"Cube", GetCube}},
+		{CommomMesh::Sphere, {"Sphere", GetSphere}},
+		{CommomMesh::Plane, {"Plane", GetPlane}},
+		{CommomMesh::Cone, {"Cone", GetCone}},
+		{CommomMesh::Triangle, {"Triangle", GetTriangle}},
+		{CommomMesh::Quad, {"Quad", GetQuad}},
+		#else
+		#ifndef TARA_NO_BUILDIN_2D
+		{CommomMesh::Error, {"Texture Shader", GetTextureShader}},
+		#endif
+		#endif
+	};
+
+	Mesh* ImportFromScene(const aiScene* scene) {
 		if (scene->HasMeshes()) {
 			aiMesh* bmesh = scene->mMeshes[0];
 			Mesh* result = new Mesh();
 			TARA_DEBUG_LEVEL("\tSet mesh name %s", 1, scene->mRootNode->mName.C_Str());
-			result->SetName(scene->mRootNode->mName.C_Str());
+			result->Name() = scene->mRootNode->mName.C_Str();
 			std::vector<glm::vec3> ver = std::vector<glm::vec3>();
 			std::vector<glm::vec3> nor = std::vector<glm::vec3>();
 			std::vector<glm::vec2> tex = std::vector<glm::vec2>();
@@ -55,7 +115,7 @@ namespace Tara {
 
 	void CreateDefaultMeshes()
 	{
-#ifndef TARA_NO_BUILDIN
+#ifndef TARA_NO_BUILDIN_3D
 		TARA_DEBUG_LEVEL("Buildin resources mesh create: Cube", 1);
 		Mesh::GetCommon(CommomMesh::Cube);
 		TARA_DEBUG_LEVEL("Buildin resources mesh create: Sphere", 1);
@@ -69,7 +129,10 @@ namespace Tara {
 		TARA_DEBUG_LEVEL("Buildin resources mesh create: Quad", 1);
 		Mesh::GetCommon(CommomMesh::Quad);
 #else
-		TARA_DEBUG_LEVEL("Buildin feature has been disabled at this build mode: Mesh initialization", 1);
+#ifndef TARA_NO_BUILDIN_2D
+		TARA_DEBUG_LEVEL("Buildin resources mesh create: Quad", 1);
+		Mesh::GetCommon(CommomMesh::Quad);
+#endif
 #endif
 	}
 
@@ -80,11 +143,11 @@ namespace Tara {
 		glGenBuffers(1, &m_VBO);
 		glGenBuffers(1, &m_EBO);
 		TARA_DEBUG_LEVEL("\tMesh pool add!", 1);
-		m_meshPool->Add(this);
+		GetAssetPool()->Add(*this);
 	}
 	Mesh::~Mesh()
 	{
-		TARA_DEBUG_LEVEL("Mesh destroy! %s", 1, Name());
+		TARA_DEBUG_LEVEL("Mesh destroy! %s", 1, Name().c_str());
 		glDeleteVertexArrays(1, &m_VAO);
 		glDeleteBuffers(1, &m_VBO);
 		glDeleteBuffers(1, &m_EBO);
@@ -92,50 +155,24 @@ namespace Tara {
 		m_normal.clear();
 		m_textures.clear();
 		m_indices.clear();
-		TARA_DEBUG_LEVEL("\tMesh pool remove! %s", 1, Name());
 	}
 
 	Mesh* Mesh::GetCommon(CommomMesh type)
 	{
-		switch (type) {
-		case CommomMesh::Cube:
-		{
-			Mesh* s = m_meshPool->Find("Cube.obj", true);
-			if (s == nullptr) return GetCube();
-			else return s;
+		if (!mesh_commonMap.count(type)) {
+			TARA_WARNING_LEVEL("Commom mesh does not register:", 3);
+			return nullptr;
 		}
-		case CommomMesh::Quad:
-		{
-			Mesh* s = m_meshPool->Find("Quad", true);
-			if (s == nullptr) return GetQuad();
-			else return s;
+		auto cgs = mesh_commonMap.at(type);
+		Mesh* s = GetAssetPool()->FindByName(cgs.first.c_str(), true);
+		if (s == nullptr) {
+			s = cgs.second();
+			s->Name() = cgs.first;
+			s->BuildIn() = true;
 		}
-		case CommomMesh::Sphere:
-		{
-			Mesh* s = m_meshPool->Find("Sphere", true);
-			if (s == nullptr) return GetSphere();
-			else return s;
+		else {
+			return s;
 		}
-		case CommomMesh::Plane:
-		{
-			Mesh* s = m_meshPool->Find("Plane", true);
-			if (s == nullptr) return GetPlane();
-			else return s;
-		}
-		case CommomMesh::Cone:
-		{
-			Mesh* s = m_meshPool->Find("Cone", true);
-			if (s == nullptr) return GetCone();
-			else return s;
-		}
-		case CommomMesh::Triangle:
-		{
-			Mesh* s = m_meshPool->Find("Triangle", true);
-			if (s == nullptr) return GetTriangle();
-			else return s;
-		}
-		}
-		return nullptr;
 	}
 	Mesh* Mesh::ImportFromFile(const char* filename)
 	{
@@ -162,6 +199,13 @@ namespace Tara {
 		return m_meshPool;
 	}
 
+	Mesh& Mesh::Clone()
+	{
+		Mesh m = *new Mesh(*this);
+		m.Name() += " Clone";
+		m.BuildIn() = false;
+		return m;
+	}
 	void Mesh::Bind()
 	{
 		glBindVertexArray(m_VAO);
@@ -173,8 +217,9 @@ namespace Tara {
 	void Mesh::Update()
 	{
 		Bind();
-		TARA_DEBUG_LEVEL("Mesh update start: %s", 2, Name());
+		TARA_DEBUG_LEVEL("Mesh update start: %s", 2, Name().c_str());
 		m_pack.clear();
+		m_aabb = GenerateAABB();
 		size_t size = m_vertices.size();
 		for (int32_t i = 0; i < size; i++) {
 			glm::vec3 v = m_vertices.at(i);
@@ -207,7 +252,7 @@ namespace Tara {
 		// Texture
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(6 * sizeof(float)));
 		glEnableVertexAttribArray(2);
-		TARA_DEBUG_LEVEL("Mesh update end: %s", 2, Name());
+		TARA_DEBUG_LEVEL("Mesh update end: %s", 2, Name().c_str());
 		Unbind();
 	}
 	void Mesh::Draw()
@@ -226,6 +271,28 @@ namespace Tara {
 	{
 		return m_indices.size() / 3;
 	}
+	AABB Mesh::GetAABB()
+	{
+		return m_aabb;
+	}
+	AABB Mesh::GenerateAABB()
+	{
+		glm::vec3 minAABB = glm::vec3(std::numeric_limits<float_t>::max());
+		glm::vec3 maxAABB = glm::vec3(std::numeric_limits<float_t>::min());
+		for (glm::vec3& vertex : m_vertices)
+		{
+			minAABB.x = std::min(minAABB.x, vertex.x);
+			minAABB.y = std::min(minAABB.y, vertex.y);
+			minAABB.z = std::min(minAABB.z, vertex.z);
+							 
+			maxAABB.x = std::max(maxAABB.x, vertex.x);
+			maxAABB.y = std::max(maxAABB.y, vertex.y);
+			maxAABB.z = std::max(maxAABB.z, vertex.z);
+		}
+		TARA_DEBUG("min %f, %f, %f", minAABB.x, minAABB.y, minAABB.z);
+		TARA_DEBUG("max %f, %f, %f", maxAABB.x, maxAABB.y, maxAABB.z);
+		return AABB(minAABB, maxAABB);
+	}
 	void Mesh::CleanStore()
 	{
 		m_vertices.clear();
@@ -238,72 +305,29 @@ namespace Tara {
 		m_pack.clear();
 	}
 
-	void Mesh::SetVertices(std::vector<glm::vec3> ver)
+	void Mesh::SetVertices(std::vector<glm::vec3>& ver)
 	{
 		m_vertices = ver;
-		TARA_DEBUG_LEVEL("\t%s Vertex register size: %i", 1, Name(), m_vertices.size());
+		TARA_DEBUG_LEVEL("\t%s Vertex register size: %i", 1, Name().c_str(), m_vertices.size());
 	}
-	void Mesh::SetNormal(std::vector<glm::vec3> ver)
+	void Mesh::SetNormal(std::vector<glm::vec3>& ver)
 	{
 		m_normal = ver;
-		TARA_DEBUG_LEVEL("\t%s Normal register size: %i", 1, Name(), m_normal.size());
+		TARA_DEBUG_LEVEL("\t%s Normal register size: %i", 1, Name().c_str(), m_normal.size());
 	}
-	void Mesh::SetTextures(std::vector<glm::vec2> tex)
+	void Mesh::SetTextures(std::vector<glm::vec2>& tex)
 	{
 		m_textures = tex;
-		TARA_DEBUG_LEVEL("\t%s Textures register size: %i", 1, Name(), m_textures.size());
+		TARA_DEBUG_LEVEL("\t%s Textures register size: %i", 1, Name().c_str(), m_textures.size());
 	}
-	void Mesh::SetIndices(std::vector<uint32_t> ind)
+	void Mesh::SetIndices(std::vector<uint32_t>& ind)
 	{
 		m_indices = ind;
-		TARA_DEBUG_LEVEL("\t%s Indices register size: %i", 1, Name(), m_indices.size());
+		TARA_DEBUG_LEVEL("\t%s Indices register size: %i", 1, Name().c_str(), m_indices.size());
 	}
-	void Mesh::SetVertex(std::vector<Vertex> ver)
+	void Mesh::SetVertex(std::vector<Vertex>& ver)
 	{
 		m_pack = ver;
-		TARA_DEBUG_LEVEL("\t%s Pack register size: %i", 1, Name(), m_pack.size());
-	}
-
-	Mesh* Mesh::GetCube()
-	{
-		Mesh* buffer = ImportFromMemory(BuildInMesh::Cube().c_str());
-		buffer->SetName("Cube");
-		buffer->m_buildIn = true;
-		return buffer;
-	}
-	Mesh* Mesh::GetQuad()
-	{
-		Mesh* buffer = ImportFromMemory(BuildInMesh::Quad().c_str());
-		buffer->SetName("Quad");
-		buffer->m_buildIn = true;
-		return buffer;
-	}
-	Mesh* Mesh::GetSphere()
-	{
-		Mesh* buffer = ImportFromMemory(BuildInMesh::Sphere().c_str());
-		buffer->SetName("Sphere");
-		buffer->m_buildIn = true;
-		return buffer;
-	}
-	Mesh* Mesh::GetPlane()
-	{
-		Mesh* buffer = ImportFromMemory(BuildInMesh::Plane().c_str());
-		buffer->SetName("Plane");
-		buffer->m_buildIn = true;
-		return buffer;
-	}
-	Mesh* Mesh::GetCone()
-	{
-		Mesh* buffer = ImportFromMemory(BuildInMesh::Cone().c_str());
-		buffer->SetName("Cone");
-		buffer->m_buildIn = true;
-		return buffer;
-	}
-	Mesh* Mesh::GetTriangle()
-	{
-		Mesh* buffer = ImportFromMemory(BuildInMesh::Triangle().c_str());
-		buffer->SetName("Triangle");
-		buffer->m_buildIn = true;
-		return buffer;
+		TARA_DEBUG_LEVEL("\t%s Pack register size: %i", 1, Name().c_str(), m_pack.size());
 	}
 }

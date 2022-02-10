@@ -196,17 +196,8 @@ namespace Tara {
 		{
 			return m_flags;
 		}
-		void ImGui_SceneView::Content()
+		void ImGui_SceneView::RenderCamera(CCamera* target)
 		{
-			UI::ImGui_BeginChild(m_child_id, 0, 0, false, m_flags);
-			MenuBar();
-			// GUI initialization is create earlier than scene
-			// So the camera will be null at first
-			// Put the guard here to prevent crash
-			if (!m_camera) {
-				UI::ImGui_EndChild();
-				return;
-			}
 			// Get the child window size and position
 			glm::vec2 wsize = UI::ImGui_GetWindowSize();
 			glm::vec2 wpos = UI::ImGui_GetWindowPos();
@@ -232,7 +223,7 @@ namespace Tara {
 				float_t heightDiff = frameHeight - mulSize.y;
 				// Place padding top and bottom then we finish :D
 				UI::ImGui_Dummy(0, (heightDiff / 2.f) - 25.f);
-				UI::ImGui_Image(m_camera, mulSize.x, mulSize.y);
+				UI::ImGui_Image(target, mulSize.x, mulSize.y);
 				UI::ImGui_Dummy(0, (heightDiff / 2.f) - 25.f);
 				m_leftPadding = 0;
 				m_topPadding = (heightDiff / 2.f) - 25.f;
@@ -242,10 +233,23 @@ namespace Tara {
 				// Put the padding left then we finish :D
 				UI::ImGui_Dummy((wsize.x - mulSize.x) / 2.f, 0);
 				UI::ImGui_Sameline(0, 1);
-				UI::ImGui_Image(m_camera, mulSize.x, mulSize.y);
+				UI::ImGui_Image(target, mulSize.x, mulSize.y);
 				m_leftPadding = (wsize.x - mulSize.x) / 2.f;
 				m_topPadding = 0;
 			}
+		}
+		void ImGui_SceneView::Content()
+		{
+			UI::ImGui_BeginChild(m_child_id, 0, 0, false, m_flags);
+			MenuBar();
+			// GUI initialization is create earlier than scene
+			// So the camera will be null at first
+			// Put the guard here to prevent crash
+			if (!m_camera) {
+				UI::ImGui_EndChild();
+				return;
+			}
+			RenderCamera(m_camera);
 			PostRender();
 			UI::ImGui_EndChild();
 		}
@@ -279,7 +283,7 @@ namespace Tara {
 		}
 		void ImGui_TextureView::Render()
 		{
-			ImGui_Image((void*)target->ID(), glm::vec2(512, 512), glm::vec2(0));
+			ImGui_Image((void*)target->TextureID(), glm::vec2(512, 512), glm::vec2(0));
 		}
 		#pragma endregion
 }

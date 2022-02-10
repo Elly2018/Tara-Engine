@@ -7,31 +7,117 @@
 
 namespace Tara {
 	/*
-
-		Structs, classes declaration
-
+		Summary:
+			Uniform type.
 	*/
-	class DllExport Shader;
+	enum class DllExport ShaderUniformType {
+		Float,
+		Double,
+		Int,
+		UInt,
+		Bool,
 
-	/// <summary>
-	/// Shader types
-	/// </summary>
-	DllExport enum class ShaderType {
+		Vec2,
+		Vec3,
+		Vec4,
+		BVec2,
+		BVec3,
+		BVec4,
+		DVec2,
+		DVec3,
+		DVec4,
+		IVec2,
+		IVec3,
+		IVec4,
+		UVec2,
+		UVec3,
+		UVec4,
+
+		Mat2,
+		Mat3,
+		Mat4,
+		Mat2x3,
+		Mat2x4,
+		Mat3x2,
+		Mat3x4,
+		Mat4x2,
+		Mat4x3,
+		DMat2,
+		DMat3,
+		DMat4,
+		DMat2x3,
+		DMat2x4,
+		DMat3x2,
+		DMat3x4,
+		DMat4x2,
+		DMat4x3,
+
+		Texture1D,
+		Texture2D,
+		Texture3D,
+		TextureCube,
+		Texture1DShadow,
+		Texture2DShadow,
+		Texture1DArray,
+		Texture2DArray,
+		Texture2DRect,
+		Texture2DRectShadow,
+		Texture2DMultisample,
+		Texture2DMultisampleArray,
+		Texture1DShadowArray,
+		Texture2DShadowArray,
+		ITexture1D,
+		ITexture2D,
+		ITexture3D,
+		ITextureCube,
+		ITexture1DArray,
+		ITexture2DArray,
+		ITexture2DRect,
+		ITexture2DMultisample,
+		ITexture2DMultisampleArray,
+		UTexture1D,
+		UTexture2D,
+		UTexture3D,
+		UTextureCube,
+		UTexture1DArray,
+		UTexture2DArray,
+		UTexture2DRect,
+		UTexture2DMultisample,
+		UTexture2DMultisampleArray,
+	};
+
+
+	/*
+		Summary:
+			Shader types.
+	*/
+	enum class DllExport ShaderType {
 		Vertex,
 		Tessellation,
 		Fragment,
 		Geometry,
 		Compute
 	};
-	/// <summary>
-	/// Common shader type (Build-in)
-	/// </summary>
-	DllExport enum class CommonShader {
+	
+
+	/*
+		Summary:
+			Buildin shader type.
+	*/
+	enum class DllExport CommonShader {
+		Error,
 		Color,
 		Gradient,
 		Texture,
+#ifndef TARA_NO_BUILDIN_3D
+		Lambert,
+		Blinn,
+		GGX,
+		Toon,
+#endif
 		DefaultPostprocess
 	};
+
 
 	/*
 		Summary:
@@ -39,12 +125,28 @@ namespace Tara {
 	*/
 	DllExport void CreateDefaultShaders();
 
+
 	/*
+		Summary:
+			A container store uniform information.
+	*/
+	struct DllExport ShaderUniform {
+	public:
+		std::string Name;
+		int32_t Location;
+		int32_t Size;
+		int32_t Length;
+		ShaderUniformType Type;
+	};
+
+
+	/*
+
 		Summary:
 			Shader handle the processes of creating program, compile shaders, loading shader files.
 			You can use the complete compiled shader by calling "use()".
 	*/
-	class Shader : public AssetBase
+	class DllExport Shader : public AssetBase
 	{
 	public:
 		friend class Material;
@@ -55,26 +157,6 @@ namespace Tara {
 				Generate common use shader.
 		*/
 		static Shader* GetCommon(CommonShader type);
-		/*
-			Summary:
-				Generate pure color shader (Build-In).
-		*/
-		static Shader* GetColorShader();
-		/*
-			Summary:
-				Generate gradient shader (Build-In).
-		*/
-		static Shader* GetGradientShader();
-		/*
-			Summary:
-				Generate gradient shader (Build-In).
-		*/
-		static Shader* GetTextureShader();
-		/*
-			Summary:
-				Generate default post process shader (Build-In).
-		*/
-		static Shader* GetDefaultPostprocessShader();
 		/*
 			Summary:
 				Get asset pool
@@ -91,14 +173,25 @@ namespace Tara {
 				Binding an empty pointer (fallback to default opengl shader).
 		*/
 		void Unuse();
-		/// <returns>Success</returns>
 		/*
 			Summary:
 				Compile the shader code and build the shader program.
 		*/
 		bool Compile();
+		/*
+			Summary:
+				Delete shader code string and buffer.
+		*/
 		void DeleteShader();
+		/*
+			Summary:
+				Delete stored shader buffer.
+		*/
 		void DeleteShaderBuffer();
+		/*
+			Summary:
+				Delete stored shader code string.
+		*/
 		void DeleteShaderString();
 
 		virtual void SetVertexFromFile(const char* filename);
@@ -112,12 +205,24 @@ namespace Tara {
 		virtual void SetComputeFromFile(const char* filename);
 		virtual void SetComputeFromCode(const char* code);
 
-		int GetUniformLocation(const char* name);
+		/*
+			Summary:
+				Delete stored shader code string.
+		*/
+		int32_t GetUniformLocation(const char* name);
+		/*
+			Summary:
+				Output shader location.
+		*/
 		void PrintUniform();
+		/*
+			Summary:
+				Get all uniform info.
+		*/
+		std::vector<ShaderUniform> Uniforms();
 
 	protected:
 		void CompileShader(ShaderType type);
-		std::string LoadFromFile(const char* filename);
 
 		int program = -1;
 		int vertex = -1;

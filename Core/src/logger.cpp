@@ -5,6 +5,7 @@
 #include <config.h>
 #include <glm/glm.hpp>
 
+#define NOMINMAX
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
 #include <Windows.h>
 #define TARA_WINDOW
@@ -16,7 +17,7 @@ namespace Tara {
 	const std::string errortag = "[Error]";
 	std::vector<LogMessage> Logger::messages = std::vector<LogMessage>();
 	std::vector<OnLog> Logger::events = std::vector<OnLog>();
-	int32_t Logger::lastPosition = -99999;
+	int32_t Logger::lastPosition = -1;
 
 	bool ReadLogger(std::string prefix, glm::vec3 color, std::vector<LogMessage>* buffer, bool* first, std::string line, LogMessage* current) {
 		bool find = line.rfind(prefix, 0) == 0;
@@ -37,18 +38,20 @@ namespace Tara {
 
 	void Logger::LogToFile()
 	{
+#ifndef TARA_NO_LOGGER
 		FILE* stream = freopen(DEBUG_FILENAME, "w", stdout); // Added missing pointer
 		setvbuf(stream, 0, _IONBF, 0); // No Buffering
+#endif // !TARA_NO_LOGGER
 	}
 	void Logger::Flush()
 	{
+		fflush(stdout);
 		std::vector<LogMessage> r = GetApplicationLog();
 		if (r.size() > 0) {
 			for (auto e : events) {
 				e(r);
 			}
 		}
-		fflush(stdout);
 	}
 	void Logger::HideConsole() {
 #ifdef TARA_WINDOW
@@ -70,11 +73,21 @@ namespace Tara {
 		LogMessage current = LogMessage();
 		bool first = true;
 		std::string line;
-		int32_t currentPos = -1;
-		while (std::getline(input, line))
+		int32_t currentPos = 0;
+		bool finish = false;
+
+		while (!finish)
 		{
 			currentPos++;
-			if (currentPos <= lastPosition) continue;
+			if (currentPos < lastPosition) {
+				input.ignore(std::numeric_limits<std::streamsize>::max(), input.widen('\n'));
+				finish = input.eof();
+				continue;
+			}
+			else {
+				std::getline(input, line);
+				finish = input.eof();
+			}
 			if (ReadLogger(systemtag, LOGCOLOR_NORMAL, &result, &first, line, &current)) continue;
 			else if (ReadLogger(warningtag, LOGCOLOR_WARNING, &result, &first, line, &current)) continue;
 			else if (ReadLogger(errortag, LOGCOLOR_ERROR, &result, &first, line, &current)) continue;

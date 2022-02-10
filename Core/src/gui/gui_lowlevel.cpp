@@ -4,6 +4,7 @@
 #include <imgui.h>
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
+#define NOMINMAX
 #include <Windows.h>
 #include <Shellapi.h>
 #include <cstdarg>
@@ -572,19 +573,19 @@ namespace Tara {
 		}
 		void ImGui_Image(Texture* image, float_t w, float_t h, float_t uv_x, float_t uv_y, float_t uv2_x, float_t uv2_y)
 		{
-			ImGui_Image((void*)image->ID(), w, h, uv_x, uv_y, uv2_x, uv2_y);
+			ImGui_Image((void*)image->TextureID(), w, h, uv_x, uv_y, uv2_x, uv2_y);
 		}
 		void ImGui_Image(Texture* image, glm::vec2 size, glm::vec2 uv, glm::vec2 uv2)
 		{
-			ImGui_Image((void*)image->ID(), size.x, size.y, uv.x, uv.y, uv2.x, uv2.y);
+			ImGui_Image((void*)image->TextureID(), size.x, size.y, uv.x, uv.y, uv2.x, uv2.y);
 		}
 		void ImGui_Image(FrameBuffer* image, float_t w, float_t h, float_t uv_x, float_t uv_y, float_t uv2_x, float_t uv2_y)
 		{
-			ImGui_Image((void*)image->GetTextureID(), w, h, uv_x, uv_y, uv2_x, uv2_y);
+			ImGui_Image((void*)image->TextureID(), w, h, uv_x, uv_y, uv2_x, uv2_y);
 		}
 		void ImGui_Image(FrameBuffer* image, glm::vec2 size, glm::vec2 uv, glm::vec2 uv2)
 		{
-			ImGui_Image((void*)image->GetTextureID(), size.x, size.y, uv.x, uv.y, uv2.x, uv2.y);
+			ImGui_Image((void*)image->TextureID(), size.x, size.y, uv.x, uv.y, uv2.x, uv2.y);
 		}
 		bool ImGui_ImageButton(void* image, glm::vec2 size, glm::vec2 uv, glm::vec2 uv2)
 		{
@@ -645,6 +646,10 @@ namespace Tara {
 		void ImGui_Table()
 		{
 
+		}
+		bool ImGui_CollapsingHeader(std::string title, bool* visible)
+		{
+			return ImGui_CollapsingHeader(title.c_str(), visible);
 		}
 		bool ImGui_CollapsingHeader(const char* title, bool* visible)
 		{
@@ -995,6 +1000,9 @@ namespace Tara {
 			}
 			ImGui_NextColumn();
 		}
+		void ImGui_MeshGridImageView(const char* title, std::vector<Mesh*> target, int32_t size, int32_t height, int32_t column, ImGui_EventPack<Mesh> events)
+		{
+		}
 		void ImGui_TextureField(const char* title, Texture* target)
 		{
 			std::string s = "";
@@ -1014,7 +1022,7 @@ namespace Tara {
 		}
 		void ImGui_TextureImageField(Texture* target, int32_t size, ImGui_EventPack<Texture> events)
 		{
-			ImGui_ImageButton((void*)target->ID(), glm::vec2(size, size));
+			ImGui_ImageButton((void*)target->TextureID(), glm::vec2(size, size));
 			if (events.Tooltop != nullptr) {
 				if (ImGui_IsItemHovered()) {
 					ImGui_BeginTooltip();
@@ -1041,31 +1049,31 @@ namespace Tara {
 				events.Tooltop = [](Texture* tex) -> void {
 					glm::ivec2 tsize = tex->Size();
 					ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
-					ImGui::TextUnformatted(tex->Name());
+					ImGui::TextUnformatted(tex->Name().c_str());
 					ImGui::Text("%ix%i", tsize.x, tsize.y);
 					ImGui::PopTextWrapPos();
 				};
 			}
 			ImGui_TextureImageField(target, size, events);
 			ImGui_Sameline(size + 20, 3);
-			ImGui_Text(target->Name());
+			ImGui_Text(target->Name().c_str());
 		}
-		void ImGui_TextureGridImageField(const char* title, std::vector<Texture*> target, int32_t size, int32_t height, int32_t column, ImGui_EventPack<Texture> events)
+		void ImGui_TextureGridImageView(const char* title, std::vector<Texture*> target, int32_t size, int32_t height, int32_t column, ImGui_EventPack<Texture> events)
 		{
 			glm::ivec2 windowSize = ImGui_GetWindowSize();
 			int32_t columnCount = -1;
 			if (column == 0) {
-				columnCount = std::fmax(windowSize.x / size, 1);
+				columnCount = std::max(windowSize.x / size, 1);
 			}
 			else {
-				columnCount = std::fmax(std::fmin(column, windowSize.x / size), 1);
+				columnCount = std::max(std::min(column, windowSize.x / size), 1);
 			}
 			// Override tooltip.
 			if (events.Tooltop == nullptr) {
 				events.Tooltop = [](Texture* tex) -> void {
 					glm::ivec2 tsize = tex->Size();
 					ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
-					ImGui::TextUnformatted(tex->Name());
+					ImGui::TextUnformatted(tex->Name().c_str());
 					ImGui::Text("%ix%i", tsize.x, tsize.y);
 					ImGui::PopTextWrapPos();
 				};
@@ -1113,10 +1121,19 @@ namespace Tara {
 		void ImGui_MaterialVerticalImageField(Material* target, CommomMesh preview)
 		{
 		}
-		void ImGui_MaterialGridImageField(Material* target, CommomMesh preview)
+		void ImGui_MaterialGridImageView(const char* title, std::vector<Material*> target, int32_t size, int32_t height, int32_t column, ImGui_EventPack<Material> events)
 		{
+
+		}
+		void ImGui_MaterialUniformPropertiesView(Material* target)
+		{
+			Shader& m_shader = target->GetShader();
+			std::vector<ShaderUniform> su = m_shader.Uniforms();
 		}
 		void ImGui_ShaderField(Shader* target)
+		{
+		}
+		void ImGui_ShaderGridImageView(const char* title, std::vector<Shader*> target, int32_t size, int32_t height, int32_t column, ImGui_EventPack<Shader> events)
 		{
 		}
 		EObject* ImGui_EObjectHierarchy(EObject* target, EObject* _focus) {
@@ -1129,7 +1146,7 @@ namespace Tara {
 				ImGui_TextColor(glm::vec3(1, 1, 1));
 			}
 
-			if (ImGui_Tree((void*)target, target->Name())) {
+			if (ImGui_Tree((void*)target, target->Name().c_str())) {
 				if (ImGui_IsItemFocued()) {
 					focus = target;
 				}

@@ -9,17 +9,11 @@
 // Include tara library
 #include "config.h"
 #include <material.h>
+#include <renderer.h>
 #include <scene.h>
 #include <gui.h>
 
 namespace Tara {
-	/*
-
-		Structs, classes declaration
-
-	*/
-	struct DllExport EWindowConfig;
-	struct DllExport RenderState;
 	class DllExport EWindow;
 
 	/*
@@ -29,7 +23,7 @@ namespace Tara {
 			last 3 bit means minor version,
 			Then it use map in cpp file to get GLSL version string.
 	*/
-	DllExport enum class OpenGLVersion {
+	enum class DllExport OpenGLVersion {
 		Version2_0 = 16, // 010-000 -> #version 110
 		Version3_0 = 24, // 011-000 -> #version 130
 		Version3_1 = 25, // 011-001 -> #version 140
@@ -44,20 +38,30 @@ namespace Tara {
 		Version4_6 = 38  // 100-110 -> #version 460
 	};
 
+
 	/*
 		Summary:
 			Initialize the resources and stuff.
 	*/
 	DllExport void Tara_Initialization();
+	/*
+		Summary:
+			Get current use tara window
+	*/
 	DllExport EWindow* CurrentWindow();
+	/*
+		Summary:
+			...
+	*/
 	DllExport bool IsCurrentWindowIconify();
+
 
 	/*
 		Summary:
 			Ewindow flags
 			The struct organize glfw flags into a struct like object
 	*/
-	struct EWindowConfig
+	struct DllExport EWindowConfig
 	{
 	public:
 		EWindowConfig();
@@ -108,13 +112,14 @@ namespace Tara {
 		bool HaveAspectRatio();
 	};
 
+
 	/*
 		Summary:
 			Window object
 			The window base class, contain basic features such as
 			gui drawing, events register, update function, show/hide function
 	*/
-	class EWindow
+	class DllExport EWindow
 	{
 	public:
 		/*
@@ -144,6 +149,7 @@ namespace Tara {
 				Enter window rendering, called every frame before gui and update called.
 		*/
 		virtual void Render();
+		virtual void Gizmo();
 		/*
 			Summary:
 				gui new frame method, called every frame.
@@ -203,41 +209,111 @@ namespace Tara {
 				Flags that does require window instance.
 		*/
 		void UpdateWindowFlags(EWindowConfig config);
+		/*
+			Summary:
+				Resize the window.
+		*/
 		void Resize(int width, int height);
+		/*
+			Summary:
+				Rename the window title.
+		*/
 		void Rename(const char* name);
+		/*
+			Summary:
+				Clean color, depth, stencil buffers
+		*/
 		void CleanBuffer();
+		/*
+			Summary:
+				Clean color buffer with color,
+		*/
 		void CleanColor(const glm::vec4 c = glm::vec4(0, 0, 0, 1));
+		/*
+			Summary:
+				Clean color buffer with color,
+		*/
 		void CleanColor(float_t r = 0, float_t g = 0, float_t b = 0, float_t a = 1);
+		/*
+			Summary:
+				Change viewport rect.
+		*/
 		void Viewport(int32_t x, int32_t y, size_t w, size_t h);
+		/*
+			Summary:
+				Swap buffer.
+		*/
 		void Swap();
+		/*
+			Summary:
+				Set active scene.
+		*/
 		void SetActiveScene(Scene* target);
 
 	public:
+		/*
+			Summary:
+				Get window position on screen.
+		*/
 		glm::ivec2 GetEWindowPos();
+		/*
+			Summary:
+				Get window size.
+		*/
 		glm::ivec2 GetEWindowSize();
+		/*
+			Summary:
+				Render state.
+		*/
 		RenderState& GetRenderState();
 
 	protected:
+		/*
+			Summary:
+				Clean all assets pool nullptr.
+		*/
+		void CleanGarbage();
+
+		// Scenes current loaded.
 		std::vector<Scene*> m_scenes = std::vector<Scene*>();
+		// Use camera, They will render in render stage.
+		std::vector<CCamera*> m_renderCamera = std::vector<CCamera*>();
 		int32_t m_main_scene = 0;
-		CCamera* m_camera;
+		// Decide that update scene or not.
 		bool updateScenes = true;
+		// Decide that render scene or not.
 		bool renderScenes = true;
+		// Decide that if application will collect render profiler.
+		bool renderState = true;
+		// Draw wireframe of objects on screen.
 		bool wireframe = false;
+		// Draw normally of objects on screen.
 		bool shaded = true;
+		// How many frame pass will cause garbage collect start.
+		int32_t m_garbageCleanPassFrameCount = 20;
 
 	#ifndef TARA_NO_IMGUI
+		// All gui window objects, They will get call in GUI stage.
 		std::vector<UI::ImGui_WindowBase*> m_guiWindows = std::vector<UI::ImGui_WindowBase*>();
 	#endif
 	private:
-		// Screen render shader
+		/*
+			Summary:
+				Check if garbage collection should happend or not.
+		*/
+		void CheckCleanGarbage();
+
+		// Screen render shader.
 		Material* m_postprocessShader;
-		// Screen render quad
+		// Screen render quad.
 		Mesh* m_screenQuad;
-		// Opengl version major
+		// Opengl version major.
 		int32_t m_major;
-		// Opengl version minor
+		// Opengl version minor.
 		int32_t m_minor;
+		// Frame count
 		int32_t m_frameCount;
+		// Count down of garbage collection, when it smaller than 1, garbage collection will happen.
+		int32_t m_garbageCleanCountDown = 0;
 	};
 }

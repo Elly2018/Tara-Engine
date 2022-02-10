@@ -7,6 +7,7 @@
 #include <components/component.h>
 
 namespace Tara {
+	// Prevent include loop.
 	class DllExport Scene;
 	/*
 		Summary:
@@ -16,6 +17,7 @@ namespace Tara {
 	{
 	public:
 		friend class Scene;
+		friend class Renderer;
 		EObject();
 		~EObject();
 
@@ -29,6 +31,7 @@ namespace Tara {
 				Return parent EObject.
 		*/
 		EObject* Parent();
+		Scene* HostScene();
 		/*
 			Summary:
 				Get child EObject by index.
@@ -55,6 +58,11 @@ namespace Tara {
 		void Init();
 		void Start();
 		void Render();
+
+#ifndef TARA_NO_IMGUI
+		void Gizmo();
+#endif // !TARA_NO_IMGUI
+
 		void Update();
 		void Destroy();
 
@@ -76,6 +84,7 @@ namespace Tara {
 				Apply component to EObject.
 		*/
 		template<typename T> T* AddComponent() {
+			static_assert(std::is_base_of<Tara::EComponent, T>::value, "type cast error");
 			T* instance = new T(this);
 			m_components.push_back(instance);
 			return instance;
@@ -124,34 +133,38 @@ namespace Tara {
 				Get a standard pawn EObject.
 		*/
 		static EObject* CreatePawn();
+	};
 
-		class DllExport OFViewer {
-		public:
-			/*
-				Summary:
-					Get a free camera EObject.
-			*/
-			static EObject* CreateFreeCamera();
-			static EObject* CreateCamera();
-		};
-		class DllExport OF3D {
-			static EObject* CreateMesh(CommomMesh mesh);
-			static EObject* CreateMeshWithPhysics(CommomMesh mesh);
-		};
-		class DllExport OF2D {
-			static EObject* CreateSprite();
-			static EObject* CreateSpriteWithPhysics();
-		};
-		class DllExport OFSystem {
-			static EObject* CreatePostProcessSystem();
-			static EObject* CreateVoxelSystem();
-		};
-		class DllExport OFUI {
-			
-		};
-		class DllExport OFParticle {
-			static EObject* CreateDefaultParticleSystem();
-			static EObject* CreateGPUParticleSystem();
-		};
+	class DllExport ObjectFactoryViewer {
+	public:
+		/*
+			Summary:
+				Get a free camera EObject.
+		*/
+		static EObject* CreateFreeCamera();
+		static EObject* CreateCamera();
+	};
+	class DllExport ObjectFactory3D {
+	public:
+		static EObject* CreateMesh(CommomMesh mesh);
+		static EObject* CreateMeshWithPhysics(CommomMesh mesh);
+	};
+	class DllExport ObjectFactory2D {
+	public:
+		static EObject* CreateSprite();
+		static EObject* CreateSpriteWithPhysics();
+	};
+	class DllExport ObjectFactorySystem {
+	public:
+		static EObject* CreatePostProcessSystem();
+		static EObject* CreateVoxelSystem();
+	};
+	class DllExport ObjectFactoryUI {
+	public:
+	};
+	class DllExport ObjectFactoryParticle {
+	public:
+		static EObject* CreateDefaultParticleSystem();
+		static EObject* CreateGPUParticleSystem();
 	};
 }

@@ -9,13 +9,19 @@
 
 using namespace Tara;
 
+struct PostProcessConfig {
+public:
+    MSAASamples m_sample = MSAASamples::None;
+    bool m_updateSample = false;
+};
+
 EWindow* w;
 EWindowConfig wc = EWindowConfig();
 std::vector<Scene*> allScene = std::vector<Scene*>();
 EObject* focusedObject = nullptr;
+PostProcessConfig post = PostProcessConfig();
 
 class DemoWindow;
-#ifndef TARA_NO_IMGUI
 class AssetWindow;
 class FileExplorerWindow;
 class SceneViewerWindow;
@@ -36,14 +42,15 @@ RenderState m_render = RenderState();
 
 bool shouldUpdateScene = false;
 bool shouldRenderScene = false;
+bool shouldRecordRenderState = false;
 bool showDebugState = false;
-#endif
+bool showGizmo = false;
+CCamera* selectCameraObject = nullptr;
 
 std::vector<LogMessage> messages = std::vector<LogMessage>();
 bool updateMessages = true;
 int rendermode = 0;
 
-#ifndef TARA_NO_IMGUI
 class AssetWindow : public UI::ImGui_WindowBase {
 private:
     bool first = true;
@@ -71,6 +78,45 @@ public:
             // And because we didn't input events, 
             // Default will show basic texture info when mouse is hovered.
             UI::ImGui_TextureGridImageField("All", list);
+        }
+        else if (leftViewSelect == 1) {
+            std::vector<Material*> list = std::vector<Material*>();
+            AssetPool<Material>* pool = Material::GetAssetPool();
+            size_t size = pool->Size();
+            for (int i = 0; i < size; i++) {
+                Material* mat = pool->Get(i);
+                list.push_back(mat);
+            }
+            // Place texture grid field, default: column is auto, height is match parent.
+            // And because we didn't input events, 
+            // Default will show basic texture info when mouse is hovered.
+            UI::ImGui_MaterialGridImageField("All", list);
+        }
+        else if (leftViewSelect == 2) {
+            std::vector<Mesh*> list = std::vector<Mesh*>();
+            AssetPool<Mesh>* pool = Mesh::GetAssetPool();
+            size_t size = pool->Size();
+            for (int i = 0; i < size; i++) {
+                Mesh* mat = pool->Get(i);
+                list.push_back(mat);
+            }
+            // Place texture grid field, default: column is auto, height is match parent.
+            // And because we didn't input events, 
+            // Default will show basic texture info when mouse is hovered.
+            UI::ImGui_MeshGridImageField("All", list);
+        }
+        else if (leftViewSelect == 3) {
+            std::vector<Shader*> list = std::vector<Shader*>();
+            AssetPool<Shader>* pool = Shader::GetAssetPool();
+            size_t size = pool->Size();
+            for (int i = 0; i < size; i++) {
+                Shader* mat = pool->Get(i);
+                list.push_back(mat);
+            }
+            // Place texture grid field, default: column is auto, height is match parent.
+            // And because we didn't input events, 
+            // Default will show basic texture info when mouse is hovered.
+            UI::ImGui_ShaderGridImageField("All", list);
         }
     }
     void Content() override {
@@ -138,21 +184,26 @@ public:
 
                 }
                 UI::ImGui_Separator();
-                if (UI::ImGui_BeginMenu("FXAA")) {
-                    if (UI::ImGui_MenuItem("None")) {
-
+                if (UI::ImGui_BeginMenu("MSAA")) {
+                    if (UI::ImGui_MenuItem("None", 0, post.m_sample == MSAASamples::None)) {
+                        post.m_sample = MSAASamples::None;
+                        post.m_updateSample = true;
                     }
-                    if (UI::ImGui_MenuItem("2x")) {
-
+                    if (UI::ImGui_MenuItem("2x", 0, post.m_sample == MSAASamples::_2x)) {
+                        post.m_sample = MSAASamples::_2x;
+                        post.m_updateSample = true;
                     }
-                    if (UI::ImGui_MenuItem("4x")) {
-
+                    if (UI::ImGui_MenuItem("4x", 0, post.m_sample == MSAASamples::_4x)) {
+                        post.m_sample = MSAASamples::_4x;
+                        post.m_updateSample = true;
                     }
-                    if (UI::ImGui_MenuItem("8x")) {
-
+                    if (UI::ImGui_MenuItem("8x", 0, post.m_sample == MSAASamples::_8x)) {
+                        post.m_sample = MSAASamples::_8x;
+                        post.m_updateSample = true;
                     }
-                    if (UI::ImGui_MenuItem("16x")) {
-
+                    if (UI::ImGui_MenuItem("16x", 0, post.m_sample == MSAASamples::_16x)) {
+                        post.m_sample = MSAASamples::_16x;
+                        post.m_updateSample = true;
                     }
                     UI::ImGui_EndMenu();
                 }
@@ -198,28 +249,48 @@ public:
             if (UI::ImGui_MenuItem("Debug", 0, showDebugState)) {
                 showDebugState = !showDebugState;
             }
+            if (UI::ImGui_MenuItem("Gizmo", 0, showGizmo)) {
+                showGizmo = !showGizmo;
+            }
             UI::ImGui_EndMenubar();
         }
     }
     void PostRender() override {
         shouldUpdateScene = UI::ImGui_IsWindowFocued();
         glm::vec2 wpos = UI::ImGui_GetWindowPos();
+        glm::vec2 wsize = UI::ImGui_GetWindowSize();
         DefaultContent();
         if (showDebugState) {
+            near = m_camera->m_nearPlane;
+            far = m_camera->m_farPlane;
             UI::ImGui_SetNextWindowPos(wpos.x + m_leftPadding + 20, wpos.y + m_topPadding + 50);
-            UI::ImGui_BeginChild("Debug State", 180, 150, true);
+            UI::ImGui_BeginChild("Debug State", 180, 220, true);
             UI::ImGui_Text("FPS: %f", m_render.FPS);
             UI::ImGui_Text("CPU usage: %f", m_render.CPU_Usage);
             UI::ImGui_Text("GPU usage: %f", m_render.GPU_Usage);
             UI::ImGui_Text("Draw call: %i", m_render.DrawCall);
             UI::ImGui_Text("Vertices count: %i", m_render.Vertices);
             UI::ImGui_Text("Triangles count: %i", m_render.Triangle);
+            UI::ImGui_DragFloat("Near", &near);
+            UI::ImGui_DragFloat("Far", &far);
+            UI::ImGui_Checkbox("Render State", &shouldRecordRenderState);
+            UI::ImGui_EndChild();
+
+            m_camera->m_nearPlane = near;
+            m_camera->m_farPlane = far;
+        }
+        if (selectCameraObject) {
+            UI::ImGui_SetNextWindowPos(wpos.x + wsize.x - 320, wpos.y + wsize.y - 260);
+            UI::ImGui_BeginChild("Debug State", 300, 200, true);
+            RenderCamera(selectCameraObject);
             UI::ImGui_EndChild();
         }
     }
     void SetCam(CCamera* c) {
         m_camera = c;
     }
+    float near = 0;
+    float far = 0;
 };
 class PropertiesWindow : public UI::ImGui_WindowBase {
 public:
@@ -229,9 +300,9 @@ public:
     }
     void Content() override {
         UI::ImGui_BeginChild("Hierarchy Frame", 0, 0, true, flags);
-        bool d = EComponent::GetDebugMenu();
-        UI::ImGui_Checkbox("Debug", &d);
-        EComponent::SetDebugMenu(d);
+        if (UI::ImGui_Checkbox("Debug", &EComponent::DebugMenu())) {
+            TARA_DEBUG("Toggle Debug");
+        }
         if (!focusedObject) {
             UI::ImGui_EndChild();
             return;
@@ -252,21 +323,61 @@ public:
 };
 class HierarchyWindow : public UI::ImGui_WindowBase {
 public:
-    HierarchyWindow() : UI::ImGui_WindowBase("Hierarchy") {}
+    HierarchyWindow() : UI::ImGui_WindowBase("Hierarchy") {
+        childWinFlags.MenuBar = true;
+        childWinFlags.AlwaysAutoResize = true;
+    }
     void Content() override {
         for (auto s : allScene) {
             if (!s) continue;
             size_t c = s->TopLayerCount();
             if (UI::ImGui_CollapsingHeader(s->Name())) {
+
+                UI::ImGui_BeginChild((std::string(s->Name()) + "##").c_str(), 0, 0, false, childWinFlags);
+                if (UI::ImGui_BeginMenubar()) {
+                    if (UI::ImGui_BeginMenu("New")) {
+                        if (UI::ImGui_MenuItem("Empty")) {
+                            ObjectFactory::CreateEmpty();
+                        }
+                        if (UI::ImGui_MenuItem("Actor")) {
+                            ObjectFactory::CreateActor();
+                        }
+                        if (UI::ImGui_MenuItem("Pawn")) {
+                            ObjectFactory::CreatePawn();
+                        }
+                        if (UI::ImGui_BeginMenu("Camera")) {
+                            if (UI::ImGui_MenuItem("Camera")) {
+                                ObjectFactoryViewer::CreateCamera();
+                            }
+                            if (UI::ImGui_MenuItem("Free Camera")) {
+                                ObjectFactoryViewer::CreateFreeCamera();
+                            }
+                            UI::ImGui_EndMenu();
+                        }
+                        UI::ImGui_EndMenu();
+                    }
+                    if (UI::ImGui_MenuItem("Edit")) {
+
+                    }
+                    if (UI::ImGui_MenuItem("Search")) {
+
+                    }
+                    UI::ImGui_EndMenubar();
+                }
                 UI::ImGui_Indent();
                 for (size_t i = 0; i < c; i++) {
                     EObject* eo = s->GetChild(i);
                     focusedObject = UI::ImGui_EObjectHierarchy(eo, focusedObject);
                 }
+                if (focusedObject)
+                    selectCameraObject = focusedObject->GetRelateComponent<CCamera>();
                 UI::ImGui_UnIndent();
+                UI::ImGui_EndChild();
             }
         }
     }
+    char* search;
+    UI::ImGui_WindiwFlags childWinFlags = UI::ImGui_WindiwFlags();
 };
 class HelperWindow : public UI::ImGui_WindowBase {
 public:
@@ -320,7 +431,9 @@ public:
     ConsoleWindow() : UI::ImGui_WindowBase("Console") {}
 private:
 };
-#endif
+class ProfilerWindow : public UI::ImGui_WindowBase {
+    ProfilerWindow() : UI::ImGui_WindowBase("Profiler") {}
+};
 
 class DemoWindow : public EWindow {
 public:
@@ -342,8 +455,8 @@ public:
         // Init scene
         Scene* m_scene = new Scene();
         // Add camera to look around
-        EObject* camera = ObjectFactory::OFViewer::CreateFreeCamera();
-        camera->SetName("Camera");
+        EObject* camera = ObjectFactoryViewer::CreateCamera();
+        camera->Name() = "Camera";
         CTransformation* cameratrans = camera->GetRelateComponent<CTransformation>();
         // Create cube object
         EObject* m_demo_object1 = ObjectFactory::CreatePawn();
@@ -351,9 +464,9 @@ public:
         EObject* floor = ObjectFactory::CreatePawn();
         m_demo_object1->SetParent(m_demo_object2);
 
-        m_demo_object1->SetName("cube object");
-        m_demo_object2->SetName("sphere object");
-        floor->SetName("floor");
+        m_demo_object1->Name() = "cube object";
+        m_demo_object2->Name() = "sphere object";
+        floor->Name() = "floor";
         CTransformation* trans1 = m_demo_object1->GetRelateComponent<CTransformation>();
         CTransformation* sphere = m_demo_object2->GetRelateComponent<CTransformation>();
         CMeshRenderer* meshr1 = m_demo_object1->GetRelateComponent<CMeshRenderer>();
@@ -369,16 +482,16 @@ public:
         Shader* texshader = Shader::GetCommon(CommonShader::Texture);
         Shader* baseshader = Shader::GetCommon(CommonShader::Texture);
         // Create material hold the shader
-        Material* m_material1 = new Material(texshader);
-        m_material1->SetName("color material 1");
+        Material* m_material1 = new Material(*texshader);
+        m_material1->Name() = "color material 1";
         m_material1->SetTextureIndex("surface", 0);
-        m_material1->SetTexture("surface", m_texture);
+        m_material1->SetTexture("surface", *m_texture);
         m_material1->SetVec3("color", vec3(1));
 
-        Material* m_material2 = new Material(baseshader);
-        m_material2->SetName("color material 2");
+        Material* m_material2 = new Material(*baseshader);
+        m_material2->Name() = "color material 2";
         m_material2->SetTextureIndex("surface", 0);
-        m_material2->SetTexture("surface", m_texture2);
+        m_material2->SetTexture("surface", *m_texture2);
         m_material2->SetVec3("color", vec3(1));
 
         // Apply to the cube object
@@ -396,7 +509,7 @@ public:
                 floor_name += std::to_string(x);
                 floor_name += ":";
                 floor_name += std::to_string(z);
-                floor_child->SetName(floor_name.c_str());
+                floor_child->Name() = floor_name;
                 CTransformation* plane = floor_child->GetRelateComponent<CTransformation>();
                 CMeshRenderer* meshr_floor = floor_child->GetRelateComponent<CMeshRenderer>();
                 meshr_floor->SetMesh(mesh3);
@@ -410,7 +523,6 @@ public:
 
         // Upload scene
         m_scenes.push_back(m_scene);
-#ifndef TARA_NO_IMGUI
         fileExplorer->SetVisible(false);
         helperTips->SetVisible(false);
         m_guiWindows.push_back(asset);
@@ -421,15 +533,21 @@ public:
         m_guiWindows.push_back(helperTips);
         m_guiWindows.push_back(console);
         m_guiWindows.push_back(debug);
-#endif
     };
     void Update() override {
         EWindow::Update();
-#ifndef TARA_NO_IMGUI
+        if (post.m_updateSample) {
+            Renderer::MainCamera().CameraFramebuffer().SetSamples(post.m_sample);
+            post.m_updateSample = false;
+        }
+        m_renderCamera = std::vector<CCamera*>();
+        if (selectCameraObject) {
+            m_renderCamera.push_back(selectCameraObject);
+        }
         shouldRenderScene = sceneViewer->Visible();
         updateScenes = shouldUpdateScene;
         renderScenes = shouldRenderScene;
-#endif
+        renderState = shouldRecordRenderState && sceneViewer->Visible();
         m_render = GetRenderState();
         switch (rendermode)
         {
@@ -446,9 +564,6 @@ public:
             shaded = true;
             break;
         }
-        if (EInput::IsKeyDown(keycode::K)) {
-            TARA_DEBUG("YO");
-        }
     }
     void DeleteAllScene() {
         for (auto s : m_scenes) {
@@ -457,7 +572,6 @@ public:
         m_scenes.clear();
         allScene = m_scenes;
     }
-#ifndef TARA_NO_IMGUI
     void GUI() override {
         EWindow::GUI();
         UI::ImGui_DockspaceOverviewport();
@@ -521,23 +635,29 @@ public:
             UI::ImGui_EndMainmenuBar();
         }
     }
+    void Gizmo() override {
+        //RendererDebug::DrawPlane(vec3(0, 10, 0), -Renderer::MainCamera().Host()->GetRelateComponent<CTransformation>()->GlobalPosition());
+        //RendererDebug::DrawSphere(vec3(std::sin(EInput::Time()) * 10.f, 2, std::cos(EInput::Time()) * 10.f), 20);
+        if (showGizmo) {
+            // We can call the base for drawing all gizmo on the screen
+            EWindow::Gizmo();
+        }
+    }
     void PostRender() override {
         // Default is render scene to window background
         // But we can disable that with override PostRender() function
         // The scene main camera is under EWindow memeber: m_camera
-        sceneViewer->SetCam(m_camera); // Get main camera of the scene
+        sceneViewer->SetCam(&Renderer::MainCamera()); // Get main camera of the scene
         allScene = m_scenes;
         // Clean color depth buffer only
         CleanBuffer();
         // Render nothing
     }
-#endif
 };
 
 int main()
 {
     Logger::HideConsole();
-#ifndef TARA_NO_IMGUI
     console = new ConsoleWindow();
     asset = new AssetWindow();
     fileExplorer = new FileExplorerWindow();
@@ -546,11 +666,10 @@ int main()
     hierarchy = new HierarchyWindow();
     helperTips = new HelperWindow();
     debug = new UI::ImGui_DebugWindow();
-
     // Register event
     // So everytime stdout is called, it can receive callback.
     Logger::RegisterLog(ConsoleWindow::AddMessage);
-#endif
+    wc.Vsync = false;
     w = new DemoWindow();
     w->Maximum();
     w->Start();

@@ -54,5 +54,6 @@ namespace Tara {
 		static std::vector<LogMessage> messages;
 		static std::vector<OnLog> events;
 		static int32_t lastPosition;
+		static int32_t lastLocation;
 	};
 }

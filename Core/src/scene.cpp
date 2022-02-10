@@ -2,7 +2,7 @@
 
 namespace Tara {
 	Scene* current = nullptr;
-	AssetPool<Scene> Scene::m_scenePool = AssetPool<Scene>();
+	AssetPool<Scene>* Scene::m_scenePool = new AssetPool<Scene>();
 
 	Scene* CurrentScene()
 	{
@@ -22,6 +22,16 @@ namespace Tara {
 	{
 		TARA_DEBUG_LEVEL("Scene destroy! %s", 2, Name());
 		Clean();
+	}
+
+	Scene* Scene::GetDefaultScene()
+	{
+		return nullptr;
+	}
+
+	AssetPool<Scene>* Scene::GetAssetPool()
+	{
+		return m_scenePool;
 	}
 
 	void Scene::Clean()
@@ -79,6 +89,14 @@ namespace Tara {
 		// Draw on framebuffer
 		for (EObject* i : Objects) {
 			i->Render();
+		}
+	}
+
+	void Scene::Gizmo()
+	{
+		// Draw on framebuffer
+		for (EObject* i : Objects) {
+			i->Gizmo();
 		}
 	}
 

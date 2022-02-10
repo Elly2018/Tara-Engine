@@ -24,57 +24,69 @@ namespace Tara {
 		~EComponent();
 
 		#ifndef TARA_NO_IMGUI
+	private:
 		static bool m_debugMenu;
-		static void SetDebugMenu(bool v);
-		static bool GetDebugMenu();
+	public:
+		static bool& DebugMenu();
 		#endif
 
 		/*
 			Summary:
 				Initialization, follows by constructor.
 		*/
-		virtual void Init();
+		virtual void Init() {}
 		/*
 			Summary:
 				The first frame.
 		*/
-		virtual void Start();
+		virtual void Start() {}
+
+#ifndef TARA_NO_IMGUI
 		/*
 			Summary:
-				GUI render method
+				GUI render method.
+				Called by GUI func, not by EObject.
 		*/
-		virtual void GUI();
+		virtual void GUI() {}
+		/*
+			Summary:
+				For engine debug view use.
+				Called by EObject during gizmo stage.
+		*/
+		virtual void Gizmo() {}
+#endif
+
 		/*
 			Summary:
 				Called by each frame, mainly for drawing.
 		*/
-		virtual void Render();
+		virtual void Render() {}
 		/*
 			Summary:
 				Called by each frame, mainly for update the logic.
 		*/
-		virtual void Update();
+		virtual void Update() {}
 		/*
 			Summary:
 				Follows by destrctor.
 		*/
-		virtual void Destroy();
+		virtual void Destroy() {}
 		/*
 			Summary:
 				Called when component become enable.
 		*/
-		virtual void Enable();
+		virtual void Enable() {}
 		/*
 			Summary:
 				Called when component become disable.
 		*/
-		virtual void Disable();
+		virtual void Disable() {}
 
 		/*
 			Summary:
 				Change component enable state.
 		*/
-		void SetEnable(bool _enable);
+		void SetEnable(const bool _enable);
 		/*
 			Summary:
 				Check component is enable.
@@ -85,10 +97,11 @@ namespace Tara {
 				Get host object of the component.
 		*/
 		EObject* Host();
+		CTransformation* Transform();
 
 	protected:
 		EObject* m_host = nullptr;
-		CTransformation* TransformComponent();
+		CTransformation* TransformComponent = nullptr;
 
 	private:
 		// Is component enable

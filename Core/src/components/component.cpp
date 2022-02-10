@@ -5,10 +5,7 @@
 namespace Tara {
 	#ifndef TARA_NO_IMGUI
 	bool EComponent::m_debugMenu = false;
-	void EComponent::SetDebugMenu(bool v) {
-		m_debugMenu = v;
-	}
-	bool EComponent::GetDebugMenu() {
+	bool& EComponent::DebugMenu() {
 		return m_debugMenu;
 	}
 	#endif
@@ -21,16 +18,7 @@ namespace Tara {
 	{
 	}
 
-	void EComponent::Init() {}
-	void EComponent::Start() {}
-	void EComponent::GUI() {}
-	void EComponent::Render() {}
-	void EComponent::Update() {}
-	void EComponent::Destroy() {}
-	void EComponent::Enable() {}
-	void EComponent::Disable() {}
-
-	void EComponent::SetEnable(bool _enable)
+	void EComponent::SetEnable(const bool _enable)
 	{
 		m_enable = _enable;
 		if (_enable) Enable();
@@ -44,7 +32,7 @@ namespace Tara {
 	{
 		return m_host;
 	}
-	CTransformation* EComponent::TransformComponent()
+	CTransformation* EComponent::Transform()
 	{
 		return m_host->GetRelateComponent<CTransformation>();
 	}

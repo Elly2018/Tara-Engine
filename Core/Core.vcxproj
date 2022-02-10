@@ -22,7 +22,6 @@
     <ClCompile Include="src\asset.cpp" />
     <ClCompile Include="src\buildin\buildin_mesh.cpp" />
     <ClCompile Include="src\buildin\buildin_shader.cpp" />
-    <ClCompile Include="src\buildin\buildin_texture.cpp" />
     <ClCompile Include="src\components\camera.cpp" />
     <ClCompile Include="src\components\character_control.cpp" />
     <ClCompile Include="src\components\collision.cpp" />
@@ -49,6 +48,7 @@
     <ClCompile Include="src\lib\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\logger.cpp" />
     <ClCompile Include="src\material.cpp" />
+    <ClCompile Include="src\emath.cpp" />
     <ClCompile Include="src\mesh.cpp" />
     <ClCompile Include="src\renderer.cpp" />
     <ClCompile Include="src\scene.cpp" />
@@ -84,6 +84,7 @@
     <ClInclude Include="include\gui\gui_style.h" />
     <ClInclude Include="include\logger.h" />
     <ClInclude Include="include\material.h" />
+    <ClInclude Include="include\emath.h" />
     <ClInclude Include="include\mesh.h" />
     <ClInclude Include="include\renderer.h" />
     <ClInclude Include="include\scene.h" />

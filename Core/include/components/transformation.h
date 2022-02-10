@@ -60,6 +60,7 @@ namespace Tara {
 				_s -> Space info, detail please check space enum summary.
 		*/
 		void Rotate(float_t x, float_t y, float_t z, Space _s = Space::Local);
+		void Rotate(float_t x, float_t y, Space _s = Space::Local);
 		/*
 			Summary:
 				Rotate by input eular angle vector3 data.
@@ -72,32 +73,32 @@ namespace Tara {
 			Summary:
 				Get the global vector of [0, 0, 1]
 		*/
-		glm::vec3 Forward();
+		glm::vec3& Forward();
 		/*
 			Summary:
 				Get the global vector of [0, 0, -1]
 		*/
-		glm::vec3 Backward();
+		glm::vec3& Backward();
 		/*
 			Summary:
 				Get the global vector of [-1, 0, 0]
 		*/
-		glm::vec3 Left();
+		glm::vec3& Left();
 		/*
 			Summary:
 				Get the global vector of [1, 0, 0]
 		*/
-		glm::vec3 Right();
+		glm::vec3& Right();
 		/*
 			Summary:
 				Get the global vector of [0, 1, 0]
 		*/
-		glm::vec3 Up();
+		glm::vec3& Up();
 		/*
 			Summary:
 				Get the global vector of [0, -1, 0]
 		*/
-		glm::vec3 Down();
+		glm::vec3& Down();
 		#pragma endregion
 
 
@@ -111,47 +112,47 @@ namespace Tara {
 			Summary:
 				Get the local space matrix.
 		*/
-		glm::mat4 LocalMatrix();
+		const glm::mat4 LocalMatrix();
 		/*
 			Summary:
 				Get the model matrix.
 		*/
-		glm::mat4 LocalToGlobal();
+		const glm::mat4 LocalToGlobal();
 		/*
 			Summary:
 				Inverse of model matrix.
 		*/
-		glm::mat4 GlobalToLocal();
+		const glm::mat4 GlobalToLocal();
 		/*
 			Summary:
 				Convert local position to global position.
 		*/
-		glm::vec3 LocalToGlobalPoint(glm::vec3 v);
+		glm::vec3 LocalToGlobalPoint(const glm::vec3& v);
 		/*
 			Summary:
 				Convert local vector to global vector.
 		*/
-		glm::vec3 LocalToGlobalVector(glm::vec3 v);
+		glm::vec3 LocalToGlobalVector(const glm::vec3& v);
 		/*
 			Summary:
 				Convert local direction to global direction.
 		*/
-		glm::vec3 LocalToGlobalDirection(glm::vec3 v);
+		glm::vec3 LocalToGlobalDirection(const glm::vec3& v);
 		/*
 			Summary:
 				Convert global position to local position.
 		*/
-		glm::vec3 GlobalToLocalPoint(glm::vec3 v);
+		glm::vec3 GlobalToLocalPoint(const glm::vec3& v);
 		/*
 			Summary:
 				Convert global vector to local vector.
 		*/
-		glm::vec3 GlobalToLocalVector(glm::vec3 v);
+		glm::vec3 GlobalToLocalVector(const glm::vec3& v);
 		/*
 			Summary:
 				Convert global direction to local direction.
 		*/
-		glm::vec3 GlobalToLocalDirection(glm::vec3 v);
+		glm::vec3 GlobalToLocalDirection(const glm::vec3& v);
 		/*
 			Summary:
 				Get global position.

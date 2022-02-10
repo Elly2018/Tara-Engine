@@ -8,45 +8,59 @@
 
 namespace Tara {
 	/*
-
-		Structs, classes declaration
-
-	*/
-	class DllExport Material;
-
-	/*
 		Summary:
 			The container for shader, store uniform data.
 			When 'use()' is call, it will send all the uniform buffer.
 	*/
-	class Material : public AssetBase
+	class DllExport Material final : public AssetBase
 	{
 	public:
-		Material(Shader* _shader);
+		Material(Shader& _shader);
 		~Material();
 
+		Material& Clone();
+		/*
+			Summary:
+				Use the shader program.
+				And sending all the uniform buffer.
+		*/
 		void Use();
+		/*
+			Summary:
+				Unuse the shader program.
+		*/
 		void Unuse();
-		void SetShader(Shader* _shader);
-		Shader* GetShader();
+		/*
+			Summary:
+				Get material binding shader.
+		*/
+		Shader& GetShader();
 
-		void SetTexture(const char* name, Texture* v);
-		void SetTextureIndex(const char* name, int32_t v);
-		void SetNumber(const char* name, float_t v);
-		void SetVec2(const char* name, glm::vec2 v);
-		void SetVec3(const char* name, glm::vec3 v);
-		void SetVec4(const char* name, glm::vec4 v);
-		void SetMat3(const char* name, glm::mat3 v);
-		void SetMat4(const char* name, glm::mat4 v);
+#ifndef TARA_NO_IMGUI
+		/*
+			Summary:
+				Draw all the material properties on GUI.
+		*/
+		void GUI();
+#endif // !TARA_NO_IMGUI
 
-		void UniformTexture(const char* location, Texture* v);
-		void UniformTexture(const char* location, uint32_t v);
-		void UniformNumber(const char* location, float_t v);
-		void UniformVec2(const char* location, glm::vec2 v);
-		void UniformVec3(const char* location, glm::vec3 v);
-		void UniformVec4(const char* location, glm::vec4 v);
-		void UniformMat3(const char* location, glm::mat3 v);
-		void UniformMat4(const char* location, glm::mat4 v);
+		void SetTexture(const char* name, Texture& v);
+		void SetTextureIndex(const char* name, const int32_t v);
+		void SetNumber(const char* name, const float_t v);
+		void SetVec2(const char* name, const glm::vec2 v);
+		void SetVec3(const char* name, const glm::vec3 v);
+		void SetVec4(const char* name, const glm::vec4 v);
+		void SetMat3(const char* name, const glm::mat3 v);
+		void SetMat4(const char* name, const glm::mat4 v);
+
+		void UniformTexture(const char* location, Texture& v);
+		void UniformTexture(const char* location, const uint32_t v);
+		void UniformNumber(const char* location, const float_t v);
+		void UniformVec2(const char* location, const glm::vec2 v);
+		void UniformVec3(const char* location, const glm::vec3 v);
+		void UniformVec4(const char* location, const glm::vec4 v);
+		void UniformMat3(const char* location, const glm::mat3 v);
+		void UniformMat4(const char* location, const glm::mat4 v);
 
 		void PrintUniformLocations();
 		void CleanUniform();
@@ -54,7 +68,7 @@ namespace Tara {
 			Summary:
 				Get asset pool
 		*/
-		static AssetPool<Material> GetAssetPool();
+		static AssetPool<Material>* GetAssetPool();
 
 	private:
 		std::map<const char*, int32_t> m_TextureIndex = std::map<const char*, int32_t>();
@@ -66,6 +80,6 @@ namespace Tara {
 		std::map<const char*, glm::mat3> m_mat3Bind = std::map<const char*, glm::mat3>();
 		std::map<const char*, glm::mat4> m_mat4Bind = std::map<const char*, glm::mat4>();
 		Shader* m_shader;
-		static AssetPool<Material> m_materialPool;
+		static AssetPool<Material>* m_materialPool;
 	};
 }

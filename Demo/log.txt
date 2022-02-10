@@ -29,7 +29,7 @@
 [System] Shader created!
 [System] 	Shader pool add!
 [System] 
-[System] Compile Shader... Default Postprocess VERTEX
+[System] Compile Shader... Default Asset VERTEX
 [System] #########################################################
 [System] #			VERTEX start			#
 [System] #########################################################
@@ -51,7 +51,7 @@ void main()
 [System] #			VERTEX end			#
 [System] #########################################################
 [System] 
-[System] Compile Shader... Default Postprocess FRAGMENT
+[System] Compile Shader... Default Asset FRAGMENT
 [System] #########################################################
 [System] #			FRAGMENT start			#
 [System] #########################################################
@@ -86,6 +86,8 @@ void main()
 [System] 	mesh_import_temp Textures register size: 4
 [System] 	mesh_import_temp Indices register size: 6
 [System] Mesh update start: mesh_import_temp
+[System] min -1.000000, -1.000000, -0.000000
+[System] max 1.000000, 1.000000, 0.000000
 [System] Mesh update end: mesh_import_temp
 [System] Tara initialization start
 [System] Debug level: 1
@@ -94,7 +96,7 @@ void main()
 [System] Shader created!
 [System] 	Shader pool add!
 [System] 
-[System] Compile Shader... Color Shader VERTEX
+[System] Compile Shader... Default Asset VERTEX
 [System] #########################################################
 [System] #			VERTEX start			#
 [System] #########################################################
@@ -119,7 +121,7 @@ void main()
 [System] #			VERTEX end			#
 [System] #########################################################
 [System] 
-[System] Compile Shader... Color Shader FRAGMENT
+[System] Compile Shader... Default Asset FRAGMENT
 [System] #########################################################
 [System] #			FRAGMENT start			#
 [System] #########################################################
@@ -142,7 +144,7 @@ void main()
 [System] Shader created!
 [System] 	Shader pool add!
 [System] 
-[System] Compile Shader... Gradient Shader VERTEX
+[System] Compile Shader... Default Asset VERTEX
 [System] #########################################################
 [System] #			VERTEX start			#
 [System] #########################################################
@@ -167,7 +169,7 @@ void main()
 [System] #			VERTEX end			#
 [System] #########################################################
 [System] 
-[System] Compile Shader... Gradient Shader FRAGMENT
+[System] Compile Shader... Default Asset FRAGMENT
 [System] #########################################################
 [System] #			FRAGMENT start			#
 [System] #########################################################
@@ -190,7 +192,7 @@ void main()
 [System] Shader created!
 [System] 	Shader pool add!
 [System] 
-[System] Compile Shader... Texture Shader VERTEX
+[System] Compile Shader... Default Asset VERTEX
 [System] #########################################################
 [System] #			VERTEX start			#
 [System] #########################################################
@@ -215,7 +217,7 @@ void main()
 [System] #			VERTEX end			#
 [System] #########################################################
 [System] 
-[System] Compile Shader... Texture Shader FRAGMENT
+[System] Compile Shader... Default Asset FRAGMENT
 [System] #########################################################
 [System] #			FRAGMENT start			#
 [System] #########################################################
@@ -235,30 +237,224 @@ void main()
 [System] #########################################################
 [System] #			FRAGMENT end			#
 [System] #########################################################
+[System] Buildin resources shader create: Lambert
+[System] Shader created!
+[System] 	Shader pool add!
+[System] 
+[System] Compile Shader... Default Asset VERTEX
+[System] #########################################################
+[System] #			VERTEX start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+layout(location = 0) in vec3 aPos;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in vec2 aTex;
+out vec2 Tex;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(aPos, 1.0);
+	Tex = aTex;
+}
+
+[System] 
+[System] #########################################################
+[System] #			VERTEX end			#
+[System] #########################################################
+[System] 
+[System] Compile Shader... Default Asset FRAGMENT
+[System] #########################################################
+[System] #			FRAGMENT start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+in vec2 Tex;
+out vec4 FragColor;
+
+uniform vec3 color;
+void main()
+{
+	FragColor = vec4(1.0, 0.0, 1.0, 1.0);
+}
+
+[System] 
+[System] #########################################################
+[System] #			FRAGMENT end			#
+[System] #########################################################
+[System] Buildin resources shader create: Blinn
+[System] Shader created!
+[System] 	Shader pool add!
+[System] 
+[System] Compile Shader... Default Asset VERTEX
+[System] #########################################################
+[System] #			VERTEX start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+layout(location = 0) in vec3 aPos;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in vec2 aTex;
+out vec2 Tex;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(aPos, 1.0);
+	Tex = aTex;
+}
+
+[System] 
+[System] #########################################################
+[System] #			VERTEX end			#
+[System] #########################################################
+[System] 
+[System] Compile Shader... Default Asset FRAGMENT
+[System] #########################################################
+[System] #			FRAGMENT start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+in vec2 Tex;
+out vec4 FragColor;
+
+uniform vec3 color;
+void main()
+{
+	FragColor = vec4(1.0, 0.0, 1.0, 1.0);
+}
+
+[System] 
+[System] #########################################################
+[System] #			FRAGMENT end			#
+[System] #########################################################
+[System] Buildin resources shader create: GGX
+[System] Shader created!
+[System] 	Shader pool add!
+[System] 
+[System] Compile Shader... Default Asset VERTEX
+[System] #########################################################
+[System] #			VERTEX start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+layout(location = 0) in vec3 aPos;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in vec2 aTex;
+out vec2 Tex;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(aPos, 1.0);
+	Tex = aTex;
+}
+
+[System] 
+[System] #########################################################
+[System] #			VERTEX end			#
+[System] #########################################################
+[System] 
+[System] Compile Shader... Default Asset FRAGMENT
+[System] #########################################################
+[System] #			FRAGMENT start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+in vec2 Tex;
+out vec4 FragColor;
+
+uniform vec3 color;
+void main()
+{
+	FragColor = vec4(1.0, 0.0, 1.0, 1.0);
+}
+
+[System] 
+[System] #########################################################
+[System] #			FRAGMENT end			#
+[System] #########################################################
+[System] Buildin resources shader create: Toon
+[System] Shader created!
+[System] 	Shader pool add!
+[System] 
+[System] Compile Shader... Default Asset VERTEX
+[System] #########################################################
+[System] #			VERTEX start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+layout(location = 0) in vec3 aPos;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in vec2 aTex;
+out vec2 Tex;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+	gl_Position = projection * view * model * vec4(aPos, 1.0);
+	Tex = aTex;
+}
+
+[System] 
+[System] #########################################################
+[System] #			VERTEX end			#
+[System] #########################################################
+[System] 
+[System] Compile Shader... Default Asset FRAGMENT
+[System] #########################################################
+[System] #			FRAGMENT start			#
+[System] #########################################################
+[System] 
+[System] #version 420
+in vec2 Tex;
+out vec4 FragColor;
+
+uniform vec3 color;
+void main()
+{
+	FragColor = vec4(1.0, 0.0, 1.0, 1.0);
+}
+
+[System] 
+[System] #########################################################
+[System] #			FRAGMENT end			#
+[System] #########################################################
 [System] Buildin resources shader create: Postprocess
 [System] Buildin resources texture create: White
 [System] Texture created!
-[System] 	Generate texture successfully: "White texture"  "White Texture"
-[System] Apply ! White Texture
+[System] 	Generate texture successfully: "White texture"  "Default Asset"
+[System] Apply texture ! Default Asset
 [System] Buildin resources texture create: Grid
 [System] Texture created!
-[System] 	Import texture successfully: ".\Resources\Grid.png"  "Grid Texture"
-[System] Apply ! Grid Texture
+[System] 	Import texture successfully: ".\Resources\Grid.png"  "Default Texture"
+[System] Apply texture ! Default Texture
 [System] Buildin resources texture create: Default
 [System] Texture created!
 [System] 	Import texture successfully: ".\Resources\Default.png"  "Default Texture"
-[System] Apply ! Default Texture
+[System] Apply texture ! Default Texture
 [System] Buildin resources mesh create: Cube
 [System] Trying import mesh from memory
 [System] Trying import mesh from: .\temp\mesh_import_temp
 [System] Mesh created!
 [System] 	Mesh pool add!
 [System] 	Set mesh name mesh_import_temp
-[System] 	mesh_import_temp Vertex register size: 20
-[System] 	mesh_import_temp Normal register size: 20
-[System] 	mesh_import_temp Textures register size: 20
-[System] 	mesh_import_temp Indices register size: 30
+[System] 	mesh_import_temp Vertex register size: 24
+[System] 	mesh_import_temp Normal register size: 24
+[System] 	mesh_import_temp Textures register size: 24
+[System] 	mesh_import_temp Indices register size: 36
 [System] Mesh update start: mesh_import_temp
+[System] min -1.000000, -1.000000, -1.000000
+[System] max 1.000000, 1.000000, 1.000000
 [System] Mesh update end: mesh_import_temp
 [System] Buildin resources mesh create: Sphere
 [System] Trying import mesh from memory
@@ -271,6 +467,8 @@ void main()
 [System] 	mesh_import_temp Textures register size: 1980
 [System] 	mesh_import_temp Indices register size: 2874
 [System] Mesh update start: mesh_import_temp
+[System] min -1.000000, -1.000000, -1.000000
+[System] max 1.000000, 1.000000, 1.000000
 [System] Mesh update end: mesh_import_temp
 [System] Buildin resources mesh create: Plane
 [System] Trying import mesh from memory
@@ -283,6 +481,8 @@ void main()
 [System] 	mesh_import_temp Textures register size: 4
 [System] 	mesh_import_temp Indices register size: 6
 [System] Mesh update start: mesh_import_temp
+[System] min -1.000000, 0.000000, -1.000000
+[System] max 1.000000, 0.000000, 1.000000
 [System] Mesh update end: mesh_import_temp
 [System] Buildin resources mesh create: Cone
 [System] Trying import mesh from memory
@@ -290,11 +490,13 @@ void main()
 [System] Mesh created!
 [System] 	Mesh pool add!
 [System] 	Set mesh name mesh_import_temp
-[System] 	mesh_import_temp Vertex register size: 93
-[System] 	mesh_import_temp Normal register size: 93
-[System] 	mesh_import_temp Textures register size: 93
-[System] 	mesh_import_temp Indices register size: 93
+[System] 	mesh_import_temp Vertex register size: 125
+[System] 	mesh_import_temp Normal register size: 125
+[System] 	mesh_import_temp Textures register size: 125
+[System] 	mesh_import_temp Indices register size: 183
 [System] Mesh update start: mesh_import_temp
+[System] min -1.000000, 0.012510, -1.000000
+[System] max 1.000000, 2.012510, 1.000000
 [System] Mesh update end: mesh_import_temp
 [System] Buildin resources mesh create: Triangle
 [System] Trying import mesh from memory
@@ -307,18 +509,83 @@ void main()
 [System] 	mesh_import_temp Textures register size: 3
 [System] 	mesh_import_temp Indices register size: 3
 [System] Mesh update start: mesh_import_temp
+[System] min -1.000000, -0.000000, -0.000000
+[System] max 1.000000, 1.000000, 0.000000
 [System] Mesh update end: mesh_import_temp
 [System] Buildin resources mesh create: Quad
 [System] Tara initialization end
 [System] Create scene
-[System] Trying import mesh from memory
-[System] Trying import mesh from: .\temp\mesh_import_temp
-[System] Mesh created!
-[System] 	Mesh pool add!
-[System] 	Set mesh name mesh_import_temp
-[System] 	mesh_import_temp Vertex register size: 20
-[System] 	mesh_import_temp Normal register size: 20
-[System] 	mesh_import_temp Textures register size: 20
-[System] 	mesh_import_temp Indices register size: 30
-[System] Mesh update start: mesh_import_temp
-[System] Mesh update end: mesh_import_temp
+[System] 83 31 1 0
+[System] 32 57 1 0
+[System] 83 31 0 0
+[System] 65 30 1 0
+[System] 32 57 0 0
+[System] 340 42 1 1
+[System] 87 17 1 1
+[System] 340 42 0 0
+[System] 65 30 0 0
+[System] 68 32 1 0
+[System] 87 17 0 0
+[System] 68 32 0 0
+[System] 32 57 1 0
+[System] 32 57 0 0
+[System] 87 17 1 0
+[System] 87 17 0 0
+[System] 32 57 1 0
+[System] 32 57 0 0
+[System] 87 17 1 0
+[System] 87 17 0 0
+[System] 83 31 1 0
+[System] 83 31 0 0
+[System] 87 17 1 0
+[System] 87 17 0 0
+[System] 68 32 1 0
+[System] 83 31 1 0
+[System] 68 32 0 0
+[System] 65 30 1 0
+[System] 83 31 0 0
+[System] 65 30 0 0
+[System] 83 31 1 0
+[System] 68 32 1 0
+[System] 83 31 0 0
+[System] 68 32 0 0
+[System] 87 17 1 0
+[System] 65 30 1 0
+[System] 87 17 0 0
+[System] 65 30 0 0
+[System] 83 31 1 0
+[System] 83 31 0 0
+[System] Application exit !
+[System] Texture asset size: 3
+[System] Texture destroy! White Texture
+[System] Texture destroy! Grid Texture
+[System] Texture destroy! Deafult Texture
+[System] Shader asset size: 8
+[System] Shader destroy! Default Postprocess
+[System] 	Shader buffer destroy! Default Postprocess
+[System] Shader destroy! Color Shader
+[System] 	Shader buffer destroy! Color Shader
+[System] Shader destroy! Gradient Shader
+[System] 	Shader buffer destroy! Gradient Shader
+[System] Shader destroy! Texture Shader
+[System] 	Shader buffer destroy! Texture Shader
+[System] Shader destroy! Lambert Shader
+[System] 	Shader buffer destroy! Lambert Shader
+[System] Shader destroy! Blinn Shader
+[System] 	Shader buffer destroy! Blinn Shader
+[System] Shader destroy! GGX Shader
+[System] 	Shader buffer destroy! GGX Shader
+[System] Shader destroy! Toon Shader
+[System] 	Shader buffer destroy! Toon Shader
+[System] Mesh asset size: 6
+[System] Mesh destroy! Quad
+[System] Mesh destroy! Cube
+[System] Mesh destroy! Sphere
+[System] Mesh destroy! Plane
+[System] Mesh destroy! Cone
+[System] Mesh destroy! Triangle
+[System] Framebuffer asset size: 2
+[System] Framebuffer destroy! Default Asset
+[System] Framebuffer destroy! Default Asset
+[System] Delete glfw window
+[System] Delete glfw terminate

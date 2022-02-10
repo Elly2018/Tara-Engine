@@ -18,7 +18,6 @@ namespace Tara {
 	void EInput::KeyInput(int key, int scancode, int action, int mods)
 	{
 		UpdateKey();
-		TARA_DEBUG("%i %i %i %i", key, scancode, action, mods);
 		keyboard[key] = std::pair<int, int>(action, mods);
 	}
 	void EInput::ScrollInput(double xoffset, double yoffset)

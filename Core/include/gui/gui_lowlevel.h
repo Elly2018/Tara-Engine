@@ -136,6 +136,7 @@ namespace Tara {
 		DllExport bool ImGui_Combo(const char* title, int32_t* current, const char* const items, size_t size);
 		DllExport void ImGui_Plot();
 		DllExport void ImGui_Table();
+		DllExport bool ImGui_CollapsingHeader(std::string title, bool* visible = (bool*)0);
 		DllExport bool ImGui_CollapsingHeader(const char* title, bool* visible = (bool*)0);
 		DllExport void ImGui_Indent(int32_t w = 10);
 		DllExport void ImGui_UnIndent(int32_t w = 10);
@@ -223,18 +224,25 @@ namespace Tara {
 		*/
 		DllExport void ImGui_PieMenu();
 		DllExport void ImGui_Markdown(std::string& text);
-		template <typename T> DllExport void ImGui_AssetList(std::vector<T*> target);
-		template <typename T> DllExport void ImGui_AssetGrid(std::vector<T*> target);
 		DllExport void ImGui_MeshField(const char* title, Mesh* target);
+		DllExport void ImGui_MeshGridImageView(const char* title, std::vector<Mesh*> target, int32_t size = 100, int32_t height = 0, int32_t column = 0, ImGui_EventPack<Mesh> events = ImGui_EventPack<Mesh>());
 		DllExport void ImGui_TextureField(const char* title, Texture* target);
 		DllExport void ImGui_TextureImageField(Texture* target, int32_t size = 100, ImGui_EventPack<Texture> events = ImGui_EventPack<Texture>());
 		DllExport void ImGui_TextureVerticalImageField(Texture* target, int32_t size = 100, ImGui_EventPack<Texture> events = ImGui_EventPack<Texture>());
-		DllExport void ImGui_TextureGridImageField(const char* title, std::vector<Texture*> target, int32_t size = 100, int32_t height = 0, int32_t column = 0, ImGui_EventPack<Texture> events = ImGui_EventPack<Texture>());
+		DllExport void ImGui_TextureGridImageView(const char* title, std::vector<Texture*> target, int32_t size = 100, int32_t height = 0, int32_t column = 0, ImGui_EventPack<Texture> events = ImGui_EventPack<Texture>());
 		DllExport void ImGui_MaterialField(const char* title, Material* target);
 		DllExport void ImGui_MaterialImageField(Material* target, CommomMesh preview = CommomMesh::Cube);
 		DllExport void ImGui_MaterialVerticalImageField(Material* target, CommomMesh preview = CommomMesh::Cube);
-		DllExport void ImGui_MaterialGridImageField(Material* target, CommomMesh preview = CommomMesh::Cube);
+		DllExport void ImGui_MaterialGridImageView(const char* title, std::vector<Material*> target, int32_t size = 100, int32_t height = 0, int32_t column = 0, ImGui_EventPack<Material> events = ImGui_EventPack<Material>());
+		DllExport void ImGui_MaterialUniformPropertiesView(Material* target);
 		DllExport void ImGui_ShaderField(Shader* target);
+		DllExport void ImGui_ShaderGridImageView(const char* title, std::vector<Shader*> target, int32_t size = 100, int32_t height = 0, int32_t column = 0, ImGui_EventPack<Shader> events = ImGui_EventPack<Shader>());
+		/*
+			Summary:
+				Render eobject hierachy.
+			Return:
+				Select eobject.
+		*/
 		DllExport EObject* ImGui_EObjectHierarchy(EObject* target, EObject* focus = nullptr);
 		DllExport void ImGui_EObjectField(const char* title, EObject* target);
 		DllExport void ImGui_EObjectImageField(EObject* target);

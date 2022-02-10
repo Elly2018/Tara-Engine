@@ -117,6 +117,7 @@ namespace Tara {
 			ImGui_SceneView(const char* _title, const char* child_id);
 			~ImGui_SceneView();
 			ImGui_WindiwFlags& FrameFlags();
+			void RenderCamera(CCamera* target);
 			void Content() override;
 			virtual void MenuBar();
 			virtual void PostRender();

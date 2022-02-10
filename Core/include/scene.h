@@ -33,6 +33,7 @@ namespace Tara {
 	{
 		friend class EObject;
 		friend class EWindow;
+		friend class Renderer;
 	public:
 		Scene();
 		~Scene();
@@ -42,7 +43,7 @@ namespace Tara {
 			Summary:
 				Get asset pool
 		*/
-		static AssetPool<Shader> GetAssetPool();
+		static AssetPool<Scene>* GetAssetPool();
 
 		/*
 			Summary:
@@ -83,12 +84,17 @@ namespace Tara {
 			Summary:
 				Scene update, call update method for all EObjects.
 		*/
-		virtual void Update();
+		void Update();
 		/*
 			Summary:
 				Scene update, call render method for all EObjects.
 		*/
-		virtual void Render();
+		void Render();
+		/*
+			Summary:
+				Scene update, call render method for all EObjects.
+		*/
+		void Gizmo();
 
 	private:
 		/*
@@ -101,7 +107,7 @@ namespace Tara {
 		Tara::CCamera* m_MainCamera = nullptr;
 		// Scene objects top leaf.
 		std::vector<EObject*> Objects = std::vector<EObject*>();
-		static AssetPool<Scene> m_scenePool;
+		static AssetPool<Scene>* m_scenePool;
 	private:
 		/*
 			Summary:

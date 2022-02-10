@@ -2,6 +2,7 @@
 #include <config.h>
 #include <framebuffer.h>
 #include <components/component.h>
+#include <emath.h>
 
 namespace Tara {
 	/*
@@ -21,6 +22,7 @@ namespace Tara {
 	public:
 		DEFAULT_CTOR_IMPLE(CCamera);
 		~CCamera();
+		void GUI() override;
 		/*
 			Summary:
 				Get camera view matrix.
@@ -31,6 +33,11 @@ namespace Tara {
 				Get camera projection matrix.
 		*/
 		glm::mat4 ProjectionMatrix();
+		/*
+			Summary:
+				Blit camera framebuffer.
+		*/
+		void Blit();
 		/*
 			Summary:
 				Binding camera framebuffer.
@@ -51,6 +58,8 @@ namespace Tara {
 				Unbinding camera framebuffer texture.
 		*/
 		void Unbind();
+		Frustum GetFrustum();
+		FrameBuffer& CameraFramebuffer();
 		uint32_t TextureID();
 
 		// Camera types, default: perspective
@@ -70,6 +79,7 @@ namespace Tara {
 		float_t m_farPlane = 1000;
 
 	private:
+		float_t GetAspectRatio();
 		// Camera framebuffer
 		FrameBuffer* frame = new FrameBuffer();
 	};

@@ -1,5 +1,6 @@
 #pragma once
 #define DllExport __declspec( dllexport )
+#define DllImport __declspec( dllimport )
 
 /*
 	Contain some useful macro.
@@ -11,100 +12,121 @@
 #include <logger.h>
 
 /*
-	Define the current build mode
-	It will depend on build mode to import features
+	Define the current build mode.
+	It will depend on build mode to import features.
 */
 #pragma region Build Mode
+/*
+	Core build:
+		The very basic tara core, it remove all the extensions and extra features.
+		Result will be a very lightweight library.
+*/
 #ifdef TARA_CORE
 	#define TARA_NO_IMGUI
-	#define TARA_NO_BUILDIN
-	#define TARA_NO_EXTENSION2D
-	#define TARA_NO_EXTENSION3D
+	#define TARA_NO_BUILDIN_2D
+	#define TARA_NO_BUILDIN_3D
+	#define TARA_NO_EXTENSION_2D
+	#define TARA_NO_EXTENSION_3D
 	#define TARA_NO_POSTPROCESSING
+	#define TARA_NO_LOGGER
 #endif
-
+/*
+	Engine build:
+		Keep the GUI features !
+		And some heavy computing features.
+*/
 #ifdef TARA_3D_ENGINE
+// Exclude none !
+// Import all the features !!
 #endif
 
 #ifdef TARA_2D_ENGINE
-	#define TARA_NO_EXTENSION3D
+// Will exclude 3D relative features.
+	#define TARA_NO_EXTENSION_3D
+	#define TARA_NO_BUILDIN_3D
 #endif
 
 #ifdef TARA_3D_ENGINE_LIGHTWEIGHT
-	#define TARA_NO_BUILDIN
+// Reduce size by remove buildin asset.
+// User must prepare their own asset in order to use the library.
+	#define TARA_NO_BUILDIN_3D
+	#define TARA_NO_BUILDIN_2D
 #endif
 
 #ifdef TARA_2D_ENGINE_LIGHTWEIGHT
-	#define TARA_NO_BUILDIN
+// Reduce size by remove buildin asset.
+// User must prepare their own asset in order to use the library.
+	#define TARA_NO_BUILDIN_2D
+	#define TARA_NO_BUILDIN_3D
 #endif
-
+/*
+	Game build:
+		If it's a game build, remove the GUI and control features !
+		But still keep the UI components though
+*/
 #ifdef TARA_3D_GAME
 	#define TARA_NO_IMGUI
 #endif
 
 #ifdef TARA_2D_GAME
 	#define TARA_NO_IMGUI
-	#define TARA_NO_EXTENSION3D
+	#define TARA_NO_EXTENSION_3D
 #endif
 
 #ifdef TARA_3D_GAME_LIGHTWEIGHT
+// Reduce size by remove buildin asset.
+// User must prepare their own asset in order to use the library.
 	#define TARA_NO_IMGUI
-	#define TARA_NO_BUILDIN
+	#define TARA_NO_BUILDIN_2D
+	#define TARA_NO_BUILDIN_3D
 #endif
 
 #ifdef TARA_2D_GAME_LIGHTWEIGHT
+// Reduce size by remove buildin asset.
+// User must prepare their own asset in order to use the library.
 	#define TARA_NO_IMGUI
-	#define TARA_NO_BUILDIN
-	#define TARA_NO_EXTENSION3D
+	#define TARA_NO_BUILDIN_2D
+	#define TARA_NO_BUILDIN_3D
+	#define TARA_NO_EXTENSION_3D
 #endif
 #pragma endregion
 
+
+/*
+	Some useful preprocesser const.
+*/
+#pragma region Const
+// Mesh memory loading temp
 #define MESH_IMPORT_TEMP ".\\temp\\mesh_import_temp"
-/*
-	Summary:
-		printf color normal
-*/
+// Printf color normal
 #define KNRM  "\x1B[0m"
-/*
-	Summary:
-		printf color red
-*/
+// Printf color red
 #define KRED  "\x1B[31m"
-/*
-	Summary:	
-		printf color green
-*/
+// Printf color green
 #define KGRN  "\x1B[32m"
-/*
-	Summary:
-		printf color yellow
-*/
+// Printf color yellow
 #define KYEL  "\x1B[33m"
-/*
-	Summary:
-		printf color blue
-*/
+// Printf color blue
 #define KBLU  "\x1B[34m"
-/*
-	Summary:
-		printf color magenta
-*/
+// Printf color magenta
 #define KMAG  "\x1B[35m"
-/*
-	Summary:
-		printf color cyan
-*/
+// Printf color cyan
 #define KCYN  "\x1B[36m"
-/*
-	Summary:
-		printf color white
-*/
+// Printf color white
 #define KWHT  "\x1B[37m"
-
+// Tara engine normal log color
 #define LOGCOLOR_NORMAL glm::vec3(1, 1, 1)
+// Tara engine warning log color
 #define LOGCOLOR_WARNING glm::vec3(1, 1, 0)
+// Tara engine error log color
 #define LOGCOLOR_ERROR glm::vec3(1, 0, 0)
+#pragma endregion
 
+
+/*
+	Some useful preprocesser macro function.
+*/
+#pragma region Macro
 /*
 	Summary:
 		Easy way to combine text together
@@ -130,9 +152,16 @@
 		Default ecomponent subclass constrctor with empty function bracket
 */
 #define DEFAULT_CTOR_INHERIT_IMPLE(x, y) x(EObject* host) : y(host) {};
+#pragma endregion
 
+
+/*
+	Debug output message macro.
+	It change depends on current buildmode.
+*/
+#pragma region Debug Macro
 // Debug macro
-#ifdef _DEBUG
+#ifndef TARA_NO_LOGGER
 // The debug function without level control
 /*
 	Summary:
@@ -178,14 +207,14 @@
 			Structure: TARA_DEBUG_LEVEL([format], [level number], [format arguments])
 			Example: TARA_DEBUG_LEVEL("Debug message: %s", 2, "arugment text");
 	*/
-	#define TARA_DEBUG_LEVEL(message, level, ...) ((level >= 0) ? TARA_DEBUG(message, __VA_ARGS__) : 0)
+	#define TARA_DEBUG_LEVEL(message, level, ...) ((level >= DEBUG_LEVEL) ? TARA_DEBUG(message, __VA_ARGS__) : 0)
 	/*
 		Summary:
 			Yellow color output
 			Structure: TARA_DEBUG_LEVEL([format], [level number], [format arguments])
 			Example: TARA_DEBUG_LEVEL("Debug message: %s", 2, "arugment text");
 	*/
-	#define TARA_WARNING_LEVEL(message, level, ...) ((level >= 0) ? TARA_WARNING(message, __VA_ARGS__) : 0)
+	#define TARA_WARNING_LEVEL(message, level, ...) ((level >= DEBUG_LEVEL) ? TARA_WARNING(message, __VA_ARGS__) : 0)
 	/*
 		Summary:
 			Red color output
@@ -204,4 +233,4 @@
 #define TARA_ERROR(x, ...)
 #define TARA_RUNTIME_ERROR(x)
 #endif // _DEBUG
-
+#pragma endregion

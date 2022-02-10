@@ -151,6 +151,7 @@ namespace Tara {
 	#endif // TARA_WINDOW
 	#pragma endregion
 
+	#pragma region Global Functions
 	void Tara_Initialization()
 	{
 		TARA_DEBUG_LEVEL("Tara initialization start", 2);
@@ -162,11 +163,10 @@ namespace Tara {
 		CreateDefaultShaders();
 		CreateDefaultTextures();
 		CreateDefaultMeshes();
-		renderer::pureColor = new Material(Shader::GetCommon(CommonShader::Color));
-		renderer::pureColor->SetVec3("color", glm::vec3(1));
+		Renderer::pureColor = new Material(*Shader::GetCommon(CommonShader::Color));
+		Renderer::pureColor->SetVec3("color", glm::vec3(1, 0, 0));
 		TARA_DEBUG_LEVEL("Tara initialization end", 2);
 	}
-
 	EWindow* CurrentWindow()
 	{
 		return current;
@@ -174,6 +174,8 @@ namespace Tara {
 	bool IsCurrentWindowIconify() {
 		return glfwGetWindowAttrib(window, GLFW_ICONIFIED);
 	}
+	#pragma endregion
+
 	#pragma region EWindow Config
 	EWindowConfig::EWindowConfig()
 	{
@@ -268,14 +270,15 @@ namespace Tara {
 	}
 	EWindow::~EWindow()
 	{
+		CleanGarbage();
+		TARA_DEBUG_LEVEL("Texture asset size: %i", 1, Texture::GetAssetPool()->Size());
 		Texture::GetAssetPool()->DeleteAll();
-		Texture::GetAssetPool()->CleanNull();
-		Logger::Flush();
+		TARA_DEBUG_LEVEL("Shader asset size: %i", 1, Shader::GetAssetPool()->Size());
 		Shader::GetAssetPool()->DeleteAll();
-		Shader::GetAssetPool()->CleanNull();
-		Logger::Flush();
+		TARA_DEBUG_LEVEL("Mesh asset size: %i", 1, Mesh::GetAssetPool()->Size());
 		Mesh::GetAssetPool()->DeleteAll();
-		Mesh::GetAssetPool()->CleanNull();
+		TARA_DEBUG_LEVEL("Framebuffer asset size: %i", 1, FrameBuffer::GetAssetPool()->Size());
+		FrameBuffer::GetAssetPool()->DeleteAll();
 		Logger::Flush();
 #ifndef TARA_NO_IMGUI
 		UI::ImGui_Destroy();
@@ -296,7 +299,7 @@ namespace Tara {
 		UI::ImGui_Initialization(GLSLVersionMap.at(std::pair<int, int>(m_major, m_major)), (void*)window);
 #endif
 		RegisterEvents();
-		m_postprocessShader = new Material(Shader::GetCommon(CommonShader::DefaultPostprocess));
+		m_postprocessShader = new Material(*Shader::GetCommon(CommonShader::DefaultPostprocess));
 		m_screenQuad = Mesh::GetCommon(CommomMesh::Quad);
 	}
 	void EWindow::RegisterEvents()
@@ -325,13 +328,31 @@ namespace Tara {
 	{
 		while (!glfwWindowShouldClose(window))
 		{
-			float_t m_cpu = renderer::m_RenderState.CPU_Usage;
-			renderer::m_RenderState = RenderState();
-			renderer::m_RenderState.CPU_Usage = m_cpu;
+			CCamera& maincamera = Renderer::MainCamera();
+
+			float_t m_cpu = Renderer::m_RenderState.CPU_Usage;
+			Renderer::m_RenderState = RenderState();
+			if (renderScenes) Renderer::m_RenderState.CPU_Usage = m_cpu;
+			else Renderer::m_RenderState.CPU_Usage = 0;
+
+			bool ogState = Renderer::m_renderRecord;
 			// Update glfw events, receive callback functions
 			glfwPollEvents();
 			// Render 2D/3D scene
 			Render();
+			{
+				Renderer::m_renderRecord = false;
+				maincamera.Use();
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+				glEnable(GL_DEPTH_TEST);
+			}
+			Gizmo();
+			{
+				Renderer::m_renderRecord = ogState;
+				maincamera.Unuse();
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+				glDisable(GL_DEPTH_TEST);
+			}
 			// Post processing
 			PostRender();
 			// Gui new frame
@@ -352,54 +373,43 @@ namespace Tara {
 	void EWindow::Render() {
 		if (m_scenes.size() == 0 || !renderScenes) return;
 
-		std::vector<CCamera*> cams = std::vector<CCamera*>();
-		for (Scene* i : m_scenes) {
-			std::vector<CCamera*> camss = i->FindComponentsByType<CCamera>();
-			cams.insert(cams.end(), camss.begin(), camss.end());
-		}
+		Renderer::MainCamera().Render();
+		Renderer::wireframeMode = wireframe;
+		Renderer::shadedMode = shaded;
+		Renderer::m_renderRecord = renderState;
 
-		if (cams.size() == 0) {
-			if (m_main_scene >= m_scenes.size()) m_main_scene = 0;
-			EObject* default_camera_object = ObjectFactory::OFViewer::CreateFreeCamera();
-			m_scenes.at(m_main_scene)->AddObject(default_camera_object);
-			CCamera* default_camera = default_camera_object->GetRelateComponent<CCamera>();
-			cams.push_back(default_camera);
-			m_camera = default_camera;
-		}
-		else {
-			m_camera = cams.at(0);
-		}
-		m_camera = cams.at(0);
+		std::vector<CCamera*> useCam = std::vector<CCamera*>(m_renderCamera);
+		useCam.push_back(&Renderer::MainCamera());
 
-		for (CCamera* i : cams) {
-			if (!i->GetEnable()) continue;
-
-			i->Use();
+		for (auto maincamera : useCam) {
+			if (!maincamera) continue;
+			maincamera->Use();
 			glm::ivec2 wsize = GetEWindowSize();
 			Viewport(0, 0, wsize.x, wsize.y);
 			CleanBuffer();
 
 			glEnable(GL_DEPTH_TEST);
+			glEnable(GL_CULL_FACE);
+			glCullFace(GL_FRONT_AND_BACK);
+			glFrontFace(GL_CCW);
 			glLineWidth(5);
 			// Apply camera view, projection matrix
-			renderer::view = i->ViewMatrix();
-			renderer::projection = i->ProjectionMatrix();
-			if (shaded) {
-				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-				renderer::wireframeMode = false;
-				for (Scene* s : m_scenes) {
-					s->Render();
-				}
+			Renderer::view = maincamera->ViewMatrix();
+			Renderer::projection = maincamera->ProjectionMatrix();
+			Renderer::CameraFrustum() = maincamera->GetFrustum();
+			for (Scene* s : m_scenes) {
+				s->Render();
 			}
-			if (wireframe) {
-				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-				renderer::wireframeMode = true;
-				for (Scene* s : m_scenes) {
-					s->Render();
-				}
-			}
+			glDisable(GL_CULL_FACE);
 			glDisable(GL_DEPTH_TEST);
-			i->Unuse();
+			maincamera->Blit();
+			maincamera->Unuse();
+		}
+	}
+	void EWindow::Gizmo() {
+		if (m_scenes.size() == 0 || !renderScenes) return;
+		for (Scene* s : m_scenes) {
+			s->Gizmo();
 		}
 	}
 	void EWindow::GUI()
@@ -420,28 +430,33 @@ namespace Tara {
 	}
 	void EWindow::Update() {
 		if (m_scenes.size() == 0 || !updateScenes) return;
+		Renderer::MainCamera().Update();
 		for (Scene* i : m_scenes) {
 			i->Update();
 		}
 		m_frameCount++;
-		renderer::m_RenderState.FPS = 1.0 / EInput::Delta();
+
+		if (renderState) {
+			Renderer::m_RenderState.FPS = 1.0 / EInput::Delta();
 #ifdef TARA_WINDOW || TARA_LINUX
-		double m_cpu = GetCurrentValue();
-		renderer::m_RenderState.CPU_Usage = m_cpu == 0.0 ? renderer::m_RenderState.CPU_Usage : m_cpu;
+			double m_cpu = GetCurrentValue();
+			Renderer::m_RenderState.CPU_Usage = m_cpu == 0.0 ? Renderer::m_RenderState.CPU_Usage : m_cpu;
 #endif // TARA_WINDOW
+		}
 
 	}
 	void EWindow::PostRender()
 	{
-		if (m_scenes.size() == 0 || !updateScenes || !m_camera || !m_screenQuad || !m_postprocessShader) return;
+		CCamera& maincamera = Renderer::MainCamera();
+		if (m_scenes.size() == 0 || !updateScenes  || !m_screenQuad || !m_postprocessShader) return;
 		CleanBuffer();
 		m_postprocessShader->Use();
 		m_postprocessShader->UniformVec2("screenSize", GetEWindowSize());
 		glActiveTexture(GL_TEXTURE0);
 		//Texture::GetCommon(CommomTexture::Grid)->Bind();
-		m_camera->Bind();
+		maincamera.Bind();
 		m_screenQuad->Draw();
-		m_camera->Unbind();
+		maincamera.Unbind();
 	}
 	void EWindow::Show()
 	{
@@ -564,7 +579,22 @@ namespace Tara {
 	}
 	RenderState& EWindow::GetRenderState()
 	{
-		return renderer::m_RenderState;
+		return Renderer::m_RenderState;
+	}
+	void EWindow::CleanGarbage()
+	{
+		Texture::GetAssetPool()->CleanNull();
+		Shader::GetAssetPool()->CleanNull();
+		Mesh::GetAssetPool()->CleanNull();
+		FrameBuffer::GetAssetPool()->CleanNull();
+	}
+	void EWindow::CheckCleanGarbage()
+	{
+		m_garbageCleanCountDown--;
+		if (m_garbageCleanCountDown <= 0) {
+			m_garbageCleanCountDown = m_garbageCleanPassFrameCount;
+			CleanGarbage();
+		}
 	}
 	#pragma endregion
 };
