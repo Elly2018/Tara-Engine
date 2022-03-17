@@ -381,7 +381,7 @@ namespace Tara {
 		}
 		void ImGui_SetTreeNodeOpen(bool open, ImGui_ConditionFlags cond)
 		{
-			ImGui::SetNextTreeNodeOpen(open, cond.GetFlags());
+			ImGui::SetNextItemOpen(open, cond.GetFlags());
 		}
 
 		glm::vec2 ImGui_GetWindowSize()

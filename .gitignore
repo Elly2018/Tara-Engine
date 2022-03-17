@@ -22,7 +22,22 @@ mono_crash.*
 
 # Custom ignore
 download
-lib
+CMakeFiles
+engine/lib
+lib/assimp
+lib/openal-soft
+lib/backward-cpp
+lib/base64
+lib/FastNoiseLite-1.0.3
+lib/FFmpeg
+lib/glfw
+lib/glm
+lib/imgui
+lib/json
+lib/libarchive
+lib/pybind11
+lib/stb
+lib/uuid4
 
 # Build results
 [Dd]ebug/
@@ -40,7 +55,6 @@ bld/
 [Oo]ut/
 [Ll]og/
 [Ll]ogs/
-CMakeFiles
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

@@ -1,0 +1,24 @@
+@echo off
+
+cd assimp
+cmake .
+cmake --build . --config Release
+cd ../
+
+cd libarchive
+cmake .
+cmake --build . --config Release
+cd libarchive
+cmake .
+cmake --build . --config Release
+cd ../../
+
+cd pybind11
+cmake .
+cmake --build . --config Release
+cd ../
+
+cd glfw
+cmake .
+cmake --build . --config Release
+cd ../
