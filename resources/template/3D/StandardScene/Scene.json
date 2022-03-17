@@ -1,0 +1,21 @@
+{
+	"description": "",
+	"hierarchy":[
+		{
+			"name": "Floor"
+			"components":[
+				{
+					"class": "TARA::Transformation",
+					"localposition": {0.0, 0.0, 0.0},
+					"localeularangle": {0.0, 0.0, 0.0},
+					"localscale": {1.0, 1.0, 1.0},
+				},
+				{
+					"class": "TARA::MeshRenderer",
+					"Material": "",
+					"Mesh": ""
+				}
+			]
+		}
+	]
+}

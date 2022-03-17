@@ -1,0 +1,12 @@
+{
+	"name": "Platfrom Scene",
+	"assets":{
+		"import":[
+			{
+				"from": "Platfrom",
+				"to": "",
+				"recursion": true
+			}
+		]
+	}
+}

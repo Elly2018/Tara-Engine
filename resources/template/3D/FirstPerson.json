@@ -1,0 +1,12 @@
+{
+	"name": "First Person Scene",
+	"assets":{
+		"import":[
+			{
+				"from": "FirstPerson",
+				"to": "",
+				"recursion": true
+			}
+		]
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"name": "Strategy Scene",
+	"assets":{
+		"import":[
+			{
+				"from": "Strategy",
+				"to": "",
+				"recursion": true
+			}
+		]
+	}
+}

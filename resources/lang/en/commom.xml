@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Commom>
+    <Yes>Yes</Yes>
+    <No>No</No>
+    <Confirm>Confirm</Confirm>
+    <Cancel>Cancel</Cancel>
+    <Continue>Continue</Continue>
+
+    <Cut>Cut</Cut>
+    <Copy>Copy</Copy>
+    <Duplicate>Duplicate</Duplicate>
+    <Paste>Paste</Paste>
+    <Edit>Edit</Edit>
+    <Destroy>Destroy</Destroy>
+    <Delete>Delete</Delete>
+</Commom>

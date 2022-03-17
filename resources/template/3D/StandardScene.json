@@ -1,0 +1,12 @@
+{
+	"name": "Standard 3D Scene",
+	"assets":{
+		"import":[
+			{
+				"from": "StandardScene",
+				"to": "",
+				"recursion": true
+			}
+		]
+	}
+}

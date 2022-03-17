@@ -1,0 +1,30 @@
+{
+	"templates":[
+		{
+			"name": "3D Game Project",
+			"description": "Select 3D project templates.",
+			"link":[
+				"3D/StandardScene.json",
+				"3D/FirstPerson.json",
+				"3D/ThirdPerson.json",
+				"3D/Topdown.json",
+				"3D/Strategy.json",
+				"3D/Platfrom.json"
+			]
+		},
+		{
+			"name": "2D Game Project",
+			"description": "Select 2D project templates.",
+			"link":[
+				"2D/StandardScene.json"
+			]
+		},
+		{
+			"name": "Animation Project",
+			"description": "Select Animation project templates.",
+			"link":[
+				"Animation/StandardScene.json"
+			]
+		}
+	]
+}

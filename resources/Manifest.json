@@ -1,0 +1,60 @@
+{
+	"version": "1.0.0",
+	"shaderConfig":{
+		"loadCommomLibrary": [
+			"base/Utility",
+			"base/Model",
+			"base/Light"
+		],
+		"loadCommomShaders": [
+			{
+				"type": 0,
+				"name": "Error"
+			},
+			{
+				"type": 1,
+				"name": "Color"
+			},
+			{
+				"type": 2,
+				"name": "Normal"
+			},
+			{
+				"type": 3,
+				"name": "Reflection"
+			},
+			{
+				"type": 4,
+				"name": "DirectionalShadow"
+			},
+			{
+				"type": 5,
+				"name": "PointShadow"
+			}
+		]
+	},
+	"fontConfig":{
+		"loadFonts":[
+			{
+				"path": "OpenSans-Medium.ttf",
+				"size": 16.0,
+				"fontOwnedByAtlas": false
+			},
+			{
+				"path": "OpenSans-Bold.ttf",
+				"size": 36.0,
+				"style": "H1"
+			},
+			{
+				"path": "OpenSans-Bold.ttf",
+				"size": 32.0,
+				"style": "H2"
+			},
+			{
+				"path": "OpenSans-Medium.ttf",
+				"size": 26.0,
+				"style": "H3"
+			}
+		]
+	}
+}

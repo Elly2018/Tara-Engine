@@ -1,0 +1,12 @@
+{
+	"name": "Top Down Scene",
+	"assets":{
+		"import":[
+			{
+				"from": "Topdown",
+				"to": "",
+				"recursion": true
+			}
+		]
+	}
+}

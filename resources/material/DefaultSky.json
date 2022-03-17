@@ -1,0 +1,57 @@
+{
+    "description": "The default skybox material",
+    "shaderLink": [
+        {
+            "type": 1,
+            "path": "buildin/shader/Sky.vert"
+        },
+        {
+            "type": 4,
+            "path": "buildin/shader/Sky.frag"
+        }
+    ],
+    "properties": [
+        {
+            "name": "top",
+            "type": 39,
+            "value": {
+                "path": "buildin/image/sky/top.jpg"
+            }
+        },
+        {
+            "name": "bottom",
+            "type": 39,
+            "value": {
+                "path": "buildin/image/sky/bottom.jpg"
+            }
+        },
+        {
+            "name": "front",
+            "type": 39,
+            "value": {
+                "path": "buildin/image/sky/front.jpg"
+            }
+        },
+        {
+            "name": "back",
+            "type": 39,
+            "value": {
+                "path": "buildin/image/sky/back.jpg"
+            }
+        },
+        {
+            "name": "left",
+            "type": 39,
+            "value": {
+                "path": "buildin/image/sky/left.jpg"
+            }
+        },
+        {
+            "name": "right",
+            "type": 39,
+            "value": {
+                "path": "buildin/image/sky/right.jpg"
+            }
+        }
+    ]
+}
