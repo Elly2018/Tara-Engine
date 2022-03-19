@@ -7,6 +7,8 @@
 #include <GLFW/glfw3.h>
 
 namespace Tara {
+	AssetPool<FrameBuffer>* FrameBuffer::m_framebufferPool = nullptr;
+
 	std::map<MSAASamples, int32_t> sampleMap = {
 		{MSAASamples::None, 1},
 		{MSAASamples::_2x, 2},
@@ -31,6 +33,7 @@ namespace Tara {
 	}
 	AssetPool<FrameBuffer>& FrameBuffer::GetAssetPool()
 	{
+		if (!m_framebufferPool) m_framebufferPool = new AssetPool<FrameBuffer>();
 		return *m_framebufferPool;
 	}
 

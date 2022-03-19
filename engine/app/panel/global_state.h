@@ -16,7 +16,7 @@ namespace Tara {
 				Pst processing configuration for scene viewer.
 				Apply it in update stage.
 		*/
-		struct TARA_API PostProcessConfig {
+		struct PostProcessConfig {
 		public:
 			MSAASamples m_sample = MSAASamples::None;
 			// Is config dirty.
@@ -27,7 +27,7 @@ namespace Tara {
 			Summary:
 				The collection of application use panels.
 		*/
-		class TARA_API PanelCollection {
+		class PanelCollection {
 		public:
 			PanelCollection();
 			~PanelCollection();
@@ -53,13 +53,13 @@ namespace Tara {
 			Summary:
 				The collection of application use panels when dev mode is on.
 		*/
-		class TARA_API DevPanelCollection {
+		class DevPanelCollection {
 		public:
 			DevPanelCollection();
 			~DevPanelCollection();
 		};
 
-		class TARA_API PanelGlobalState final : public PanelCollection {
+		class PanelGlobalState final : public PanelCollection {
 		public:
 			static PanelGlobalState& Singleton();
 			std::vector<Scene*> allScene = std::vector<Scene*>();

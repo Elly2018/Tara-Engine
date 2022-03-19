@@ -7,12 +7,12 @@ namespace Tara {
 	class TARA_API Mesh;
 
 	namespace FileSystem {
-		class TARA_API SpecialFile : public FileBase {
+		class TARA_EDITOR_API SpecialFile : public FileBase {
 		public:
 			
 		};
 
-		class TARA_API MaterialFile final : public FileBase {
+		class TARA_EDITOR_API MaterialFile final : public FileBase {
 		public:
 			bool DrawGrid() override;
 			void DrawProp() override;
@@ -21,13 +21,13 @@ namespace Tara {
 			Material* binder;
 		};
 
-		class TARA_API ShaderFile final : public FileBase {
+		class TARA_EDITOR_API ShaderFile final : public FileBase {
 		public:
 			bool DrawGrid() override;
 			void DrawProp() override;
 		};
 
-		class TARA_API MarkdownFile final : public FileBase {
+		class TARA_EDITOR_API MarkdownFile final : public FileBase {
 		public:
 			bool DrawGrid() override;
 			void DrawProp() override;
@@ -35,7 +35,7 @@ namespace Tara {
 			std::string data;
 		};
 
-		class TARA_API TextureFile final : public FileBase {
+		class TARA_EDITOR_API TextureFile final : public FileBase {
 		public:
 			TextureFile(Texture2D* tex, std::filesystem::path path);
 			AssetBase* BindingFile() override { return (AssetBase*)binder; }
@@ -45,7 +45,7 @@ namespace Tara {
 			Texture2D* binder;
 		};
 
-		class TARA_API MeshFile final : public FileBase {
+		class TARA_EDITOR_API MeshFile final : public FileBase {
 		public:
 			AssetBase* BindingFile() override { return (AssetBase*)binder; }
 			bool DrawGrid() override;
@@ -54,25 +54,25 @@ namespace Tara {
 			Mesh* binder;
 		};
 
-		class TARA_API PrefabFile final : public FileBase {
+		class TARA_EDITOR_API PrefabFile final : public FileBase {
 		public:
 			bool DrawGrid() override;
 			void DrawProp() override;
 		};
 
-		class TARA_API SceneFile final : public FileBase {
+		class TARA_EDITOR_API SceneFile final : public FileBase {
 		public:
 			bool DrawGrid() override;
 			void DrawProp() override;
 		};
 
-		class TARA_API WorldFile final : public FileBase{
+		class TARA_EDITOR_API WorldFile final : public FileBase{
 		public:
 			bool DrawGrid() override;
 			void DrawProp() override;
 		};
 
-		class TARA_API PostProcessingFile final : public FileBase{
+		class TARA_EDITOR_API PostProcessingFile final : public FileBase{
 		public:
 			bool DrawGrid() override;
 			void DrawProp() override;

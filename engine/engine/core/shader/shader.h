@@ -438,6 +438,4 @@ namespace Tara {
 
 		std::vector<std::string> registerName = std::vector<std::string>();
 	};
-
-	inline TARA_API ShaderLibrary* ShaderLibrary::m_Singleton = new ShaderLibrary;
 }

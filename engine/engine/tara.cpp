@@ -34,6 +34,7 @@ namespace Tara {
 
 	bool Tara_Initialization()
 	{
+		Utility::Argument& arg = Utility::Argument::Singleton();
 		Logger::LogToFile();
 		std::filesystem::create_directory("temp");
 
@@ -43,7 +44,6 @@ namespace Tara {
 		}
 
 		TARA_DEBUG_LEVEL("Tara initialization start", 2);
-		TARA_DEBUG("Debug level: %i", DEBUG_LEVEL);
 		TARA_DEBUG("Debug filename: %s", DEBUG_FILENAME);
 #ifdef TARA_WINDOW || TARA_LINUX
 		ProfilerInit();
@@ -58,6 +58,8 @@ namespace Tara {
 
 		PackageManager& pm = PackageManager::Singleton();
 		BuildinManager& bm = BuildinManager::Singleton();
+
+		if (!arg.recordAllLog) Logger::LogToConsole();
 		return true;
 	}
 	bool Tara_Shutdown()

@@ -235,7 +235,7 @@ namespace Tara {
 		// For some reason the first line of debug message
 		// Won't output from 'Logger::GetApplicationLog()'
 		// So we print a dummy message first then
-		TARA_DEBUG();
+		TARA_DEBUG("");
 		TARA_DEBUG_LEVEL("GLFW version: %i.%i", 4, m_major, m_minor);
 		TARA_DEBUG_LEVEL("GLSL version: %s", 4, GLSLVersion.at(version).c_str());
 
@@ -310,7 +310,7 @@ namespace Tara {
 
 	void EWindow::Start() {
 		RegisterEvents();
-		for (auto i : WindowStartEvent) {
+		for (auto& i : WindowStartEvent) {
 			i.second();
 		}
 	}
@@ -352,9 +352,10 @@ namespace Tara {
 			// Update glfw events, receive callback functions
 			glfwPollEvents();
 
-			for (auto i : PipelineEvent) {
-				i.second();
+			for (auto& i : PipelineEvent) {
+				if(i.second) i.second();
 			}
+
 			// Frame swap
 			Swap();
 			// Update input state
@@ -422,7 +423,7 @@ namespace Tara {
 		}
 
 		// 2. Render scene out
-		for (auto maincamera : useCam) {
+		for (auto& maincamera : useCam) {
 			if (!maincamera) continue;
 			if (!maincamera->Good()) continue;
 			maincamera->Use();
@@ -500,7 +501,7 @@ namespace Tara {
 		}
 		if (m_scenes.size() == 0 || !updateScenes) return;
 		renderer.MainCamera().Update();
-		for (auto i : m_scenes) {
+		for (auto& i : m_scenes) {
 			i->Update();
 		}
 		m_frameCount++;

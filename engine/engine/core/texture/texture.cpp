@@ -16,6 +16,7 @@
 #include "../utility.h"
 
 namespace Tara {
+	AssetPool<Texture>* Texture::m_texturePool = nullptr;
 	#pragma region Static Members
 	const std::map<TextureFormat, int32_t> stride = {
 		{TextureFormat::R16, 1},
@@ -67,6 +68,7 @@ namespace Tara {
 	}
 	AssetPool<Texture>& Texture::GetAssetPool()
 	{
+		if (!m_texturePool) m_texturePool = new AssetPool<Texture>();
 		return *m_texturePool;
 	}
 	TextureConfig& Texture::Config()

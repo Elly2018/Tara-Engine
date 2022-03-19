@@ -125,6 +125,4 @@ namespace Tara {
 		ShadowFrameBuffer(int32_t width = 1024, int32_t height = 1024);
 		~ShadowFrameBuffer();
 	};
-
-	inline TARA_API AssetPool<FrameBuffer>* FrameBuffer::m_framebufferPool = new AssetPool<FrameBuffer>();
 }

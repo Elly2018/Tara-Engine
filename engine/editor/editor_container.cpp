@@ -122,63 +122,6 @@ namespace Tara {
 		#pragma endregion
 
 		#pragma region Gui Window Subclasses
-		ImGui_DebugWindow::ImGui_DebugWindow() : ImGui_WindowBase("Tara Debug Info")
-		{
-		}
-		ImGui_DebugWindow::~ImGui_DebugWindow()
-		{
-		}
-		void ImGui_DebugWindow::Content()
-		{
-			DebugInfo();
-		}
-		void ImGui_DebugWindow::DebugInfo()
-		{
-			std::string t = "";
-			if (ImGui_BeginTabBar("Debug Info")) {
-				if (ImGui_BeginTabitems("Application", 0)) {
-					t = "Tara version: 1.0";
-					ImGui_Text(t.c_str());
-					ImGui_EndTabitems();
-				}
-				if (ImGui_BeginTabitems("Input", 0)) {
-					t = "time: ";
-					t.append(std::to_string(EInput::Time()));
-					ImGui_Text(t.c_str());
-
-					t = "time delta: ";
-					t.append(std::to_string(EInput::Delta()));
-					ImGui_Text(t.c_str());
-
-					glm::ivec2 m = EInput::GetMousePosition();
-					t = "mouse: ";
-					t.append(std::to_string((int)m.x));
-					t.append(", " + std::to_string((int)m.y));
-					ImGui_Text(t.c_str());
-
-					m = EInput::GetMouseDelta();
-					t = "mouse delta: ";
-					t.append(std::to_string((int)m.x));
-					t.append(", " + std::to_string((int)m.y));
-					ImGui_Text(t.c_str());
-
-					char c = EInput::GetLastChar();
-					t = "last char: ";
-					t += c;
-					ImGui_Text(t.c_str());
-
-					t = "log level: ";
-					t.append(std::to_string(DEBUG_LEVEL));
-					ImGui_Text(t.c_str());
-
-					t = "log filename: ";
-					t.append(DEBUG_FILENAME);
-					ImGui_Text(t.c_str());
-					ImGui_EndTabitems();
-				}
-				ImGui_EndTabBar();
-			}
-		}
 		void ImGui_PopWindow::Render()
 		{
 			if (show) {

@@ -204,6 +204,4 @@ namespace Tara {
 	private:
 		static ObjectFactory* m_Singleton;
 	};
-
-	inline TARA_API ObjectFactory* ObjectFactory::m_Singleton = new ObjectFactory();
 }

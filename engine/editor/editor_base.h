@@ -1,13 +1,13 @@
 #pragma once
 #include <functional>
-#include "../engine/core/config.h"
+#include "editor_config.h"
 
 /*
 	Gui base, states or enum or const that is often use.
 */
 namespace Tara {
 	namespace UI {
-		enum class TARA_API MouseButton {
+		enum class TARA_EDITOR_API MouseButton {
 			Left = 0,
 			Right = 1,
 			Middle = 2,
@@ -17,7 +17,7 @@ namespace Tara {
 			Summary:
 				Use for arrow button functional call
 		*/
-		enum class TARA_API ArrowDirection
+		enum class TARA_EDITOR_API ArrowDirection
 		{
 			None = -1,
 			Left = 0,
@@ -27,7 +27,7 @@ namespace Tara {
 			COUNT
 		};
 
-		enum class TARA_API EditorKey {
+		enum class TARA_EDITOR_API EditorKey {
 			Tab,
 			LeftArrow,
 			RightArrow,
@@ -52,7 +52,7 @@ namespace Tara {
 			Z,
 		};
 
-		enum class TARA_API EditorModifieKey {
+		enum class TARA_EDITOR_API EditorModifieKey {
 			None = 0,
 			Ctrl = 1 << 0,
 			Shift = 1 << 1,
@@ -61,7 +61,7 @@ namespace Tara {
 		};
 
 		template<typename T>
-		class TARA_API ImGui_EventPack {
+		class TARA_EDITOR_API ImGui_EventPack {
 		public:
 			std::function<void(T*, MouseButton)> OnClick = NULL;
 			std::function<void(T*, MouseButton)> DoubleClick = NULL;

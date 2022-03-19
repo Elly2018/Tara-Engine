@@ -3,7 +3,7 @@
 #include "../engine/core/logger.h"
 #include "../engine/tara.h"
 #include "../engine/core/window/ewindow.h"
-#include "../extension/tara_extension.h"
+#include "../engine/extension/tara_extension.h"
 #include "../engine/core/renderer/renderer.h"
 #include "../editor/editor.h"
 #include "panel/global_state.h"

@@ -1,7 +1,6 @@
 #pragma once
-#include "../engine/core/config.h"
+#include "editor_config.h"
 
-#ifndef TARA_NO_IMGUI
 // For imgui style change.
 #include "editor_style.h"
 // For low level imgui function calls.
@@ -9,7 +8,6 @@
 // For customize gui classes.
 #include "editor_container.h"
 #include "component/editor_component.h"
-#endif
 
 /*
 	Summary:
@@ -20,32 +18,39 @@
 
 namespace Tara{
 	namespace UI {
+		TARA_EDITOR_API void Init();
+		TARA_EDITOR_API void ShutdownGUI();
+		TARA_EDITOR_API void NewFrame();
+		TARA_EDITOR_API void Render();
+		TARA_EDITOR_API void Gizmo();
+		TARA_EDITOR_API void GUI();
+		TARA_EDITOR_API void PostGUI();
 		/*
 			Summary:
 				Use this before Tara window is create.
 				To registering the events into framework.
 		*/
-		TARA_API void Tara_GUI_Initialization();
+		TARA_EDITOR_API void Tara_GUI_Initialization();
 		/*
 			Summary:
 				Use this after window shutdown or window before create.
 				Prevent imgui context points to wrong glfw window.
 		*/
-		TARA_API void Tara_GUI_Shutdown();
+		TARA_EDITOR_API void Tara_GUI_Shutdown();
 		/*
 			Summary:
 				Insert new editor window.
 		*/
-		TARA_API void AddGUIWindow(ImGui_WindowBase* window);
+		TARA_EDITOR_API void AddGUIWindow(ImGui_WindowBase* window);
 		/*
 			Summary:
 				Remove editor window.
 		*/
-		TARA_API void RemoveGUIWindow(ImGui_WindowBase* window);
+		TARA_EDITOR_API void RemoveGUIWindow(ImGui_WindowBase* window);
 		/*
 			Summary:
 				Remove all editor window.
 		*/
-		TARA_API void CleanGUIWindow();
+		TARA_EDITOR_API void CleanGUIWindow();
 	}
 }

@@ -13,7 +13,7 @@ namespace Tara {
 	*/
 	class TARA_API Component : public TaraObjectEventBase
 	{
-		friend class SceneObject;
+		friend struct SceneObject;
 	public:
 		/*
 			Summary:

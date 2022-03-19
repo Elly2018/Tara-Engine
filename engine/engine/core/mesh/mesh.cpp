@@ -18,6 +18,8 @@
 #include "../renderer/renderer.h"
 
 namespace Tara {
+	AssetPool<Mesh>* Mesh::m_meshPool = nullptr;
+
 	Mesh* ImportFromScene(const aiScene* scene) {
 		if (scene->HasMeshes()) {
 			aiMesh* bmesh = scene->mMeshes[0];
@@ -120,6 +122,7 @@ namespace Tara {
 	}
 	AssetPool<Mesh>& Mesh::GetAssetPool()
 	{
+		if (!m_meshPool) m_meshPool = new AssetPool<Mesh>();
 		return *m_meshPool;
 	}
 

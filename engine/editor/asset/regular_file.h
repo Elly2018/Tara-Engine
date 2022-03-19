@@ -3,7 +3,7 @@
 
 namespace Tara {
 	namespace FileSystem {
-		class TARA_API RegularFile final : public FileBase {
+		class TARA_EDITOR_API RegularFile final : public FileBase {
 		public:
 			RegularFile() : FileBase() {}
 			RegularFile(std::filesystem::path p) : FileBase(p) {}

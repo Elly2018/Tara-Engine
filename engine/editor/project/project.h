@@ -1,6 +1,6 @@
 #pragma once
 #include <filesystem>
-#include "../../engine/core/config.h"
+#include "../editor_config.h"
 
 namespace Tara {
 	namespace UI {
@@ -9,7 +9,7 @@ namespace Tara {
 				The project file manager.
 				Handle project vaild and directory path.
 		*/
-		class TARA_API TaraProject {
+		class TARA_EDITOR_API TaraProject {
 		public:
 			static TaraProject& Singleton();
 			bool CreateProject(std::string name, std::filesystem::path path);
@@ -53,8 +53,6 @@ namespace Tara {
 			bool IsProjectSetupRequire = true;
 			std::filesystem::path m_ProjectPath;
 		};
-
-		inline TARA_API TaraProject* TaraProject::m_Singleton = new TaraProject();
 	}
 }
 

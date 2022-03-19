@@ -1,7 +1,5 @@
 #pragma once
 // Import Tara engine library
-#include "../core/config.h"
-#include "component.h"
 #include "camera.h"
 
 namespace Tara {

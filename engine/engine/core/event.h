@@ -12,7 +12,7 @@ namespace Tara {
 	class TARA_API Component;
 
 	template<typename T>
-	class TARA_API EventBase {
+	class EventBase {
 	public:
 		int32_t Add(int32_t priority, T t) {
 			int32_t index = GetLastIndex(priority);

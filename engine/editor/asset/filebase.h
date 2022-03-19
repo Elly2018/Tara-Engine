@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 #include <filesystem>
-#include "../../engine/core/config.h"
+#include "../editor_config.h"
 #include "../../engine/core/asset.h"
 
 namespace Tara {
@@ -10,7 +10,7 @@ namespace Tara {
 			Summary:
 				The file type.
 		*/
-		enum class TARA_API FileType {
+		enum class TARA_EDITOR_API FileType {
 			None,
 			Texture,
 			Shader,
@@ -28,7 +28,7 @@ namespace Tara {
 			Summary:
 				File information.
 		*/
-		struct TARA_API FileInfo {
+		struct TARA_EDITOR_API FileInfo {
 
 		};
 
@@ -37,13 +37,13 @@ namespace Tara {
 			Summary:
 				File base class.
 		*/
-		class TARA_API FileBase : public AssetBase {
+		class TARA_EDITOR_API FileBase : public AssetBase {
 		public:
 			// Path will default empty string.
 			FileBase();
 			// Register filebase with path.
 			FileBase(std::filesystem::path p);
-			~FileBase();
+			virtual ~FileBase();
 			/*
 				Summary:
 					Return polymorphism class type.
@@ -81,7 +81,7 @@ namespace Tara {
 		/// <para> Files database. </para>
 		/// <para> Handle project file structure. </para>
 		/// </summary>
-		class TARA_API FileDataBase {
+		class TARA_EDITOR_API FileDataBase {
 		public:
 			static FileDataBase& Singleton();
 
@@ -107,9 +107,6 @@ namespace Tara {
 
 			std::map<std::string, FileBase*> storeBuffer;
 		};
-
-		inline TARA_API FileDataBase* FileDataBase::m_Singleton = new FileDataBase();
-		inline TARA_API AssetPool<FileBase>* FileBase::m_filePool = new AssetPool<FileBase>();
 	}
 }
 

@@ -31,22 +31,22 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
@@ -62,53 +62,51 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\chuel\source\repos\Tara\bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Engine.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Engine</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\chuel\source\repos\Tara\bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Engine.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Engine</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\chuel\source\repos\Tara\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Engine.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Engine</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\chuel\source\repos\Tara\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Engine.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Engine</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <ExceptionHandling>
+      </ExceptionHandling>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;DEBUG_LEVEL=1;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level2</WarningLevel>
+      <PreprocessorDefinitions>TARA_API=DLLEXPORT;CMAKE_INTDIR="Debug";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;DEBUG_LEVEL=1;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"Debug\";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -116,8 +114,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>glfw3.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/src/Release;C:/Users/chuel/source/repos/Tara/lib/glfw/src/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -131,29 +129,29 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_DEBUG;_USRDLL;DEBUG_LEVEL=1;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level2</WarningLevel>
+      <PreprocessorDefinitions>TARA_API=DLLEXPORT;CMAKE_INTDIR="Release";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_DEBUG;_USRDLL;DEBUG_LEVEL=1;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"Release\";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -161,8 +159,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>glfw3.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/src/Release;C:/Users/chuel/source/repos/Tara/lib/glfw/src/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -176,29 +174,29 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
-      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExceptionHandling>
+      </ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <Optimization>MinSpace</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_DEBUG;_USRDLL;DEBUG_LEVEL=1;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level2</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR="MinSizeRel";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_DEBUG;_USRDLL;DEBUG_LEVEL=1;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"MinSizeRel\";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -206,8 +204,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>glfw3.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/src/Release;C:/Users/chuel/source/repos/Tara/lib/glfw/src/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -221,28 +219,28 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExceptionHandling>
+      </ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_DEBUG;_USRDLL;DEBUG_LEVEL=1;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level2</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR="RelWithDebInfo";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_DEBUG;_USRDLL;DEBUG_LEVEL=1;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"RelWithDebInfo\";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui\backends;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_curve;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui_markdown;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuiColorTextEdit;C:\Users\chuel\source\repos\Tara\lib\imgui\ImGuizmo;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Source;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-node-editor\NodeEditor\Include;C:\Users\chuel\source\repos\Tara\lib\imgui\imgui-notify\example\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -250,8 +248,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>glfw3.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/src/Release;C:/Users/chuel/source/repos/Tara/lib/glfw/src/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -320,72 +318,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\app.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\app.h" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\allpanel.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\application_setting_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\application_setting_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\asset_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\asset_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\code_editor_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\code_editor_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\console_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\console_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\export_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\export_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\file_explorer_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\file_explorer_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\framebuffer_viewer_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\framebuffer_viewer_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\global_state.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\global_state.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\helper_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\helper_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\hierarchy_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\hierarchy_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\node_editor_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\node_editor_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\project_creation_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\project_creation_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\properties_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\properties_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\scene_viewer_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\scene_viewer_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\timeline_win.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\panel\timeline_win.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\app\window\app_window.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\app\window\app_window.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\asset\filebase.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\asset\filebase.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\asset\regular_file.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\asset\regular_file.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\asset\special_file.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\asset\special_file.h" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\component\alleditor.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\component\editor_component.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\component\editor_component.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\component\light_editor.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\component\light_editor.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\component\mesh_renderer_editor.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\component\mesh_renderer_editor.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\component\transformation_editor.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\component\transformation_editor.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor.h" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor_base.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor_container.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor_container.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor_flags.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor_flags.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor_lowlevel.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor_lowlevel.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor_setting.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor_setting.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor_style.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\editor_style.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\editor\project\project.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\editor\project\project.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine.cpp" />
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\allcomponents.h" />
     <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\camera.cpp" />
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\camera.h" />
@@ -395,6 +327,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\collision.h" />
     <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\component.cpp" />
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\component.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\environment.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\environment.h" />
     <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\free_camera.cpp" />
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\free_camera.h" />
     <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\light.cpp" />
@@ -424,6 +358,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\interface\assetbase.h" />
     <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\logger.cpp" />
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\logger.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\lowlevel.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\lowlevel.h" />
     <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\material\material.cpp" />
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\material\material.h" />
     <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\mesh\mesh.cpp" />
@@ -444,6 +380,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\window\ewindow.h" />
     <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\world\world.cpp" />
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\world\world.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\extension\tara_extension.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\extension\tara_extension.h" />
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\allsystems.h" />
     <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\camera_system.cpp" />
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\camera_system.h" />
@@ -455,159 +393,140 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\system.h" />
     <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\tara.cpp" />
     <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\tara.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\extension\tara_extension.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\extension\tara_extension.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\backward.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\base64.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\glad.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\gizmo\GraphEditor.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\gizmo\ImCurveEdit.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\gizmo\ImGradient.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\gizmo\ImGuizmo.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\gizmo\ImSequencer.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\imgui.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\imgui_draw.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\imgui_stdlib.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\imgui_tables.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\node-editor\crude_json.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\node-editor\imgui_canvas.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\node-editor\imgui_node_editor.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\node-editor\imgui_node_editor_api.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\imgui\text-editor\TextEditor.cpp" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_acl.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_blake2s_ref.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_blake2sp_ref.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_check_magic.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_cmdline.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_cryptor.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_digest.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_disk_acl_darwin.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_disk_acl_freebsd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_disk_acl_linux.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_disk_acl_sunos.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_entry.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_entry_copy_bhfi.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_entry_copy_stat.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_entry_link_resolver.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_entry_sparse.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_entry_stat.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_entry_strmode.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_entry_xattr.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_getdate.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_hmac.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_match.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_options.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_pack_dev.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_pathmatch.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_ppmd7.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_ppmd8.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_random.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_rb.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_add_passphrase.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_append_filter.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_data_into_fd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_disk_entry_from_file.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_disk_posix.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_disk_set_standard_lookup.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_disk_windows.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_extract.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_extract2.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_open_fd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_open_file.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_open_filename.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_open_memory.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_set_format.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_set_options.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_all.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_by_code.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_bzip2.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_compress.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_grzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_gzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_lrzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_lz4.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_lzop.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_none.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_program.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_rpm.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_uu.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_xz.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_filter_zstd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_7zip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_all.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_ar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_by_code.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_cab.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_cpio.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_empty.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_iso9660.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_lha.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_mtree.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_rar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_rar5.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_raw.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_tar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_warc.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_xar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_read_support_format_zip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_string.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_string_sprintf.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_util.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_version_details.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_virtual.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_windows.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_b64encode.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_by_name.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_bzip2.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_compress.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_grzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_gzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_lrzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_lz4.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_lzop.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_none.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_program.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_uuencode.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_xz.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_add_filter_zstd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_disk_posix.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_disk_set_standard_lookup.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_disk_windows.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_open_fd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_open_file.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_open_filename.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_open_memory.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_7zip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_ar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_by_name.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_cpio.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_cpio_binary.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_cpio_newc.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_cpio_odc.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_filter_by_ext.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_gnutar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_iso9660.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_mtree.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_pax.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_raw.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_shar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_ustar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_v7tar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_warc.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_xar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_format_zip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_options.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\archive_write_set_passphrase.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\filter_fork_posix.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\filter_fork_windows.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\libarchive\xxhash.c" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\backward.cpp" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\base64.cpp" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\glad.cpp" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_acl.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_blake2s_ref.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_blake2sp_ref.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_check_magic.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_cmdline.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_cryptor.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_digest.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_disk_acl_darwin.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_disk_acl_freebsd.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_disk_acl_linux.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_disk_acl_sunos.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_copy_bhfi.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_copy_stat.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_link_resolver.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_sparse.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_stat.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_strmode.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_xattr.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_getdate.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_hmac.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_match.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_options.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_pack_dev.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_pathmatch.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_ppmd7.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_ppmd8.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_random.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_rb.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_add_passphrase.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_append_filter.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_data_into_fd.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_disk_entry_from_file.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_disk_posix.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_disk_set_standard_lookup.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_disk_windows.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_extract.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_extract2.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_open_fd.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_open_file.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_open_filename.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_open_memory.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_set_format.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_set_options.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_all.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_by_code.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_bzip2.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_compress.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_grzip.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_gzip.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_lrzip.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_lz4.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_lzop.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_none.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_program.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_rpm.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_uu.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_xz.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_zstd.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_7zip.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_all.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_ar.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_by_code.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_cab.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_cpio.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_empty.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_iso9660.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_lha.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_mtree.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_rar.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_rar5.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_raw.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_tar.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_warc.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_xar.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_zip.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_string.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_string_sprintf.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_util.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_version_details.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_virtual.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_windows.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_b64encode.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_by_name.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_bzip2.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_compress.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_grzip.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_gzip.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_lrzip.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_lz4.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_lzop.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_none.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_program.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_uuencode.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_xz.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_zstd.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_disk_posix.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_disk_set_standard_lookup.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_disk_windows.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_open_fd.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_open_file.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_open_filename.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_open_memory.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_7zip.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_ar.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_by_name.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_cpio.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_cpio_binary.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_cpio_newc.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_cpio_odc.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_filter_by_ext.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_gnutar.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_iso9660.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_mtree.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_pax.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_raw.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_shar.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_ustar.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_v7tar.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_warc.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_xar.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_zip.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_options.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_passphrase.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\filter_fork_posix.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\filter_fork_windows.c" />
+    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\xxhash.c" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\chuel\source\repos\Tara\ZERO_CHECK.vcxproj">

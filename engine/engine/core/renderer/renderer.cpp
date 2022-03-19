@@ -25,6 +25,9 @@
 #include "../../component/free_camera.h"
 
 namespace Tara {
+	Renderer* Renderer::m_Singleton = nullptr;
+	BatchRenderer* BatchRenderer::m_Singleton = nullptr;
+	RendererDebug* RendererDebug::m_Singleton = nullptr;
 
 	constexpr bool RenderCommandKey::operator==(const RenderCommandKey& other) const
 	{
@@ -51,6 +54,7 @@ namespace Tara {
 	}
 	Renderer& Renderer::Singleton()
 	{
+		if (!m_Singleton) m_Singleton = new Renderer();
 		return *m_Singleton;
 	}
 	void Renderer::RegisterMainCamera(SceneObject* so)
@@ -90,6 +94,12 @@ namespace Tara {
 		return *m_cameraTrans;
 	}
 
+	RendererDebug& RendererDebug::Singleton()
+	{
+		if (!m_Singleton) m_Singleton = new RendererDebug();
+		return *m_Singleton;
+	}
+
 	float_t& RendererDebug::Alpha()
 	{
 		return alpha;
@@ -122,6 +132,7 @@ namespace Tara {
 	}
 	BatchRenderer& BatchRenderer::Singleton()
 	{
+		if (!m_Singleton) m_Singleton = new BatchRenderer();
 		return *m_Singleton;
 	}
 	void BatchRenderer::AddRender(Mesh* mesh, Material* material, TransformationComponent* trans)

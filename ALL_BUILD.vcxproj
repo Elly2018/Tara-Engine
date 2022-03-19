@@ -169,9 +169,21 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\App.vcxproj">
+      <Project>{70F4655A-AC9D-3651-8E36-7F757976F86E}</Project>
+      <Name>App</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\Editor.vcxproj">
+      <Project>{7EEDB46C-4B76-3CFD-9A90-F3FF9A36F917}</Project>
+      <Name>Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\chuel\source\repos\Tara\Engine.vcxproj">
       <Project>{551FAD3D-35FB-3836-A747-4CCA864DCA2C}</Project>
       <Name>Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\Single.vcxproj">
+      <Project>{5C73F1EB-834C-3AE8-B8CF-384D07BC85FB}</Project>
+      <Name>Single</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -59,7 +59,7 @@ namespace Tara {
 	/// </summary>
 	/// <typeparam name="T">Asset type</typeparam>
 	template<typename T>
-	class TARA_API PoolBase {
+	class PoolBase {
 	public:
 		virtual bool IsIn(T* t)
 		{

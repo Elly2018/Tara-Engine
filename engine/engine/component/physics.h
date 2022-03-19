@@ -4,8 +4,6 @@
 #include "component.h"
 
 namespace Tara {
-	class TARA_API SceneObject;
-
 	/*
 		Summary:
 			Physics constraint will lock the specific axis of rotation or position.
@@ -25,7 +23,7 @@ namespace Tara {
 	*/
 	class TARA_API PhysicsComponent : public Component {
 	public:
-		DEFAULT_CTOR_IMPLE(PhysicsComponent);
+		DEFAULT_HEADER_CTOR(PhysicsComponent);
 		virtual ~PhysicsComponent();
 		// Apply global force
 		bool apply_physics = true;

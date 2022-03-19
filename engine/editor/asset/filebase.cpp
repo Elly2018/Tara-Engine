@@ -9,6 +9,9 @@
 
 namespace Tara {
 	namespace FileSystem {
+		FileDataBase* FileDataBase::m_Singleton = nullptr;
+		AssetPool<FileBase>* FileBase::m_filePool = nullptr;
+
 		const std::vector<std::string> textureExtension = {
 			".jpg",
 			".png",
@@ -58,6 +61,7 @@ namespace Tara {
 		}
 		FileBase::~FileBase()
 		{
+
 		}
 		FileBase* FileBase::GetFileByPath(std::filesystem::path p)
 		{
@@ -144,10 +148,12 @@ namespace Tara {
 		}
 		AssetPool<FileBase>& FileBase::GetFilePool()
 		{
+			if (!m_filePool) m_filePool = new AssetPool<FileBase>();
 			return *m_filePool;
 		}
 		FileDataBase& FileDataBase::Singleton()
 		{
+			if (!m_Singleton) m_Singleton = new FileDataBase();
 			return *m_Singleton;
 		}
 		std::vector<std::string> FileDataBase::GetDirectories(const char* dir)

@@ -17,8 +17,3 @@ cd pybind11
 cmake .
 cmake --build . --config Release
 cd ../
-
-cd glfw
-cmake .
-cmake --build . --config Release
-cd ../

@@ -7,7 +7,7 @@
 
 namespace Tara {
 
-	class DllExport PhysicsSetting {
+	class TARA_API PhysicsSetting {
 	public:
 		glm::vec3 gravity;
 	private:
@@ -17,7 +17,7 @@ namespace Tara {
 	};
 
 
-	class DllExport LightSetting {
+	class TARA_API LightSetting {
 	public:
 		/*
 			The w axis represent the intensity.
@@ -30,7 +30,7 @@ namespace Tara {
 	};
 
 
-	class DllExport World {
+	class TARA_API World {
 	public:
 		static World* Instance();
 		void SetDefault();

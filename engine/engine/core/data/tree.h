@@ -1,11 +1,10 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "../config.h"
 
 namespace Tara {
 	template<typename T>
-	struct TARA_API tree {
+	struct tree {
 	public:
 		using container = std::vector<tree<T>>;
 		using iterator = typename container::iterator;

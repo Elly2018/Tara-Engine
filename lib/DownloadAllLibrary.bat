@@ -2,7 +2,6 @@
 git clone -b v5.2.2 https://github.com/assimp/assimp.git
 git clone -b v3.6.0 https://github.com/libarchive/libarchive.git
 git clone -b v2.9.1 https://github.com/pybind/pybind11.git
-git clone -b 3.3.6 https://github.com/glfw/glfw.git
 git clone https://github.com/rxi/uuid4.git
 git clone -b 0.9.9.8 https://github.com/g-truc/glm.git
 git clone -b v1.6 https://github.com/bombela/backward-cpp.git

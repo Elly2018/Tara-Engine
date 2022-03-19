@@ -382,8 +382,4 @@ namespace Tara {
 		// Global uniform block.
 		static std::map<std::string, MaterialUniformBlock*> m_globalBlocks;
 	};
-
-	inline TARA_API std::map<CommomMaterialType, Material*> Material::CommomMaterial = std::map<CommomMaterialType, Material*>();
-	inline TARA_API std::map<std::string, MaterialUniformBlock*> Material::m_globalBlocks = std::map<std::string, MaterialUniformBlock*>();
-	inline TARA_API AssetPool<Material>* Material::m_materialPool = new AssetPool<Material>();
 }

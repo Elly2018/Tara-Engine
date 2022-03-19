@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "../engine/core/config.h"
+#include "editor_config.h"
 #include "editor_flags.h"
 
 /*
@@ -17,7 +17,7 @@ namespace Tara {
 			Summary:
 				The gui object base class
 		*/
-		class TARA_API ImGui_UIBase {
+		class TARA_EDITOR_API ImGui_UIBase {
 		public:
 			virtual void Render() {}
 		};
@@ -26,7 +26,7 @@ namespace Tara {
 			Summary:
 				The gui element base class
 		*/
-		class TARA_API ImGui_ElementBase : public ImGui_UIBase {
+		class TARA_EDITOR_API ImGui_ElementBase : public ImGui_UIBase {
 		public:
 			ImGui_ElementBase(const char* _label = "Empty");
 			~ImGui_ElementBase();
@@ -38,7 +38,7 @@ namespace Tara {
 			Summary:
 				The gui element base class.
 		*/
-		class TARA_API ImGui_WindowBase : public ImGui_UIBase {
+		class TARA_EDITOR_API ImGui_WindowBase : public ImGui_UIBase {
 		public:
 			ImGui_WindowBase();
 			ImGui_WindowBase(const char* _title);
@@ -92,21 +92,7 @@ namespace Tara {
 			std::vector<ImGui_ElementBase*> elementlist = std::vector<ImGui_ElementBase*>();
 		};
 
-		/*
-			Summary:
-				A simple window show all the application states.
-		*/
-		class TARA_API ImGui_DebugWindow : public ImGui_WindowBase {
-		public:
-			ImGui_DebugWindow();
-			~ImGui_DebugWindow();
-			void Content() override;
-
-		protected:
-			void DebugInfo();
-		};
-
-		class TARA_API ImGui_PopWindow : public ImGui_WindowBase {
+		class TARA_EDITOR_API ImGui_PopWindow : public ImGui_WindowBase {
 		public:
 			ImGui_PopWindow() : ImGui_WindowBase() {
 				SetVisible(false);
@@ -119,7 +105,7 @@ namespace Tara {
 			ImGui_PopupFlags pflags = ImGui_PopupFlags();
 		};
 
-		class TARA_API ImGui_SceneView : public ImGui_WindowBase {
+		class TARA_EDITOR_API ImGui_SceneView : public ImGui_WindowBase {
 		public:
 			ImGui_SceneView(const char* _title, const char* child_id);
 			~ImGui_SceneView();
@@ -148,7 +134,7 @@ namespace Tara {
 				Render a texture viewer that can use apply different effect on it.
 				RGBA filter, information at bottom, brightness.
 		*/
-		class TARA_API ImGui_TextureView : public ImGui_ElementBase {
+		class TARA_EDITOR_API ImGui_TextureView : public ImGui_ElementBase {
 		public:
 			ImGui_TextureView(Texture* tex);
 			~ImGui_TextureView();

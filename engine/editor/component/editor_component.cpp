@@ -6,6 +6,7 @@
 
 namespace Tara {
 	namespace UI {
+		EditorComponentManager* EditorComponentManager::m_Singleton = nullptr;
 
 		struct EditorComponentTree {
 		public:
@@ -98,6 +99,7 @@ namespace Tara {
 
 		EditorComponentManager& EditorComponentManager::Singleton()
 		{
+			if (!m_Singleton) m_Singleton = new EditorComponentManager();
 			return *m_Singleton;
 		}
 

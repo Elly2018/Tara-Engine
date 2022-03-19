@@ -221,6 +221,4 @@ namespace Tara {
 		std::map<CubeMapType, glm::ivec2> m_Size = std::map<CubeMapType, glm::ivec2>();
 		std::map<CubeMapType, unsigned char*> m_Colordata = std::map<CubeMapType, unsigned char*>();
 	};
-
-	inline TARA_API AssetPool<Texture>* Texture::m_texturePool = new AssetPool<Texture>();
 }

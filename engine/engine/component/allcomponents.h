@@ -5,5 +5,6 @@
 #include "free_camera.h"
 #include "light.h"
 #include "mesh_renderer.h"
-#include "Physics.h"
 #include "transformation.h"
+#include "physics.h"
+#include "environment.h"

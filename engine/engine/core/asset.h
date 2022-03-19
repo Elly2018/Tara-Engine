@@ -34,7 +34,7 @@ namespace Tara {
 			Asset collection pool, easier to manage assets.
 	*/
 	template<typename T>
-	class TARA_API AssetPool final : public PoolBase<T> {
+	class AssetPool final : public PoolBase<T> {
 	public:
 		friend class EWindow;
 		AssetPool()

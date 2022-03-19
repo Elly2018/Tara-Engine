@@ -8,11 +8,12 @@ namespace Tara {
         public:
             ConsoleWindow() : ImGui_WindowBase("Console") {}
             void Content() override;
-            void AddMessage(std::vector<LogMessage> n);
+            void AddMessage(LogMessage n);
 
         private:
             std::vector<LogMessage> messages = std::vector<LogMessage>();
             bool updateMessages = true;
+            std::string m_Search;
         };
 	}
 }

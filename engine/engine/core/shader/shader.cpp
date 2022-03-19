@@ -18,6 +18,7 @@
 using namespace std::chrono_literals;
 
 namespace Tara {
+	ShaderLibrary* ShaderLibrary::m_Singleton = nullptr;
 #pragma region Const Static Declaration
 	std::map<ShaderType, std::string> Shadertype_string = {
 		{ShaderType::Vertex, "VERTEX"},
@@ -539,7 +540,7 @@ namespace Tara {
 	}
 	void Shader::CompileShaderGLSL(ShaderType type)
 	{
-		TARA_DEBUG();
+		TARA_DEBUG("");
 		TARA_DEBUG("Compile Shader... %s %s", Name.c_str(), Shadertype_string.at(type).c_str());
 		int success;
 		char infoLog[512];
@@ -623,6 +624,7 @@ namespace Tara {
 #pragma endregion
 	ShaderLibrary& ShaderLibrary::Singleton()
 	{
+		if (!m_Singleton) m_Singleton = new ShaderLibrary();
 		return *m_Singleton;
 	}
 	bool ShaderLibrary::SupportExtension()

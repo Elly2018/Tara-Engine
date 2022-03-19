@@ -7,6 +7,8 @@
 #include "../shader/shader.h"
 
 namespace Tara {
+	ObjectFactory* ObjectFactory::m_Singleton = nullptr;
+
 	SceneObject::SceneObject()
 	{
 		Scene* cs = CurrentScene();
@@ -194,6 +196,7 @@ namespace Tara {
 	}
 	ObjectFactory& ObjectFactory::Singleton()
 	{
+		if (!m_Singleton) m_Singleton  = new ObjectFactory();
 		return *m_Singleton;
 	}
 	SceneObject* ObjectFactory::CreateEmpty()

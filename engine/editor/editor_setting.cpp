@@ -4,6 +4,8 @@
 
 namespace Tara {
 	namespace UI {
+		EditorStyle* EditorStyle::m_Singleton = nullptr;
+
 #pragma region Utility Converter
 		ImVec2 ToVec2(glm::vec2 v) {
 			return ImVec2(v.x, v.y);
@@ -400,6 +402,7 @@ namespace Tara {
 
 		EditorStyle& Tara::UI::EditorStyle::Singleton()
 		{
+			if (!m_Singleton) m_Singleton = new EditorStyle();
 			return *m_Singleton;
 		}
 		bool EditorStyle::Load(const char* filename)

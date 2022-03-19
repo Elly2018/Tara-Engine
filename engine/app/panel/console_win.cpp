@@ -14,10 +14,11 @@ namespace Tara {
             if (ImGui_Button("Clear")) {
                 messages.clear();
             }
+            ImGui_TextField("Search", &m_Search);
             if (ImGui_BeginTabBar("ConsoleTab")) {
                 if (ImGui_BeginTabitems("All Logs")) {
-                    if (ImGui_BeginTable("Application All Logs", 1, tableflags)) {
-                        ImGui_BeginChild("logs", 0, 0, false);
+                    if (ImGui_BeginTable("Regular Logs", 1, tableflags)) {
+                        ImGui_BeginChild("Regular Logs Frame", 0, 0, false);
                         for (auto m : messages) {
                             ImGui_TextColor(m.color);
                             ImGui_Text(m.message.c_str());
@@ -37,12 +38,9 @@ namespace Tara {
                 ImGui_EndTabBar();
             }
         }
-        void ConsoleWindow::AddMessage(std::vector<LogMessage> n) {
-            for (auto i : n) {
-                // Add new coming message
-                messages.push_back(i);
-            }
-            if (n.size() > 0) updateMessages = true;
+        void ConsoleWindow::AddMessage(LogMessage n) {
+            messages.push_back(n);
+            updateMessages = true;
         }
 	}
 }

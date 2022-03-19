@@ -6,7 +6,6 @@
 namespace Tara {
 	struct TARA_API Frustum;
 	class TARA_API DisplayFrameBuffer;
-	class TARA_API SceneObject;
 
 	/*
 		Summary:

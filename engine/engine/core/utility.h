@@ -12,7 +12,7 @@
 namespace Tara {
 	class TARA_API ZipContent;
 
-	const TARA_API std::map<ShaderType, std::string> shaderTypeExtension = {
+	const std::map<ShaderType, std::string> shaderTypeExtension = {
 		{ShaderType::Vertex, ".vert"},
 		{ShaderType::Tessellation, ".tess"},
 		{ShaderType::Fragment, ".frag"},
@@ -22,6 +22,20 @@ namespace Tara {
 	};
 
 	namespace Utility {
+		class TARA_API Argument {
+		public:
+			static Argument& Singleton();
+			void Register(int count, char** argv);
+
+			bool debugMode = false;
+			bool recordAllLog = false;
+		private:
+			Argument() {}
+			~Argument() {}
+			static Argument* m_Singleton;
+		};
+
+
 		class TARA_API File {
 		public:
 			/*

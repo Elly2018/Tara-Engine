@@ -2,14 +2,11 @@
 #include <map>
 #include <glm/glm.hpp>
 #include <nlohmann/json.hpp>
-#include "../engine/core/config.h"
-
-#define EDITOR_APP_FILE "application.setting"
-#define EDITOR_STYLE_FILE "style.setting"
+#include "editor_config.h"
 
 namespace Tara {
 	namespace UI {
-		enum class TARA_API Direction {
+		enum class TARA_EDITOR_API Direction {
 			None = -1,
 			Left = 0,
 			Right = 1,
@@ -17,64 +14,64 @@ namespace Tara {
 			Down = 3,
 		};
 
-		struct TARA_API StyleColor {
+		struct TARA_EDITOR_API StyleColor {
 		public:
 			const size_t COUNT = 55;
-			glm::vec4 m_TextColor;
-			glm::vec4 m_TextDisabled;
-			glm::vec4 m_WindowBg;
-			glm::vec4 m_ChildBg;
-			glm::vec4 m_PopupBg;
-			glm::vec4 m_Border;
-			glm::vec4 m_BorderShadow;
-			glm::vec4 m_FrameBg;
-			glm::vec4 m_FrameBgHovered;
-			glm::vec4 m_FrameBgActive;
-			glm::vec4 m_TitleBg;
-			glm::vec4 m_TitleBgActive;
-			glm::vec4 m_TitleBgCollapsed;
-			glm::vec4 m_MenuBarBg;
-			glm::vec4 m_ScrollbarBg;
-			glm::vec4 m_ScrollbarGrab;
-			glm::vec4 m_ScrollbarGrabHovered;
-			glm::vec4 m_ScrollbarGrabActive;
-			glm::vec4 m_CheckMark;
-			glm::vec4 m_SliderGrab;
-			glm::vec4 m_SliderGrabActive;
-			glm::vec4 m_Button;
-			glm::vec4 m_ButtonHovered;
-			glm::vec4 m_ButtonActive;
-			glm::vec4 m_Header;
-			glm::vec4 m_HeaderHovered;
-			glm::vec4 m_HeaderActive;
-			glm::vec4 m_Separator;
-			glm::vec4 m_SeparatorHovered;
-			glm::vec4 m_SeparatorActive;
-			glm::vec4 m_ResizeGrip;
-			glm::vec4 m_ResizeGripHovered;
-			glm::vec4 m_ResizeGripActive;
-			glm::vec4 m_Tab;
-			glm::vec4 m_TabHovered;
-			glm::vec4 m_TabActive;
-			glm::vec4 m_TabUnfocused;
-			glm::vec4 m_TabUnfocusedActive;
-			glm::vec4 m_DockingPreview;
-			glm::vec4 m_DockingEmptyBg;
-			glm::vec4 m_PlotLines;
-			glm::vec4 m_PlotLinesHovered;
-			glm::vec4 m_PlotHistogram;
-			glm::vec4 m_PlotHistogramHovered;
-			glm::vec4 m_TableHeaderBg;
-			glm::vec4 m_TableBorderStrong;
-			glm::vec4 m_TableBorderLight;
-			glm::vec4 m_TableRowBg;
-			glm::vec4 m_TableRowBgAlt;
-			glm::vec4 m_TextSelectedBg;
-			glm::vec4 m_DragDropTarget;
-			glm::vec4 m_NavHighlight;
-			glm::vec4 m_NavWindowingHighlight;
-			glm::vec4 m_NavWindowingDimBg;
-			glm::vec4 m_ModalWindowDimBg;
+			glm::vec4 m_TextColor = glm::vec4();
+			glm::vec4 m_TextDisabled = glm::vec4();
+			glm::vec4 m_WindowBg = glm::vec4();
+			glm::vec4 m_ChildBg = glm::vec4();
+			glm::vec4 m_PopupBg = glm::vec4();
+			glm::vec4 m_Border = glm::vec4();
+			glm::vec4 m_BorderShadow = glm::vec4();
+			glm::vec4 m_FrameBg = glm::vec4();
+			glm::vec4 m_FrameBgHovered = glm::vec4();
+			glm::vec4 m_FrameBgActive = glm::vec4();
+			glm::vec4 m_TitleBg = glm::vec4();
+			glm::vec4 m_TitleBgActive = glm::vec4();
+			glm::vec4 m_TitleBgCollapsed = glm::vec4();
+			glm::vec4 m_MenuBarBg = glm::vec4();
+			glm::vec4 m_ScrollbarBg = glm::vec4();
+			glm::vec4 m_ScrollbarGrab = glm::vec4();
+			glm::vec4 m_ScrollbarGrabHovered = glm::vec4();
+			glm::vec4 m_ScrollbarGrabActive = glm::vec4();
+			glm::vec4 m_CheckMark = glm::vec4();
+			glm::vec4 m_SliderGrab = glm::vec4();
+			glm::vec4 m_SliderGrabActive = glm::vec4();
+			glm::vec4 m_Button = glm::vec4();
+			glm::vec4 m_ButtonHovered = glm::vec4();
+			glm::vec4 m_ButtonActive = glm::vec4();
+			glm::vec4 m_Header = glm::vec4();
+			glm::vec4 m_HeaderHovered = glm::vec4();
+			glm::vec4 m_HeaderActive = glm::vec4();
+			glm::vec4 m_Separator = glm::vec4();
+			glm::vec4 m_SeparatorHovered = glm::vec4();
+			glm::vec4 m_SeparatorActive = glm::vec4();
+			glm::vec4 m_ResizeGrip = glm::vec4();
+			glm::vec4 m_ResizeGripHovered = glm::vec4();
+			glm::vec4 m_ResizeGripActive = glm::vec4();
+			glm::vec4 m_Tab = glm::vec4();
+			glm::vec4 m_TabHovered = glm::vec4();
+			glm::vec4 m_TabActive = glm::vec4();
+			glm::vec4 m_TabUnfocused = glm::vec4();
+			glm::vec4 m_TabUnfocusedActive = glm::vec4();
+			glm::vec4 m_DockingPreview = glm::vec4();
+			glm::vec4 m_DockingEmptyBg = glm::vec4();
+			glm::vec4 m_PlotLines = glm::vec4();
+			glm::vec4 m_PlotLinesHovered = glm::vec4();
+			glm::vec4 m_PlotHistogram = glm::vec4();
+			glm::vec4 m_PlotHistogramHovered = glm::vec4();
+			glm::vec4 m_TableHeaderBg = glm::vec4();
+			glm::vec4 m_TableBorderStrong = glm::vec4();
+			glm::vec4 m_TableBorderLight = glm::vec4();
+			glm::vec4 m_TableRowBg = glm::vec4();
+			glm::vec4 m_TableRowBgAlt = glm::vec4();
+			glm::vec4 m_TextSelectedBg = glm::vec4();
+			glm::vec4 m_DragDropTarget = glm::vec4();
+			glm::vec4 m_NavHighlight = glm::vec4();
+			glm::vec4 m_NavWindowingHighlight = glm::vec4();
+			glm::vec4 m_NavWindowingDimBg = glm::vec4();
+			glm::vec4 m_ModalWindowDimBg = glm::vec4();
 
 			void Set(int32_t index, glm::vec4 v);
 			glm::vec4 Get(int32_t index);
@@ -83,7 +80,7 @@ namespace Tara {
 			bool operator!=(const StyleColor& tar);
 		};
 
-		struct TARA_API StyleVar {
+		struct TARA_EDITOR_API StyleVar {
 		public:
 			float_t			Alpha;
 			float_t			DisabledAlpha;
@@ -130,7 +127,7 @@ namespace Tara {
 			bool operator!=(const StyleVar& tar);
 		};
 
-		class TARA_API EditorStyle {
+		class TARA_EDITOR_API EditorStyle {
 		public:
 			static EditorStyle& Singleton();
 			bool Load(const char* filename);
@@ -152,8 +149,6 @@ namespace Tara {
 			bool LoadColor(nlohmann::json json);
 			bool LoadVar(nlohmann::json json);
 		};
-
-		inline TARA_API EditorStyle* EditorStyle::m_Singleton = new EditorStyle();
 	}
 }
 

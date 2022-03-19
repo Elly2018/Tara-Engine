@@ -6,22 +6,22 @@
 #include <imgui.h>
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+//#include <glad/glad.h>
+//#include <GLFW/glfw3.h>
 
 // Include Tara library
+#include "../engine/core/lowlevel.h"
 #include "../engine/core/window/ewindow.h"
 #include "../engine/core/renderer/renderer.h"
 #include "../engine/core/scene_object/scene_object.h"
 #include "../engine/core/event.h"
 #include "../engine/core/utility.h"
 #include "../engine/component/camera.h"
-#include "editor_lowlevel.h"
 #include "editor_setting.h"
 
 namespace Tara {
 	namespace UI {
-		std::vector<ImGui_WindowBase*> m_guiWindows;
+		std::vector<ImGui_WindowBase*> m_guiWindows = std::vector<ImGui_WindowBase*>();
 		int32_t gizmoPipeline, guiPipeline, postGUIPipeline;
 		ImGuiContext* ctx = nullptr;
 
@@ -106,41 +106,34 @@ namespace Tara {
 		}
 
 		void Render() {
-			EWindow* wptr = CurrentWindow();
-			GLFWwindow* w = (GLFWwindow*)wptr->WindowPtr();
-			if (!w) {
-				TARA_RUNTIME_ERROR("ImGui window casting error.");
-				return;
-			}
-
 			ImGui::Render();
-			int display_w, display_h;
-			glfwGetFramebufferSize(w, &display_w, &display_h);
-			glViewport(0, 0, display_w, display_h);
+			glm::ivec2 fsize = LowLevel::FramebufferSize();
+			
+			LowLevel::Viewport(fsize.x, fsize.y);
+			
 			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 			ImGuiIO& io = ImGui::GetIO(); (void)io;
 			if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 			{
-				GLFWwindow* backup_current_context = glfwGetCurrentContext();
+				void* backup_current_context = LowLevel::GetWindowConext();
 				ImGui::UpdatePlatformWindows();
 				ImGui::RenderPlatformWindowsDefault();
-				glfwMakeContextCurrent(backup_current_context);
+				LowLevel::SetWindowConext(backup_current_context);
 			}
 		}
 
 		void Gizmo() {
 			Renderer& renderer = Renderer::Singleton();
 			CameraComponent& camera = renderer.MainCamera();
-			camera.Use();
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			glEnable(GL_DEPTH_TEST);
 
-			// 
+			camera.Use();
+			LowLevel::WireframeMode(true);
+			LowLevel::DepthTest(true);
 
 			camera.Unuse();
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-			glDisable(GL_DEPTH_TEST);
+			LowLevel::WireframeMode(false);
+			LowLevel::DepthTest(false);
 		}
 
 		void GUI() {
@@ -149,9 +142,11 @@ namespace Tara {
 		}
 
 		void PostGUI() {
+			int c = 0;
 			for (auto it = m_guiWindows.begin(); it != m_guiWindows.end(); it++) {
 				if (!(*it)) continue;
 				(*it)->Render();
+				c++;
 			}
 			ImGui_RenderNotifycation();
 			Render();

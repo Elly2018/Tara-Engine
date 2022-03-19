@@ -66,6 +66,10 @@
 #pragma endregion
 
 namespace Tara {
+	std::map<CommomMaterialType, Material*> Material::CommomMaterial = std::map<CommomMaterialType, Material*>();
+	std::map<std::string, MaterialUniformBlock*> Material::m_globalBlocks = std::map<std::string, MaterialUniformBlock*>();
+	AssetPool<Material>* Material::m_materialPool = nullptr;
+
 	struct UniformStructData
 	{
 		UniformStructData(std::string n, int32_t loc, size_t si) : name(n), location(loc), size(si){}
@@ -212,6 +216,7 @@ namespace Tara {
 	}
 	AssetPool<Material>& Material::GetAssetPool()
 	{
+		if (!m_materialPool) m_materialPool = new AssetPool<Material>();
 		return *m_materialPool;
 	}
 	void Material::MaterialInitialization() {

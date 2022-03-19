@@ -4,7 +4,6 @@
 #include "component.h"
 
 namespace Tara {
-	class TARA_API SceneObject;
 	class TARA_API Mesh;
 	class TARA_API Material;
 

@@ -9,7 +9,6 @@
 #include "texture/texture.h"
 
 namespace Tara {
-
 	class ZipContent {
 	public:
 		ZipContent(void* _data, size_t _size) : data(_data), size(_size) { }
@@ -21,6 +20,26 @@ namespace Tara {
 	};
 
 	namespace Utility {
+		Argument* Argument::m_Singleton = nullptr;
+
+		Argument& Argument::Singleton()
+		{
+			if (m_Singleton == nullptr) m_Singleton = new Argument();
+			return *m_Singleton;
+		}
+		void Argument::Register(int count, char** argv)
+		{
+			for (int i = 0; i < count; i++) {
+				std::string s = argv[i];
+				if (s == "--debug") {
+					debugMode = true;
+				}
+				else if (s == "--log") {
+					recordAllLog = true;
+				}
+			}
+		}
+
 		std::string File::LoadFromFile(std::filesystem::path filename)
 		{
 			if (!exists(filename)) {
@@ -328,5 +347,5 @@ namespace Tara {
 				TARA_DEBUG_LEVEL("Zip content: %s, %zu", 2, i.first.c_str(), i.second->size);
 			}
 		}
-	}
+}
 }

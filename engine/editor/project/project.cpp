@@ -5,8 +5,11 @@
 
 namespace Tara {
 	namespace UI {
+		TaraProject* TaraProject::m_Singleton = nullptr;
+
 		TaraProject& TaraProject::Singleton()
 		{
+			if (!m_Singleton)m_Singleton = new TaraProject();
 			return *m_Singleton;
 		}
 		bool TaraProject::CreateProject(std::string name, std::filesystem::path path)

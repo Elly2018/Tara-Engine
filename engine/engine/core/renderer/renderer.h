@@ -192,8 +192,4 @@ namespace Tara {
 		static uint32_t ubo;
 		static int32_t lightCount;
 	};
-
-	inline TARA_API Renderer* Renderer::m_Singleton = new Renderer();
-	inline TARA_API BatchRenderer* BatchRenderer::m_Singleton = new BatchRenderer();
-	inline TARA_API RendererDebug* RendererDebug::m_Singleton = new RendererDebug();
 }

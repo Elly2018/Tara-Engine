@@ -7,17 +7,17 @@
 namespace Tara {
     namespace UI {
 
-        class TARA_API AppSettingContent {
+        class AppSettingContent {
         public:
             virtual void DrawListFields() = 0;
         };
 
-        class TARA_API AppSetting_App : public AppSettingContent {
+        class AppSetting_App : public AppSettingContent {
         public:
             void DrawListFields() override;
         };
 
-        class TARA_API AppSetting_Style : public AppSettingContent {
+        class AppSetting_Style : public AppSettingContent {
         public:
             AppSetting_Style();
             void DrawListFields() override;
@@ -26,17 +26,17 @@ namespace Tara {
             std::vector<std::pair<std::string, StyleColor*>> m_ThemeRegister;
         };
 
-        class TARA_API AppSetting_Editor : public AppSettingContent {
+        class AppSetting_Editor : public AppSettingContent {
         public:
             void DrawListFields() override;
         };
 
-        class TARA_API AppSetting_Plugin : public AppSettingContent {
+        class AppSetting_Plugin : public AppSettingContent {
         public:
             void DrawListFields() override;
         };
 
-        class TARA_API AppSettingWindow : public ImGui_WindowBase {
+        class AppSettingWindow : public ImGui_WindowBase {
         public:
             AppSettingWindow();
             void LeftMenu();

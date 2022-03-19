@@ -15,7 +15,7 @@ namespace Tara {
 	/*
 		Structures and classes
 	*/
-	class TARA_API AABB;
+	struct TARA_API AABB;
 
 	/*
 		Summary:
@@ -86,6 +86,4 @@ namespace Tara {
 		std::vector<Vertex> m_pack = std::vector<Vertex>();
 		static AssetPool<Mesh>* m_meshPool;
 	};
-
-	inline TARA_API AssetPool<Mesh>* Mesh::m_meshPool = new AssetPool<Mesh>();
 }

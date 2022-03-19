@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "../engine/core/config.h"
+#include "editor_config.h"
 
 /*
 	
@@ -11,12 +11,12 @@ namespace Tara {
 			Summary:
 				The flag struct base
 		*/
-		struct TARA_API ImGui_FlagBase
+		struct TARA_EDITOR_API ImGui_FlagBase
 		{
 		public:
 			virtual int32_t	GetFlags();
 		};
-		struct TARA_API ImGui_ConditionFlags : public ImGui_FlagBase {
+		struct TARA_EDITOR_API ImGui_ConditionFlags : public ImGui_FlagBase {
 		public:
 			bool Always = false;
 			bool Once = false;
@@ -28,7 +28,7 @@ namespace Tara {
 			Summary:
 				UI window flags.
 		*/
-		struct TARA_API ImGui_WindiwFlags : public ImGui_FlagBase
+		struct TARA_EDITOR_API ImGui_WindiwFlags : public ImGui_FlagBase
 		{
 		public:
 			bool		NoTitleBar = false;
@@ -58,7 +58,7 @@ namespace Tara {
 			bool		NoInputs = false;
 			int32_t GetFlags() override;
 		};
-		struct TARA_API ImGui_ComboFlags : public ImGui_FlagBase {
+		struct TARA_EDITOR_API ImGui_ComboFlags : public ImGui_FlagBase {
 		public:
 			bool PopupAlignLeft = false;
 			bool HeightSmall = false;
@@ -69,7 +69,7 @@ namespace Tara {
 			bool NoPreview = false;
 			int32_t GetFlags() override;
 		};
-		struct TARA_API ImGui_TableFlags : public ImGui_FlagBase {
+		struct TARA_EDITOR_API ImGui_TableFlags : public ImGui_FlagBase {
 		public:
 			// Feature
 			bool ReSizeble = false;
@@ -110,14 +110,14 @@ namespace Tara {
 			bool SortTristate = false;
 			int32_t GetFlags() override;
 		};
-		struct TARA_API ImGui_TabFlagsFitting : public ImGui_FlagBase
+		struct TARA_EDITOR_API ImGui_TabFlagsFitting : public ImGui_FlagBase
 		{
 		public:
 			bool	Resizedown = false;
 			bool	Scroll = false;
 			int32_t GetFlags() override;
 		};
-		struct TARA_API ImGui_TabFlags : public ImGui_FlagBase
+		struct TARA_EDITOR_API ImGui_TabFlags : public ImGui_FlagBase
 		{
 		public:
 			bool		ReOrderable = false;
@@ -129,7 +129,7 @@ namespace Tara {
 			ImGui_TabFlagsFitting	fittingpolicy = ImGui_TabFlagsFitting();
 			int32_t GetFlags() override;
 		};
-		struct TARA_API ImGui_TabitemsFlags : public ImGui_FlagBase
+		struct TARA_EDITOR_API ImGui_TabitemsFlags : public ImGui_FlagBase
 		{
 			bool		UnSave = false;
 			bool		SetSelect = false;
@@ -141,7 +141,7 @@ namespace Tara {
 			bool		Trailing = false;
 			int32_t GetFlags() override;
 		};
-		struct TARA_API ImGui_PopupFlags : public ImGui_FlagBase {
+		struct TARA_EDITOR_API ImGui_PopupFlags : public ImGui_FlagBase {
 		public:
 			bool		MouseButtonLeft = false;
 			bool		MouseButtonRight = false;
@@ -154,13 +154,13 @@ namespace Tara {
 			bool		AnyPopupLevel = false;
 			int32_t GetFlags() override;
 		};
-		struct TARA_API ImGui_SelectableFlags : public ImGui_FlagBase {
+		struct TARA_EDITOR_API ImGui_SelectableFlags : public ImGui_FlagBase {
 		public:
-			bool		DontClosePopups;
-			bool		SpanAllColumns;
-			bool		AllowDoubleClick;
-			bool		Disabled;
-			bool		AllowItemOverlap;
+			bool		DontClosePopups = false;
+			bool		SpanAllColumns = false;
+			bool		AllowDoubleClick = false;
+			bool		Disabled = false;
+			bool		AllowItemOverlap = false;
 			int32_t GetFlags() override;
 		};
 	}

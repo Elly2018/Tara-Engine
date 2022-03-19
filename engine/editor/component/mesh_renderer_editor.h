@@ -1,14 +1,14 @@
 #pragma once
-#include "../../engine/core/config.h"
+#include "../editor_config.h"
 #include "../editor_flags.h"
 #include "editor_component.h"
 #include "../../engine/component/mesh_renderer.h"
 
 namespace Tara {
 	namespace UI {
-		struct TARA_API ImGui_WindiwFlags;
+		struct TARA_EDITOR_API ImGui_WindiwFlags;
 
-		class TARA_API MeshRendererEditor : public EditorComponent<MeshRendererComponent> {
+		class TARA_EDITOR_API MeshRendererEditor : public EditorComponent<MeshRendererComponent> {
 		public:
 			MeshRendererEditor();
 			void GUI() override;
