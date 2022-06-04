@@ -24,21 +24,11 @@ mono_crash.*
 download
 version
 CMakeFiles
-engine/lib
-lib/assimp
-lib/openal-soft
-lib/backward-cpp
-lib/base64
-lib/FastNoiseLite-1.0.3
-lib/FFmpeg
-lib/glfw
-lib/glm
-lib/imgui
-lib/json
-lib/libarchive
-lib/pybind11
-lib/stb
-lib/uuid4
+lib
++lib/BuildAllLibrary.bat
++lib/CopyBinary.bat
++lib/DownloadAllLibrary.bat
+
 
 # Build results
 [Dd]ebug/

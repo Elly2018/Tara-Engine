@@ -12,7 +12,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-Ox -Ot -Oi")
 
 set(Root "${CMAKE_CURRENT_SOURCE_DIR}")
 set(BIN_DIR "${Root}/bin")
-set(ENGINE_DIR "${Root}/engine")
+set(ENGINE_DIR "${Root}/src")
 
 # Core Library
 #add_compile_definitions(WIN32)
@@ -51,7 +51,7 @@ target_include_directories(Engine PUBLIC "${Root}/lib/base64")
 target_include_directories(Engine PUBLIC "${Root}/lib/json/include")
 target_include_directories(Engine PUBLIC "${Root}/lib/libarchive/libarchive")
 
-target_link_directories(Engine PUBLIC "${Root}/lib/glfw/lib-vc2019")
+target_link_directories(Engine PUBLIC "${Root}/lib/glfw/lib-vc2022")
 target_link_directories(Engine PUBLIC "${Root}/lib/devil/lib/x64/Release")
 target_link_directories(Engine PUBLIC "${Root}/lib/assimp/lib/Release")
 target_link_directories(Engine PUBLIC "${Root}/lib/libarchive/libarchive/Release")
@@ -97,12 +97,10 @@ target_include_directories(Editor PUBLIC "${Root}/lib/imgui/imgui_curve")
 target_include_directories(Editor PUBLIC "${Root}/lib/imgui/imgui_markdown")
 target_include_directories(Editor PUBLIC "${Root}/lib/imgui/ImGuiColorTextEdit")
 target_include_directories(Editor PUBLIC "${Root}/lib/imgui/ImGuizmo")
-target_include_directories(Editor PUBLIC "${Root}/lib/imgui/imgui-node-editor/NodeEditor/Source")
-target_include_directories(Editor PUBLIC "${Root}/lib/imgui/imgui-node-editor/NodeEditor/Include")
 target_include_directories(Editor PUBLIC "${Root}/lib/imgui/imgui-notify/example/src")
 
 target_link_directories(Editor PUBLIC "${BIN_DIR}")
-target_link_directories(Editor PUBLIC "${Root}/lib/glfw/lib-vc2019")
+target_link_directories(Editor PUBLIC "${Root}/lib/glfw/lib-vc2022")
 
 target_link_libraries(Editor PUBLIC "Engine.lib")
 target_link_libraries(Editor PUBLIC "glfw3dll.lib")
@@ -183,7 +181,7 @@ target_include_directories(Single PUBLIC "${Root}/lib/imgui/imgui-node-editor/No
 target_include_directories(Single PUBLIC "${Root}/lib/imgui/imgui-node-editor/NodeEditor/Include")
 target_include_directories(Single PUBLIC "${Root}/lib/imgui/imgui-notify/example/src")
 
-target_link_directories(Single PUBLIC "${Root}/lib/glfw/src/Release")
+target_link_directories(Single PUBLIC "${Root}/lib/glfw/lib-vc2022")
 target_link_directories(Single PUBLIC "${Root}/lib/devil/lib/x64/Release")
 target_link_directories(Single PUBLIC "${Root}/lib/assimp/lib/Release")
 target_link_directories(Single PUBLIC "${Root}/lib/libarchive/libarchive/Release")

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
@@ -23,8 +23,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{551FAD3D-35FB-3836-A747-4CCA864DCA2C}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
     <ProjectName>Engine</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
@@ -33,22 +33,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -89,7 +89,6 @@
       <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
-      <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -98,11 +97,11 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level2</WarningLevel>
-      <PreprocessorDefinitions>TARA_API=DLLEXPORT;CMAKE_INTDIR="Debug";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);TARA_API=DLLEXPORT;CMAKE_INTDIR="Debug";Engine_EXPORTS</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_DEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"Debug\";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"Debug\";Engine_EXPORTS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -115,7 +114,7 @@
     </Midl>
     <Link>
       <AdditionalDependencies>glfw3dll.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2022;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2022/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -131,7 +130,6 @@
     <ClCompile>
       <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
-      <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>
       </ExceptionHandling>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -141,13 +139,13 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level2</WarningLevel>
-      <PreprocessorDefinitions>TARA_API=DLLEXPORT;CMAKE_INTDIR="Release";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);TARA_API=DLLEXPORT;CMAKE_INTDIR="Release";Engine_EXPORTS</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"Release\";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"Release\";Engine_EXPORTS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -160,7 +158,7 @@
     </Midl>
     <Link>
       <AdditionalDependencies>glfw3dll.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2022;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2022/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -176,7 +174,6 @@
     <ClCompile>
       <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
-      <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>
       </ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -186,13 +183,13 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level2</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR="MinSizeRel";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR="MinSizeRel";Engine_EXPORTS</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"MinSizeRel\";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"MinSizeRel\";Engine_EXPORTS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -205,7 +202,7 @@
     </Midl>
     <Link>
       <AdditionalDependencies>glfw3dll.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2022;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2022/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -221,7 +218,6 @@
     <ClCompile>
       <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
-      <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -232,11 +228,11 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level2</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR="RelWithDebInfo";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR="RelWithDebInfo";Engine_EXPORTS</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"RelWithDebInfo\";Engine_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;NDEBUG;TARA_API=DLLEXPORT;CMAKE_INTDIR=\"RelWithDebInfo\";Engine_EXPORTS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\chuel\source\repos\Tara\lib\glfw\include;C:\Users\chuel\source\repos\Tara\lib\glad\include;C:\Users\chuel\source\repos\Tara\lib\glm;C:\Users\chuel\source\repos\Tara\lib\devil\include;C:\Users\chuel\source\repos\Tara\lib\stb;C:\Users\chuel\source\repos\Tara\lib\utility;C:\Users\chuel\source\repos\Tara\lib\backward-cpp;C:\Users\chuel\source\repos\Tara\lib\assimp\include;C:\Users\chuel\source\repos\Tara\lib\base64;C:\Users\chuel\source\repos\Tara\lib\json\include;C:\Users\chuel\source\repos\Tara\lib\libarchive\libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -249,7 +245,7 @@
     </Midl>
     <Link>
       <AdditionalDependencies>glfw3dll.lib;DevIL.lib;ILU.lib;ILUT.lib;assimp-vc142-mt.lib;archive.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2019/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2022;C:/Users/chuel/source/repos/Tara/lib/glfw/lib-vc2022/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release;C:/Users/chuel/source/repos/Tara/lib/devil/lib/x64/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release;C:/Users/chuel/source/repos/Tara/lib/assimp/lib/Release/$(Configuration);C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release;C:/Users/chuel/source/repos/Tara/lib/libarchive/libarchive/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -263,6 +259,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\chuel\source\repos\Tara\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/chuel/source/repos/Tara/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/chuel/source/repos/Tara -BC:/Users/chuel/source/repos/Tara --check-stamp-file C:/Users/chuel/source/repos/Tara/CMakeFiles/generate.stamp
@@ -273,7 +270,7 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\chuel\source\repos\Tara\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/chuel/source/repos/Tara/CMakeLists.txt</Message>
@@ -286,7 +283,7 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\chuel\source\repos\Tara\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/chuel/source/repos/Tara/CMakeLists.txt</Message>
@@ -299,7 +296,7 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\chuel\source\repos\Tara\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/chuel/source/repos/Tara/CMakeLists.txt</Message>
@@ -312,221 +309,364 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.16.2\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\chuel\source\repos\Tara\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\allcomponents.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\camera.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\camera.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\character_control.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\character_control.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\collision.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\collision.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\component.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\component.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\environment.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\environment.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\free_camera.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\free_camera.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\light.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\light.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\mesh_renderer.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\mesh_renderer.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\physics.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\physics.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\transformation.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\component\transformation.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\asset.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\asset.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\base.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\base.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\buildin\buildin_manager.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\buildin\buildin_manager.h" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\config.h" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\data\tree.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\emath.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\emath.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\event.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\event.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\framebuffer\framebuffer.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\framebuffer\framebuffer.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\input.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\input.h" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\interface\assetbase.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\logger.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\logger.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\lowlevel.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\lowlevel.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\material\material.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\material\material.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\mesh\mesh.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\mesh\mesh.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\renderer\renderer.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\renderer\renderer.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\scene\scene.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\scene\scene.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\scene_object\scene_object.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\scene_object\scene_object.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\shader\shader.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\shader\shader.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\texture\texture.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\texture\texture.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\utility.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\utility.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\window\ewindow.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\window\ewindow.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\world\world.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\core\world\world.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\extension\tara_extension.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\extension\tara_extension.h" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\allsystems.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\camera_system.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\camera_system.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\light_system.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\light_system.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\mesh_renderer_system.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\mesh_renderer_system.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\system.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\system\system.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\engine\tara.cpp" />
-    <ClInclude Include="C:\Users\chuel\source\repos\Tara\engine\engine\tara.h" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\backward.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\base64.cpp" />
-    <ClCompile Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\glad.cpp" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_acl.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_blake2s_ref.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_blake2sp_ref.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_check_magic.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_cmdline.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_cryptor.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_digest.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_disk_acl_darwin.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_disk_acl_freebsd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_disk_acl_linux.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_disk_acl_sunos.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_copy_bhfi.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_copy_stat.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_link_resolver.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_sparse.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_stat.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_strmode.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_entry_xattr.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_getdate.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_hmac.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_match.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_options.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_pack_dev.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_pathmatch.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_ppmd7.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_ppmd8.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_random.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_rb.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_add_passphrase.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_append_filter.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_data_into_fd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_disk_entry_from_file.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_disk_posix.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_disk_set_standard_lookup.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_disk_windows.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_extract.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_extract2.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_open_fd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_open_file.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_open_filename.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_open_memory.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_set_format.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_set_options.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_all.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_by_code.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_bzip2.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_compress.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_grzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_gzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_lrzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_lz4.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_lzop.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_none.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_program.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_rpm.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_uu.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_xz.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_filter_zstd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_7zip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_all.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_ar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_by_code.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_cab.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_cpio.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_empty.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_iso9660.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_lha.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_mtree.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_rar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_rar5.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_raw.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_tar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_warc.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_xar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_read_support_format_zip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_string.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_string_sprintf.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_util.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_version_details.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_virtual.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_windows.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_b64encode.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_by_name.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_bzip2.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_compress.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_grzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_gzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_lrzip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_lz4.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_lzop.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_none.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_program.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_uuencode.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_xz.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_add_filter_zstd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_disk_posix.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_disk_set_standard_lookup.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_disk_windows.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_open_fd.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_open_file.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_open_filename.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_open_memory.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_7zip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_ar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_by_name.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_cpio.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_cpio_binary.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_cpio_newc.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_cpio_odc.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_filter_by_ext.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_gnutar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_iso9660.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_mtree.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_pax.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_raw.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_shar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_ustar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_v7tar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_warc.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_xar.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_format_zip.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_options.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\archive_write_set_passphrase.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\filter_fork_posix.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\filter_fork_windows.c" />
-    <None Include="C:\Users\chuel\source\repos\Tara\engine\lib\engine\libarchive\xxhash.c" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\allcomponents.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\audio_listener.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\audio_listener.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\audio_source.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\audio_source.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\camera.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\camera.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\character_control.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\character_control.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\collision.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\collision.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\component.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\component.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\environment.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\environment.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\free_camera.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\free_camera.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\light.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\light.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\mesh_renderer.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\mesh_renderer.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\physics.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\physics.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\component\transformation.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\component\transformation.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\asset.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\asset.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\base.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\base.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\buildin\buildin_manager.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\buildin\buildin_manager.h" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\config.h" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\data\tree.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\emath.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\emath.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\event.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\event.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\framebuffer\framebuffer.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\framebuffer\framebuffer.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\input.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\input.h" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\interface\assetbase.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\logger.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\logger.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\lowlevel.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\lowlevel.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\material\material.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\material\material.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\mesh\mesh.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\mesh\mesh.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\renderer\renderer.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\renderer\renderer.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\scene\scene.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\scene\scene.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\scene_object\scene_object.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\scene_object\scene_object.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\shader\shader.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\shader\shader.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\texture\texture.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\texture\texture.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\utility.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\utility.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\window\ewindow.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\window\ewindow.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\core\world\world.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\core\world\world.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\extension\tara_extension.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\extension\tara_extension.h" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\system\allsystems.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\system\audio_listener_system.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\system\audio_listener_system.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\system\audio_source_system.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\system\audio_source_system.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\system\camera_system.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\system\camera_system.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\system\collision_system.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\system\collision_system.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\system\light_system.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\system\light_system.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\system\mesh_renderer_system.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\system\mesh_renderer_system.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\system\physics_system.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\system\physics_system.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\system\system.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\system\system.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\engine\tara.cpp" />
+    <ClInclude Include="C:\Users\chuel\source\repos\Tara\src\engine\tara.h" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\backward.cpp" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\base64.cpp" />
+    <ClCompile Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\glad.cpp" />
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_acl.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_blake2s_ref.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_blake2sp_ref.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_check_magic.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_cmdline.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_cryptor.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_digest.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_disk_acl_darwin.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_disk_acl_freebsd.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_disk_acl_linux.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_disk_acl_sunos.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_entry.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_entry_copy_bhfi.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_entry_copy_stat.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_entry_link_resolver.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_entry_sparse.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_entry_stat.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_entry_strmode.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_entry_xattr.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_getdate.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_hmac.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_match.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_options.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_pack_dev.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_pathmatch.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_ppmd7.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_ppmd8.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_random.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_rb.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_add_passphrase.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_append_filter.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_data_into_fd.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_disk_entry_from_file.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_disk_posix.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_disk_set_standard_lookup.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_disk_windows.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_extract.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_extract2.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_open_fd.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_open_file.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_open_filename.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_open_memory.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_set_format.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_set_options.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_all.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_by_code.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_bzip2.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_compress.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_grzip.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_gzip.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_lrzip.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_lz4.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_lzop.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_none.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_program.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_rpm.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_uu.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_xz.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_filter_zstd.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_7zip.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_all.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_ar.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_by_code.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_cab.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_cpio.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_empty.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_iso9660.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_lha.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_mtree.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_rar.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_rar5.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_raw.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_tar.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_warc.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_xar.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_read_support_format_zip.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_string.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_string_sprintf.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_util.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_version_details.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_virtual.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_windows.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_b64encode.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_by_name.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_bzip2.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_compress.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_grzip.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_gzip.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_lrzip.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_lz4.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_lzop.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_none.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_program.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_uuencode.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_xz.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_add_filter_zstd.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_disk_posix.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_disk_set_standard_lookup.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_disk_windows.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_open_fd.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_open_file.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_open_filename.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_open_memory.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_7zip.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_ar.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_by_name.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_cpio.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_cpio_binary.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_cpio_newc.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_cpio_odc.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_filter_by_ext.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_gnutar.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_iso9660.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_mtree.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_pax.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_raw.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_shar.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_ustar.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_v7tar.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_warc.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_xar.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_format_zip.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_options.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\archive_write_set_passphrase.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\filter_fork_posix.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\filter_fork_windows.c">
+    </None>
+    <None Include="C:\Users\chuel\source\repos\Tara\src\lib\engine\libarchive\xxhash.c">
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\chuel\source\repos\Tara\ZERO_CHECK.vcxproj">

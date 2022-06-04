@@ -3,7 +3,7 @@
 	"assets":{
 		"import":[
 			{
-				"from": "FirstPerson",
+				"from": "Buildin/template/3D/FirstPerson",
 				"to": "",
 				"recursion": true
 			}
