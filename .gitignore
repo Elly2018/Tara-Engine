@@ -21,8 +21,17 @@
 mono_crash.*
 
 # Custom ignore
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake
 download
+version
+CMakeFiles
 lib
+-lib/BuildAllLibrary.bat
++lib/CopyBinary.bat
+-lib/DownloadAllLibrary.bat
+
 
 # Build results
 [Dd]ebug/
@@ -40,7 +49,6 @@ bld/
 [Oo]ut/
 [Ll]og/
 [Ll]ogs/
-CMakeFiles
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
