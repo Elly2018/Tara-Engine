@@ -1,4 +1,0 @@
-[Log | Tara | 2] Tara initialization start
-[Log | Tara | 3] Debug filename: log.txt
-[Log | Tara | 2] Tara initialization end
-[Log | Tara | 2] Package manager initialization end
