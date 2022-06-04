@@ -21,13 +21,16 @@
 mono_crash.*
 
 # Custom ignore
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake
 download
 version
 CMakeFiles
 lib
-+lib/BuildAllLibrary.bat
+-lib/BuildAllLibrary.bat
 +lib/CopyBinary.bat
-+lib/DownloadAllLibrary.bat
+-lib/DownloadAllLibrary.bat
 
 
 # Build results
