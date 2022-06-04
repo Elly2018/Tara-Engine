@@ -1,6 +1,0 @@
-C:/Users/chuel/source/repos/Tara/CMakeFiles/Engine.dir
-C:/Users/chuel/source/repos/Tara/CMakeFiles/Editor.dir
-C:/Users/chuel/source/repos/Tara/CMakeFiles/App.dir
-C:/Users/chuel/source/repos/Tara/CMakeFiles/Single.dir
-C:/Users/chuel/source/repos/Tara/CMakeFiles/ALL_BUILD.dir
-C:/Users/chuel/source/repos/Tara/CMakeFiles/ZERO_CHECK.dir
