@@ -4,6 +4,10 @@ cd ../bin
 del %n% /q
 cd ../
 del %n% /q
-bsdtar -cf %n% resources
-move %n% bin
+set PATH=%PATH%;%cd%
+cd resources
+set k=fonts icon image lang material mesh shader template Manifest.json
+%k%
+bsdtar -cf %n% %k%
+move engine.resource ../bin
 pause

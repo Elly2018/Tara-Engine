@@ -120,7 +120,7 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;C:\Users\chuel\source\repos\Tara\cmake\buildall.cmake;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\chuel\source\repos\Tara\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/chuel/source/repos/Tara/CMakeLists.txt</Message>
@@ -133,7 +133,7 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;C:\Users\chuel\source\repos\Tara\cmake\buildall.cmake;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\chuel\source\repos\Tara\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/chuel/source/repos/Tara/CMakeLists.txt</Message>
@@ -146,7 +146,7 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;C:\Users\chuel\source\repos\Tara\cmake\buildall.cmake;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\chuel\source\repos\Tara\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/chuel/source/repos/Tara/CMakeLists.txt</Message>
@@ -159,7 +159,7 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\Platform\WindowsPaths.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeCXXCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeRCCompiler.cmake;C:\Users\chuel\source\repos\Tara\CMakeFiles\3.23.1\CMakeSystem.cmake;C:\Users\chuel\source\repos\Tara\cmake\buildall.cmake;%(AdditionalInputs)</AdditionalInputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\chuel\source\repos\Tara\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
@@ -173,21 +173,81 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\App.vcxproj">
-      <Project>{70F4655A-AC9D-3651-8E36-7F757976F86E}</Project>
-      <Name>App</Name>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\core\appcore\AppCore.vcxproj">
+      <Project>{9ADF1926-D159-3428-93B2-90F4BA6AFBD0}</Project>
+      <Name>AppCore</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\Editor.vcxproj">
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\creator\Creator.vcxproj">
+      <Project>{41C23D13-F1BA-3255-AEE0-C3AAD48DF3E2}</Project>
+      <Name>Creator</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\asset\Creator_Asset.vcxproj">
+      <Project>{E64A7736-1903-34F7-BD3C-61F6AA0FC082}</Project>
+      <Name>Creator_Asset</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\code_editor\Creator_CodeEditor.vcxproj">
+      <Project>{74F2D5DF-1F88-3BFA-8D42-7DDE0E92BD7D}</Project>
+      <Name>Creator_CodeEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\console\Creator_Console.vcxproj">
+      <Project>{973D1705-EBA5-3ABA-9CDE-2C7AE57D6D0B}</Project>
+      <Name>Creator_Console</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\debug\Creator_Debug.vcxproj">
+      <Project>{FED693E5-DBB8-3101-8F54-F6DC015BD852}</Project>
+      <Name>Creator_Debug</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\export\Creator_Export.vcxproj">
+      <Project>{D090780D-F23F-353A-8D0E-451BFE065A9F}</Project>
+      <Name>Creator_Export</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\explorer\Creator_FileExplorer.vcxproj">
+      <Project>{E7B90A30-92F1-3D7B-96B2-41D046AEB73D}</Project>
+      <Name>Creator_FileExplorer</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\framebuffer_view\Creator_FramebufferView.vcxproj">
+      <Project>{B4829531-3A0B-3B51-BF24-93DD11730AE7}</Project>
+      <Name>Creator_FramebufferView</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\helper\Creator_Helper.vcxproj">
+      <Project>{8B15C95C-6687-3902-895C-B1C76F8E0071}</Project>
+      <Name>Creator_Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\hierarchy\Creator_Hierarchy.vcxproj">
+      <Project>{2AE43E4E-9B64-3561-AF01-7C8C743D00B1}</Project>
+      <Name>Creator_Hierarchy</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\node\Creator_Node.vcxproj">
+      <Project>{64D5BBCB-B9C6-3004-9288-D93CA0B372F7}</Project>
+      <Name>Creator_Node</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\project_creation\Creator_ProjectCreation.vcxproj">
+      <Project>{A9CA9DDF-6902-3797-9B42-F59DF827C706}</Project>
+      <Name>Creator_ProjectCreation</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\property\Creator_Property.vcxproj">
+      <Project>{B271BE3F-F497-3AF7-982F-3579C6249CFD}</Project>
+      <Name>Creator_Property</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\scene\Creator_Scene.vcxproj">
+      <Project>{BAC59161-9AAE-3657-A678-278AC2F33B8A}</Project>
+      <Name>Creator_Scene</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\setting\Creator_Setting.vcxproj">
+      <Project>{C6DE5E31-A85B-3591-9834-6AB8601189E5}</Project>
+      <Name>Creator_Setting</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\app\panels\timeline\Creator_Timeline.vcxproj">
+      <Project>{FB203CE3-3668-37EE-9E7C-B13D2A23E1E6}</Project>
+      <Name>Creator_Timeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\core\editor\Editor.vcxproj">
       <Project>{7EEDB46C-4B76-3CFD-9A90-F3FF9A36F917}</Project>
       <Name>Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\Engine.vcxproj">
+    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\src\core\engine\Engine.vcxproj">
       <Project>{551FAD3D-35FB-3836-A747-4CCA864DCA2C}</Project>
       <Name>Engine</Name>
-    </ProjectReference>
-    <ProjectReference Include="C:\Users\chuel\source\repos\Tara\Single.vcxproj">
-      <Project>{5C73F1EB-834C-3AE8-B8CF-384D07BC85FB}</Project>
-      <Name>Single</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
